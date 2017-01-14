@@ -1,0 +1,769 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CRC,计算机网络," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="基本原理CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CRC循环冗余检测(Cyclic Redundancy Check)">
+<meta property="og:url" content="http://yoursite.com/2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="基本原理CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f922keolo2j20jo0cpmyg.jpg">
+<meta property="og:updated_time" content="2017-01-12T10:55:58.299Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CRC循环冗余检测(Cyclic Redundancy Check)">
+<meta name="twitter:description" content="基本原理CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f922keolo2j20jo0cpmyg.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> CRC循环冗余检测(Cyclic Redundancy Check) | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CRC循环冗余检测(Cyclic Redundancy Check)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-23T11:57:17+08:00" content="2016-10-23">
+              2016-10-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性的检验。<br><a id="more"></a></p>
+<h1 id="几个基本概念"><a href="#几个基本概念" class="headerlink" title="几个基本概念"></a>几个基本概念</h1><ul>
+<li><p>帧检验序列FCS（Frame Check Sequence）：为了进行差错检验而添加的冗余码。</p>
+</li>
+<li><p>多项式模2运行：实际上是按位异或(Exclusive OR)运算，即相同为0，相异为1，也就是不考虑进位、借位的二进制加减运算。如：10011011 + 11001010 = 01010001。</p>
+</li>
+<li><p>生成多项式（generator polynomial）：当进行CRC检验时，发送方与接收方需要事先约定一个除数，即生成多项式，一般记作G（x）。生成多项式的最高位与最低位必须是1。常用的CRC码的生成多项式有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CRC8=X8+X5+X4+1</span><br><span class="line"></span><br><span class="line">CRC-CCITT=X16+X12+X5+1</span><br><span class="line"></span><br><span class="line">CRC16=X16+X15+X5+1</span><br><span class="line"></span><br><span class="line">CRC12=X12+X11+X3+X2+1</span><br><span class="line"></span><br><span class="line">CRC32=X32+X26+X23+X22+X16+X12+X11+X10+X8+X7+X5+X4+X2+X1+1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>每一个生成多项式都可以与一个代码相对应，如<code>CRC8</code>对应代码：<code>100110001</code>。</p>
+<h1 id="CRC检验码的计算"><a href="#CRC检验码的计算" class="headerlink" title="CRC检验码的计算"></a>CRC检验码的计算</h1><p>设信息字段为K位，校验字段为R位，则码字长度为N(N=K+R)。设双方事先约定了一个R次多项式g(x)，则CRC码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V(x)=A(x)g(x)=xRm(x)+r(x)</span><br></pre></td></tr></table></figure></p>
+<p>其中: m(x)为K次信息多项式， r(x)为R-1次校验多项式。</p>
+<p>这里r(x)对应的代码即为冗余码，加在原信息字段后即形成CRC码。</p>
+<p>r(x)的计算方法为：在K位信息字段的后面添加R个0，再除以g(x)对应的代码序列，得到的余数即为r(x)对应的代码(应为R－1位；若不足，而在高位补0)。</p>
+<p><strong>计算示例</strong></p>
+<p>设需要发送的信息为M = 1010001101，产生多项式对应的代码为P = 110101，R＝5。</p>
+<p>在M后加5个0，然后对P做模2除法运算，得余数r(x)对应的代码：<code>01110</code>。故实际需要发送的数据是<code>101000110101110</code>。</p>
+<p>计算过程:<br><img src="https://ws2.sinaimg.cn/large/647dc635jw1f922keolo2j20jo0cpmyg.jpg" alt=""></p>
+<h1 id="错误检测"><a href="#错误检测" class="headerlink" title="错误检测"></a>错误检测</h1><p>当接收方收到数据后，用收到的数据对P（事先约定的）进行模2除法，若余数为0，则认为数据传输无差错；若余数不为0，则认为数据传输出现了错误，由于不知道错误发生在什么地方，因而不能进行自动纠正，一般的做法是丢弃接收的数据。</p>
+<h1 id="Tips："><a href="#Tips：" class="headerlink" title="Tips："></a>Tips：</h1><ul>
+<li><p>CRC是一种常用的检错码，并不能用于自动纠错。</p>
+</li>
+<li><p>只要经过严格的挑选，并使用位数足够多的除数 P，那么出现检测不到的差错的概率就很小很小。</p>
+</li>
+<li><p>仅用循环冗余检验 CRC 差错检测技术只能做到无差错接受（只是非常近似的认为是无差错的），并不能保证可靠传输。</p>
+</li>
+</ul>
+<h1 id="补充：CRC在优化关系数据库的关联查询的用途。"><a href="#补充：CRC在优化关系数据库的关联查询的用途。" class="headerlink" title="补充：CRC在优化关系数据库的关联查询的用途。"></a>补充：CRC在优化关系数据库的关联查询的用途。</h1><p>在优化关系数据库的关联查询的时候，ON的字段选择为数值型，必须是会比字符型的数据快很多的，那么如何将一个字符型的数据，唯一性地转为数值型呢？</p>
+<p>一般我们会采用CRC32函数进行这个转换，CRC32会把字符串，生成一个long长整形的唯一性ID（虽然科学证明不绝对唯一，但是还是可用的）。</p>
+<p>下面提供Java、Python以及MySQL的转换方法：</p>
+<h2 id="在MySQL数据库中，可以使用CRC32直接对字符串进行编码："><a href="#在MySQL数据库中，可以使用CRC32直接对字符串进行编码：" class="headerlink" title="在MySQL数据库中，可以使用CRC32直接对字符串进行编码："></a>在MySQL数据库中，可以使用CRC32直接对字符串进行编码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; SELECT CRC32(&apos;hello-world&apos;)</span><br><span class="line">&gt;&gt;&gt; 2983461467</span><br></pre></td></tr></table></figure>
+<h2 id="在Java中，也是使用CRC32类，进行字符串编码："><a href="#在Java中，也是使用CRC32类，进行字符串编码：" class="headerlink" title="在Java中，也是使用CRC32类，进行字符串编码："></a>在Java中，也是使用CRC32类，进行字符串编码：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.zip.CRC32;;</span><br><span class="line"></span><br><span class="line">CRC32 crc32 = <span class="keyword">new</span> CRC32();</span><br><span class="line"></span><br><span class="line">crc32.update(<span class="string">"hello-world"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">System.out.println(crc32.getValue());</span><br><span class="line"></span><br><span class="line"><span class="number">2983461467</span></span><br></pre></td></tr></table></figure>
+<p>经过测试，和MySQL返回的值一致。</p>
+<h2 id="最后是Python，使用binascii包的crc32方法："><a href="#最后是Python，使用binascii包的crc32方法：" class="headerlink" title="最后是Python，使用binascii包的crc32方法："></a>最后是Python，使用binascii包的crc32方法：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> binascii</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(binascii.crc32(<span class="string">b"hello world"</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">222957957</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CRC/" rel="tag">#CRC</a>
+          
+            <a href="/tags/计算机网络/" rel="tag">#计算机网络</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/22/详解re-sub的用法/" rel="next" title="详解re.sub的用法">
+                <i class="fa fa-chevron-left"></i> 详解re.sub的用法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/24/浏览器的同源策略/" rel="prev" title="浏览器的同源策略">
+                浏览器的同源策略 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/"
+           data-title="CRC循环冗余检测(Cyclic Redundancy Check)" data-url="http://yoursite.com/2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个基本概念"><span class="nav-number">2.</span> <span class="nav-text">几个基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRC检验码的计算"><span class="nav-number">3.</span> <span class="nav-text">CRC检验码的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误检测"><span class="nav-number">4.</span> <span class="nav-text">错误检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips："><span class="nav-number">5.</span> <span class="nav-text">Tips：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：CRC在优化关系数据库的关联查询的用途。"><span class="nav-number">6.</span> <span class="nav-text">补充：CRC在优化关系数据库的关联查询的用途。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在MySQL数据库中，可以使用CRC32直接对字符串进行编码："><span class="nav-number">6.1.</span> <span class="nav-text">在MySQL数据库中，可以使用CRC32直接对字符串进行编码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Java中，也是使用CRC32类，进行字符串编码："><span class="nav-number">6.2.</span> <span class="nav-text">在Java中，也是使用CRC32类，进行字符串编码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后是Python，使用binascii包的crc32方法："><span class="nav-number">6.3.</span> <span class="nav-text">最后是Python，使用binascii包的crc32方法：</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

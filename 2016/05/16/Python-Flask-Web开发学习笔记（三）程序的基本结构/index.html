@@ -1,0 +1,787 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,Flask," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="2.5　请求-响应循环现在你已经开发了一个简单的 Flask 程序，或许希望进一步了解 Flask 的工作方式。下面将介绍这个框架的一些设计理念。
+2.5.1　程序和请求上下文Flask 从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。请求对象就是一个很好的例子，它封装了客户端发送的 HTTP 请求。
+要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Flask Web开发学习笔记（三）程序的基本结构">
+<meta property="og:url" content="http://yoursite.com/2016/05/16/Python-Flask-Web开发学习笔记（三）程序的基本结构/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="2.5　请求-响应循环现在你已经开发了一个简单的 Flask 程序，或许希望进一步了解 Flask 的工作方式。下面将介绍这个框架的一些设计理念。
+2.5.1　程序和请求上下文Flask 从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。请求对象就是一个很好的例子，它封装了客户端发送的 HTTP 请求。
+要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/647dc635jw1f3x32qe0n0j20he03amxo.jpg">
+<meta property="og:updated_time" content="2017-01-12T10:55:58.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python Flask Web开发学习笔记（三）程序的基本结构">
+<meta name="twitter:description" content="2.5　请求-响应循环现在你已经开发了一个简单的 Flask 程序，或许希望进一步了解 Flask 的工作方式。下面将介绍这个框架的一些设计理念。
+2.5.1　程序和请求上下文Flask 从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。请求对象就是一个很好的例子，它封装了客户端发送的 HTTP 请求。
+要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/647dc635jw1f3x32qe0n0j20he03amxo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Python Flask Web开发学习笔记（三）程序的基本结构 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python Flask Web开发学习笔记（三）程序的基本结构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-16T11:33:32+08:00" content="2016-05-16">
+              2016-05-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/16/Python-Flask-Web开发学习笔记（三）程序的基本结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/16/Python-Flask-Web开发学习笔记（三）程序的基本结构/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="2-5-请求-响应循环"><a href="#2-5-请求-响应循环" class="headerlink" title="2.5　请求-响应循环"></a>2.5　请求-响应循环</h2><p>现在你已经开发了一个简单的 Flask 程序，或许希望进一步了解 Flask 的工作方式。下面将介绍这个框架的一些设计理念。</p>
+<h4 id="2-5-1-程序和请求上下文"><a href="#2-5-1-程序和请求上下文" class="headerlink" title="2.5.1　程序和请求上下文"></a>2.5.1　程序和请求上下文</h4><p>Flask 从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。<code>请求对象</code>就是一个很好的例子，它封装了客户端发送的 HTTP 请求。</p>
+<p>要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，不过这会导致程序中的每个视图函数都增加一个参数。</p>
+<p>除了访问请求对象，如果视图函数在处理请求时还要访问其他对象，情况会变得更糟。<br><a id="more"></a><br>为了避免大量可有可无的参数把视图函数弄得一团糟，Flask 使用上下文临时把某些对象变为全局可访问。有了上下文，就可以写出下面的视图函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">	user_agent = request.headers.get(<span class="string">'User-Agent'</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'&lt;p&gt;Your browser is %s&lt;/p&gt;'</span> % user_agent</span><br></pre></td></tr></table></figure>
+<p>注意在这个视图函数中我们如何把 request 当作全局变量使用。事实上， <code>request</code> 不可能是全局变量。</p>
+<p>试想，在多线程服务器中，多个线程同时处理不同客户端发送的不同请求时，每个线程看到的 request 对象必然不同。<code>Falsk</code> 使用上下文让特定的变量在一个线程中全局可访问，与此同时却不会干扰其他线程。</p>
+<p>在 Flask 中有两种上下文：<code>程序上下文</code>和<code>请求上下文</code>。</p>
+<h4 id="表-2-1-列出了这两种上下文提供的变量。"><a href="#表-2-1-列出了这两种上下文提供的变量。" class="headerlink" title="表 2-1 列出了这两种上下文提供的变量。"></a>表 2-1 列出了这两种上下文提供的变量。</h4><p><img src="http://ww3.sinaimg.cn/large/647dc635jw1f3x32qe0n0j20he03amxo.jpg" alt=""></p>
+<p>Flask 在分发请求之前激活（或推送）程序和请求上下文，请求处理完成后再将其删除。程序上下文被推送后，就可以在线程中使用 current_app 和 g 变量。类似地，请求上下文被推送后，就可以使用 request 和session 变量。如果使用这些变量时我们没有激活程序上下文或请求上下文，就会导致错误。</p>
+<p><strong>下面这个 Python shell 会话演示了程序上下文的使用方法</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> hello <span class="keyword">import</span> app</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flask <span class="keyword">import</span> current_app</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>current_app.name</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">RuntimeError: working outside of application context</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>app_ctx = app.app_context()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>app_ctx.push()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>current_app.name</span><br><span class="line"><span class="string">'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>app_ctx.pop()</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子中，没激活程序上下文之前就调用 <code>current_app.name</code> 会导致错误，但推送完上下文之后就可以调用了。注意，在程序实例上调用 <code>app.app_context()</code>可获得一个程序上下文。</p>
+<h4 id="2-5-2-请求调度"><a href="#2-5-2-请求调度" class="headerlink" title="2.5.2　请求调度"></a>2.5.2　请求调度</h4><p>程序收到客户端发来的请求时，要找到处理该请求的视图函数。为了完成这个任务，<code>Flask</code>会在程序的 <code>URL</code> 映射中查找请求的 URL。URL 映射是 URL 和视图函数之间的对应关系。<code>Flask</code> 使用 <code>app.route</code> 修饰器或者非修饰器形式的<code>app.add_url_rule()</code>生成映射。</p>
+<p>要想查看 Flask 程序中的 URL 映射是什么样子，我们可以在 Python shell 中检查为 hello.py生成的映射。测试之前，请确保你激活了虚拟环境：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python</span><br><span class="line">&gt;&gt;&gt; from hello import app</span><br><span class="line">&gt;&gt;&gt; app.url_map</span><br><span class="line">Map([&lt;Rule '/' (HEAD, OPTIONS, GET) -&gt; index&gt;,</span><br><span class="line">&lt;Rule '/static/&lt;filename&gt;' (HEAD, OPTIONS, GET) -&gt; static&gt;,</span><br><span class="line">&lt;Rule '/user/&lt;name&gt;' (HEAD, OPTIONS, GET) -&gt; user&gt;])</span><br></pre></td></tr></table></figure></p>
+<p><code>/</code>和 <code>/user/&lt;name&gt;</code>路由在程序中使用 <code>app.route</code>修饰器定义。<code>/static/&lt;filename&gt;</code> 路由是<code>Flask</code> 添加的特殊路由，用于访问静态文件。第 3 章会详细介绍<code>静态文件</code>。</p>
+<p>URL 映射中的 <code>HEAD</code> 、 <code>Options</code> 、 <code>GET</code> 是请求方法，由路由进行处理。<code>Flask</code>为每个路由都指定了请求方法，这样不同的请求方法发送到相同的 <code>URL</code> 上时，会使用不同的视图函数进行处理。 <code>HEAD</code> 和 <code>OPTIONS</code> 方法由 Flask 自动处理，因此可以这么说，在这个程序中，URL映射中的 3 个路由都使用 <code>GET 方法</code>。第 4 章会介绍如何为路由指定不同的请求方法。</p>
+<h4 id="2-5-3-请求钩子"><a href="#2-5-3-请求钩子" class="headerlink" title="2.5.3　请求钩子"></a>2.5.3　请求钩子</h4><p>有时在处理请求之前或之后执行代码会很有用。例如，在请求开始时，我们可能需要创建数据库连接或者认证发起请求的用户。为了避免在每个视图函数中都使用重复的代码，Flask 提供了注册通用函数的功能，注册的函数可在请求被分发到视图函数之前或之后调用。</p>
+<p>请求钩子使用修饰器实现。Flask 支持以下 4 种钩子。</p>
+<ul>
+<li>before_first_request：注册一个函数，在处理第一个请求之前运行。</li>
+<li>before_request ：注册一个函数，在每次请求之前运行。</li>
+<li>after_request ：注册一个函数，如果没有未处理的异常抛出，在每次请求之后运行。</li>
+<li>teardown_request ：注册一个函数，即使有未处理的异常抛出，也在每次请求之后运行。</li>
+</ul>
+<p>在<code>请求钩子函数</code>和<code>视图函数</code>之间共享数据一般使用上下文<code>全局变量 g</code>。例如，<code>before_request</code> 处理程序可以从数据库中加载已登录用户，并将其保存到 <code>g.user</code>中。随后调用视图函数时，视图函数再使用<code>g.user</code> 获取用户。<br>请求钩子的用法会在后续章中介绍，如果你现在不太理解，也不用担心。</p>
+<h4 id="2-5-4-响应"><a href="#2-5-4-响应" class="headerlink" title="2.5.4　响应"></a>2.5.4　响应</h4><p>Flask 调用视图函数后，会将其返回值作为响应的内容。大多数情况下，响应就是一个简单的字符串，作为 HTML 页面回送客户端。</p>
+<p>但 HTTP 协议需要的不仅是作为请求响应的字符串。HTTP 响应中一个很重要的部分是状态码，Flask 默认设为 200，这个代码表明请求已经被成功处理。</p>
+<p>如果视图函数返回的响应需要使用不同的状态码，那么可以把数字代码作为第二个返回值，添加到响应文本之后。例如，下述视图函数返回一个 400 状态码，表示请求无效：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> <span class="string">'&lt;h1&gt;Bad Request&lt;/h1&gt;'</span>, <span class="number">400</span></span><br></pre></td></tr></table></figure>
+<p>视图函数返回的响应还可接受第三个参数，这是一个由首部（header）组成的字典，可以添加到 HTTP 响应中。一般情况下并不需要这么做，不过你会在第 14 章看到一个例子。</p>
+<p>如果不想返回由 1 个、2 个或 3 个值组成的元组，Flask 视图函数还可以返回 Response 对象。 make_response() 函数可接受 1 个、2 个或 3 个参数（和视图函数的返回值一样），并返回一个 Response 对象。有时我们需要在视图函数中进行这种转换，然后在响应对象上调用各种方法，进一步设置响应。下例创建了一个响应对象，然后设置了 cookie：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> make_response</span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">	response = make_response(<span class="string">'&lt;h1&gt;This document carries a cookie!&lt;/h1&gt;'</span>)</span><br><span class="line">	response.set_cookie(<span class="string">'answer'</span>, <span class="string">'42'</span>)</span><br><span class="line">	<span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+<p>有一种名为重定向的特殊响应类型。这种响应没有页面文档，只告诉浏览器一个新地址用以加载新页面。重定向经常在 Web 表单中使用，第 4 章会进行介绍。重定向经常使用 302 状态码表示，指向的地址由 Location 首部提供。重定向响应可以使用3 个值形式的返回值生成，也可在 Response 对象中设定。不过，由于使用频繁，Flask 提供了 redirect() 辅助函数，用于生成这种响应：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> redirect</span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> redirect(<span class="string">'http://www.example.com'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>还有一种特殊的响应由 abort 函数生成，用于处理错误。在下面这个例子中，如果 URL 中动态参数 id 对应的用户不存在，就返回状态码 404：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> abort</span><br><span class="line"><span class="meta">@app.route('/user/&lt;id&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_user</span><span class="params">(id)</span>:</span></span><br><span class="line">	user = load_user(id)</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> user:</span><br><span class="line">		abort(<span class="number">404</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'&lt;h1&gt;Hello, %s&lt;/h1&gt;'</span> % user.name</span><br></pre></td></tr></table></figure></p>
+<p>注意， abort 不会把控制权交还给调用它的函数，而是抛出异常把控制权交给 Web 服务器。</p>
+<h2 id="2-6-Flask扩展"><a href="#2-6-Flask扩展" class="headerlink" title="2.6　Flask扩展"></a>2.6　Flask扩展</h2><p>Flask 被设计为可扩展形式，故而没有提供一些重要的功能，例如数据库和用户认证，所以开发者可以自由选择最适合程序的包，或者按需求自行开发。</p>
+<p>社区成员开发了大量不同用途的扩展，如果这还不能满足需求，你还可使用所有 Python 标准包或代码库。为了让你知道如何把扩展整合到程序中，接下来我们将在 <code>hello.py</code> 中添加一个扩展，使用命令行参数增强程序的功能。</p>
+<h4 id="使用Flask-Script支持命令行选项"><a href="#使用Flask-Script支持命令行选项" class="headerlink" title="使用Flask-Script支持命令行选项"></a>使用Flask-Script支持命令行选项</h4><p>Flask 的开发 Web 服务器支持很多启动设置选项，但只能在脚本中作为参数传给<code>app.run()</code>函数。这种方式并不十分方便，传递设置选项的理想方式是使用命令行参数。<br><code>Flask-Script</code> 是一个 <code>Flask</code>扩展，为 <code>Flask</code>程序添加了一个命令行解析器。<code>Flask-Script</code> 自带了一组常用选项，而且还支持自定义命令。<br><code>Flask-Script</code>扩展使用<code>pip</code> 安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install flask-script</span><br></pre></td></tr></table></figure>
+<p>示例 2-3 显示了把命令行解析功能添加到 hello.py 程序中时需要修改的地方。<br><strong><code>示例 2-3　hello.py：使用 Flask-Script</code></strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask.ext.script <span class="keyword">import</span> Manager</span><br><span class="line">manager = Manager(app)</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	manager.run()</span><br></pre></td></tr></table></figure></p>
+<p>专为 Flask 开发的扩展都暴漏在 <code>flask.ext</code> 命名空间下。Flask-Script 输出了一个名为<code>Manager</code> 的类，可从 <code>flask.ext.script</code>中引入。</p>
+<p>这个扩展的初始化方法也适用于其他很多扩展：把程序实例作为参数传给构造函数，初始化主类的实例。创建的对象可以在各个扩展中使用。在这里，服务器由 <code>manager.run()</code>启动，启动后就能解析命令行了。</p>
+<p>这样修改之后，程序可以使用一组基本命令行选项。现在运行 hello.py，会显示一个用法消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ python hello.py</span><br><span class="line">usage: hello.py [-h] &#123;shell,runserver&#125; ...</span><br><span class="line">positional arguments:</span><br><span class="line">	&#123;shell,runserver&#125;</span><br><span class="line">	  shell 在 Flask 应用上下文中运行 Python shell</span><br><span class="line">	  runserver 运行 Flask 开发服务器：app.run()</span><br><span class="line">optional arguments:</span><br><span class="line">	-h, --help 显示帮助信息并退出</span><br></pre></td></tr></table></figure>
+<p>shell 命令用于在程序的上下文中启动 Python shell 会话。你可以使用这个会话中运行维护任务或测试，还可调试异常。顾名思义， runserver 命令用来启动 Web 服务器。运行 python hello.py runserver 将以调试模式启动 Web 服务器，但是我们还有很多选项可用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python hello.py runserver --help</span><br><span class="line">usage: hello.py runserver [-h] [-t HOST] [-p PORT] [--threaded]</span><br><span class="line">				[--processes PROCESSES] [--passthrough-errors] [-d][-r]</span><br><span class="line">							</span><br><span class="line">运行 Flask 开发服务器：app.run()</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">	-h, --help 显示帮助信息并退出</span><br><span class="line">	-t HOST, --host HOST</span><br><span class="line">	-p PORT, --port PORT</span><br><span class="line">	--threaded</span><br><span class="line">	--processes PROCESSES</span><br><span class="line">	--passthrough-errors</span><br><span class="line">	-d, --no-debug</span><br><span class="line">	-r, --no-reload</span><br><span class="line">``` </span><br><span class="line">--host参数是个很有用的选项，它告诉 Web 服务器在哪个网络接口上监听来自客户端的连接。默认情况下，Flask 开发 Web 服务器监听 localhost 上的连接，所以只接受来自服务器所在计算机发起的连接。下述命令让 Web 服务器监听公共网络接口上的连接，允许同网中的其他计算机连接服务器：</span><br><span class="line">```python</span><br><span class="line">(venv) $ python hello.py runserver --host <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"> * Running on http://<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">5000</span>/</span><br><span class="line"> * Restarting <span class="keyword">with</span> reloader</span><br></pre></td></tr></table></figure>
+<p>现在，Web 服务器可使用 <a href="http://a.b.c.d:5000/" target="_blank" rel="external">http://a.b.c.d:5000/</a> 网络中的任一台电脑进行访问，其中“a.b.c.d”是服务器所在计算机的外网 IP 地址。<br>本章介绍了请求响应的概念，不过响应的知识还有很多。对于使用模板生成响应，Flask提供了良好支持，这是个很重要的话题，下一章我们还要专门介绍模板。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/tags/Flask/" rel="tag">#Flask</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/10/《Effective-Python》之用Pythonic的方式来思考-一/" rel="next" title="《Effective Python》之用Pythonic的方式来思考(一)">
+                <i class="fa fa-chevron-left"></i> 《Effective Python》之用Pythonic的方式来思考(一)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/21/团队协作软件Worktile、-Teambition与Asana优劣对比/" rel="prev" title="团队协作软件Worktile、 Teambition与Asana优劣对比">
+                团队协作软件Worktile、 Teambition与Asana优劣对比 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/16/Python-Flask-Web开发学习笔记（三）程序的基本结构/"
+           data-title="Python Flask Web开发学习笔记（三）程序的基本结构" data-url="http://yoursite.com/2016/05/16/Python-Flask-Web开发学习笔记（三）程序的基本结构/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-请求-响应循环"><span class="nav-number">1.</span> <span class="nav-text">2.5　请求-响应循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-程序和请求上下文"><span class="nav-number">1.0.1.</span> <span class="nav-text">2.5.1　程序和请求上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表-2-1-列出了这两种上下文提供的变量。"><span class="nav-number">1.0.2.</span> <span class="nav-text">表 2-1 列出了这两种上下文提供的变量。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-请求调度"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.5.2　请求调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-3-请求钩子"><span class="nav-number">1.0.4.</span> <span class="nav-text">2.5.3　请求钩子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-4-响应"><span class="nav-number">1.0.5.</span> <span class="nav-text">2.5.4　响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Flask扩展"><span class="nav-number">2.</span> <span class="nav-text">2.6　Flask扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Flask-Script支持命令行选项"><span class="nav-number">2.0.1.</span> <span class="nav-text">使用Flask-Script支持命令行选项</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,守护进程,操作系统," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="守护进程也称为精灵进程是一种生存期较长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。他们常常在系统引导装入时启动，在系统关闭时终止。unix系统有很多守护进程，大多数服务器都是用守护进程实现的，例如inetd守护进程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="守护进程是个什么玩意儿">
+<meta property="og:url" content="http://yoursite.com/2016/10/29/守护进程是个什么玩意儿/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="守护进程也称为精灵进程是一种生存期较长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。他们常常在系统引导装入时启动，在系统关闭时终止。unix系统有很多守护进程，大多数服务器都是用守护进程实现的，例如inetd守护进程。">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f99fkza5fnj20m90c5tcn.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f99foy3cq1j20k103ojtk.jpg">
+<meta property="og:updated_time" content="2017-01-12T10:55:58.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="守护进程是个什么玩意儿">
+<meta name="twitter:description" content="守护进程也称为精灵进程是一种生存期较长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。他们常常在系统引导装入时启动，在系统关闭时终止。unix系统有很多守护进程，大多数服务器都是用守护进程实现的，例如inetd守护进程。">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f99fkza5fnj20m90c5tcn.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 守护进程是个什么玩意儿 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                守护进程是个什么玩意儿
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-29T20:51:04+08:00" content="2016-10-29">
+              2016-10-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/29/守护进程是个什么玩意儿/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/29/守护进程是个什么玩意儿/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>守护进程也称为精灵进程是一种生存期较长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。他们常常在系统引导装入时启动，在系统关闭时终止。unix系统有很多守护进程，大多数服务器都是用守护进程实现的，例如inetd守护进程。<br><a id="more"></a></p>
+<h1 id="守护进程的特征"><a href="#守护进程的特征" class="headerlink" title="守护进程的特征"></a>守护进程的特征</h1><p>用ps命令察看一些常用的系统守护进程，看一下他们和几个概念：进程组、控制终端和会话有什么联系。执行： <code>ps –axj</code> ，结果如下所示：<br><img src="https://ws2.sinaimg.cn/large/647dc635jw1f99fkza5fnj20m90c5tcn.jpg" alt=""></p>
+<p>从结果可以看出守护进程没有控制终端，其终端名设置为？，终端前台进程组ID设置为-1，init进程ID为1。系统进程依赖于操作系统实现，父进程ID为0的各进程通常是内核进程，它们作为系统自举的一部分而启动。内核进程以超级用户特权运行，无控制终端，无命令行。大多数守护进程的父进程是init进程。</p>
+<p> 守护进程与后台进程的区别：</p>
+<ul>
+<li>后台运行程序，即加＆启动的程序</li>
+<li>后台运行的程序拥有控制终端，守护进程没有</li>
+</ul>
+<h1 id="守护进程编程规则"><a href="#守护进程编程规则" class="headerlink" title="守护进程编程规则"></a>守护进程编程规则</h1><ul>
+<li>调用umask将文件模式创建屏蔽字设置为0。因为进程从创建它的父进程那里继承了文件创建掩模。它可能修改守护进程所创建的文件的存取位。为防止这一点，将文件创建掩模清除：调用umask(0)。</li>
+<li>调用fork，然后使父进程退出。这样可避免挂起控制终端将Daemon放入后台执行。</li>
+<li>调用setsid以创建一个新会话。这样可以使得调用进程成为新会话的首进程，成为一个新进程组的组长进程，没有控制终端。</li>
+<li>将当前工作目录更改为根目录。进程活动时，其工作目录所在的文件系统不能卸下。一般需要将工作目录改变到根目录。对于需要转储核心，写运行日志的进程将工作目录改变到特定目录如/tmpchdir(“/“) 。</li>
+<li>关闭不再需要的文件描述符。进程从父进程那里继承了打开的文件描述符。如不关闭，将会浪费系统资源，造成进程所在的文件系统无法卸下以及引起无法预料的错误。</li>
+<li>某些守护进程打开/dev/null使其具有文件描述符0、1和2。使得任何一个试图读标准输入、写标准输出或者标准出错的历程都不会产生任何效果。</li>
+<li>处理SIGCHLD信号 。处理SIGCHLD信号并不是必须的。但对于某些进程，特别是服务器进程往往在请求到来时生成子进程处理请求。如果父进程不等待子进程结束，子进程将成为僵尸进程（zombie）从而占用系统资源。如果父进程等待子进程结束，将增加父进程的负担，影响服务器进程的并发性能。在Linux下可以简单地将SIGCHLD信号的操作设为SIG_IGN。</li>
+</ul>
+<p>初始化一个守护进程的程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">daemonize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *cmd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>                 i,fd0,fd1,fd2;</span><br><span class="line">    <span class="keyword">pid_t</span>               pid;</span><br><span class="line">    <span class="keyword">struct</span> rlimit       r1;</span><br><span class="line">    <span class="keyword">struct</span> sigaction    sa;</span><br><span class="line">    umask(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//获取文件描述符最大值</span></span><br><span class="line">    getrlimit(RLIMIT_NOFILE,&amp;r1);</span><br><span class="line">    <span class="comment">//创建子进程</span></span><br><span class="line">    <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         perror(<span class="string">"fork() error"</span>);</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pid &gt; <span class="number">0</span>)  <span class="comment">//使父进程退出</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    setsid();  <span class="comment">//创建会话</span></span><br><span class="line">   <span class="comment">//创建子进程避免获取终端</span></span><br><span class="line">    sa.sa_handler = SIG_IGN;</span><br><span class="line">    sigemptyset(&amp;sa.sa_mask);</span><br><span class="line">    sa.sa_flags = <span class="number">0</span>;</span><br><span class="line">    sigaction(SIGHUP,&amp;sa,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         perror(<span class="string">"fork() error"</span>);</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pid &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">   <span class="comment">//修改目录</span></span><br><span class="line">    chdir(<span class="string">"/"</span>);</span><br><span class="line">    <span class="comment">//关闭不需要的文件描述符</span></span><br><span class="line">    <span class="keyword">if</span>(r1.rlim_max == RLIM_INFINITY)</span><br><span class="line">        r1.rlim_max = <span class="number">1024</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;r1.rlim_max;++i)</span><br><span class="line">        close(i);</span><br><span class="line">    <span class="comment">//打开文件描述符</span></span><br><span class="line">    fd0 = open(<span class="string">"/dev/null"</span>,O_RDWR);</span><br><span class="line">    fd1 = dup(<span class="number">0</span>);</span><br><span class="line">    fd2 = dup(<span class="number">0</span>);</span><br><span class="line">    openlog(cmd,LOG_CONS,LOG_DAEMON);</span><br><span class="line">    <span class="keyword">if</span>(fd0 != <span class="number">0</span> || fd1 != <span class="number">1</span> || fd2 != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        syslog(LOG_ERR,<span class="string">"unexpected file descriptors %d %d %d"</span>,fd0,fd1,fd2);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    daemonize(<span class="string">"ls"</span>);</span><br><span class="line">    sleep(<span class="number">30</span>);  <span class="comment">//主进程休眠，以便查看守护进程状态</span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一次调用fork的目的是保证调用setsid的调用进程不是进程组长。（而setsid函数是实现与控制终端脱离的唯一方法）；setsid函数使进程成为新会话的会话头和进程组长，并与控制终端断开连接；第二次调用fork的目的是：即使守护进程将来打开一个终端设备，也不会自动获得控制终端。（因为在SVR4中，当没有控制终端的会话头进程打开终端设备时，如果这个终端不是其他会话的控制终端，该终端将自动成为这个会话的控制终端），这样可以保证这次生成的进程不再是一个会话头。忽略SIGHUP信号的原因是，当第一次生成的子进程（会话头）终止时，该会话中的所有进程（第二次生成的子进程）都会收到该信号。</p>
+<p>程序执行结果，输入<code>ps -axj</code>命令查看守护进程的信息：<br><img src="https://ws2.sinaimg.cn/large/647dc635jw1f99foy3cq1j20k103ojtk.jpg" alt=""></p>
+<h1 id="出错记录"><a href="#出错记录" class="headerlink" title="出错记录"></a>出错记录</h1><p>守护进程没有控制终端，不能将错误写到标准输错上。大多数进程使用集中的守护进程出错syslog设施，该设施的接口是syslog函数，原型如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line">　　<span class="function"><span class="keyword">void</span> <span class="title">openlog</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *ident, <span class="keyword">int</span> option, <span class="keyword">int</span> facility)</span></span>;</span><br><span class="line">　　<span class="function"><span class="keyword">void</span> <span class="title">syslog</span><span class="params">(<span class="keyword">int</span> priority, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line">　　<span class="function"><span class="keyword">void</span> <span class="title">closelog</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">　　<span class="function"><span class="keyword">int</span> <span class="title">setlogmask</span><span class="params">(<span class="keyword">int</span> mask)</span></span>;</span><br><span class="line">　　<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdarg.h&gt;</span></span></span><br><span class="line">　　<span class="function"><span class="keyword">void</span> <span class="title">vsyslog</span><span class="params">(<span class="keyword">int</span> priority, <span class="keyword">const</span> <span class="keyword">char</span> *format, va_list ap)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>大多数syslog实现将使消息多时间处于队列中，如果在此时间中到达了重复消息，那么syslog守护进程将不把它写到日志记录中，而是打印输出重复消息。</p>
+<h1 id="单实例守护进程"><a href="#单实例守护进程" class="headerlink" title="单实例守护进程"></a>单实例守护进程</h1><p>为了正常运作，某些守护进程实现为单实例，即在任一时刻只运行该守护进程的一个副本。采用文件锁和记录锁机制可以实现单实例守护进程，如果每一个守护进程创建一个文件，并且在整个文件上加上一把锁，那就只允许创建一把这样的写锁，之后试图再创建这样的一把写锁将会失败。这样就保证守护进程只有一个副本在运行。使用文件和记录锁保证只运行某守护进程的一个副本，守护进程的每个副本都试图创建一个文件，并将其进程ID写到该文件中。</p>
+<p>程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCKFILE <span class="string">"/var/run/daemon.pid"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCKMODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH )</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">lockfile</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">already_running</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>     fd;</span><br><span class="line">    <span class="keyword">char</span>    buf[<span class="number">16</span>];</span><br><span class="line">    <span class="comment">//打开文件，不存在则创建</span></span><br><span class="line">    fd = open(LOCKFILE,O-RDWR|O_CREAT,LOCKMODE);</span><br><span class="line">    <span class="keyword">if</span>(fd &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        syslog(LOG_ERR,<span class="string">"can't open %s : %s"</span>,LOCKFILE,strerror(errno));</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//对文件加锁</span></span><br><span class="line">    <span class="keyword">if</span>(lockfile(fd)&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(errno == EACCES | errno == EAGAIN)</span><br><span class="line">        &#123;</span><br><span class="line">            close(fd);</span><br><span class="line">            return <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        syslog(LOG_ERR,<span class="string">"can,t lock %s : %s"</span>,LOCKFILE,strerror(errno));</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ftruncate(fd,<span class="number">0</span>); <span class="comment">//将文件长度截短为0</span></span><br><span class="line">    <span class="built_in">sprintf</span>(buf,<span class="string">"%ld"</span>,(long)getpid());</span><br><span class="line">    write(fd,buf,<span class="built_in">strlen</span>(buf)+<span class="number">1</span>);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="守护进程的惯例"><a href="#守护进程的惯例" class="headerlink" title="守护进程的惯例"></a>守护进程的惯例</h1><ul>
+<li>若守护进程使用锁文件，那么该文件通常存放在/var/run目录中。</li>
+<li>若守护进程支持配置选项，那么配置文件通常存放在/etc中目录中。</li>
+<li>守护进程可以用命令行启动，通常是系统初始化脚本。</li>
+<li>若一守护进程有一配置文件，那么当该守护进程启动时，读取该文件，此后一把不会在查看它。</li>
+</ul>
+<p>使用<code>sigwait</code>及多线程实现守护进程重读配置文件程序如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCKFILE <span class="string">"/var/run/daemon.pid"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCKMODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH )</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">sigset_t</span> mask;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lockfile</span><span class="params">(<span class="keyword">int</span> fd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> flock f1;</span><br><span class="line">    f1.l_type = F_WRLCK;</span><br><span class="line">    f1.l_start = <span class="number">0</span>;</span><br><span class="line">    f1.l_whence = SEEK_SET;</span><br><span class="line">    f1.l_len = <span class="number">0</span>;</span><br><span class="line">    return fcntl(fd,F_SETLK,&amp;f1);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">already_running</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>     fd;</span><br><span class="line">    <span class="keyword">char</span>    buf[<span class="number">16</span>];</span><br><span class="line"></span><br><span class="line">    fd = open(LOCKFILE,O_RDWR|O_CREAT,LOCKMODE);</span><br><span class="line">    <span class="keyword">if</span>(fd &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        syslog(LOG_ERR,<span class="string">"can't open %s : %s"</span>,LOCKFILE,strerror(errno));</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(lockfile(fd)&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(errno == EACCES | errno == EAGAIN)</span><br><span class="line">        &#123;</span><br><span class="line">            close(fd);</span><br><span class="line">            return <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        syslog(LOG_ERR,<span class="string">"can,t lock %s : %s"</span>,LOCKFILE,strerror(errno));</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ftruncate(fd,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">sprintf</span>(buf,<span class="string">"%ld"</span>,(long)getpid());</span><br><span class="line">    write(fd,buf,<span class="built_in">strlen</span>(buf)+<span class="number">1</span>);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">daemonize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *cmd)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>                 i,fd0,fd1,fd2;</span><br><span class="line">    <span class="keyword">pid_t</span>               pid;</span><br><span class="line">    <span class="keyword">struct</span> rlimit       r1;</span><br><span class="line">    <span class="keyword">struct</span> sigaction    sa;</span><br><span class="line">    umask(<span class="number">0</span>);</span><br><span class="line">    getrlimit(RLIMIT_NOFILE,&amp;r1);</span><br><span class="line">    <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         perror(<span class="string">"fork() error"</span>);</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pid &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    setsid();</span><br><span class="line">    sa.sa_handler = SIG_IGN;</span><br><span class="line">    sigemptyset(&amp;sa.sa_mask);</span><br><span class="line">    sa.sa_flags = <span class="number">0</span>;</span><br><span class="line">    sigaction(SIGHUP,&amp;sa,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         perror(<span class="string">"fork() error"</span>);</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pid &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    chdir(<span class="string">"/"</span>);</span><br><span class="line">    <span class="keyword">if</span>(r1.rlim_max == RLIM_INFINITY)</span><br><span class="line">        r1.rlim_max = <span class="number">1024</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;r1.rlim_max;++i)</span><br><span class="line">        close(i);</span><br><span class="line">    fd0 = open(<span class="string">"/dev/null"</span>,O_RDWR);</span><br><span class="line">    fd1 = dup(<span class="number">0</span>);</span><br><span class="line">    fd2 = dup(<span class="number">0</span>);</span><br><span class="line">    openlog(cmd,LOG_CONS,LOG_DAEMON);</span><br><span class="line">    <span class="keyword">if</span>(fd0 != <span class="number">0</span> || fd1 != <span class="number">1</span> || fd2 != <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        syslog(LOG_ERR,<span class="string">"unexpected file descriptors %d %d %d"</span>,fd0,fd1,fd2);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reread</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"read daemon config file again.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">thread_func</span><span class="params">(<span class="keyword">void</span> *arg)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> err,signo;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sigwait(&amp;mask,&amp;signo);</span><br><span class="line">        <span class="keyword">switch</span>(signo)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> SIGHUP:</span><br><span class="line">            syslog(LOG_INFO,<span class="string">"Re-reading configuration file.\n"</span>);</span><br><span class="line">            reread();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> SIGTERM:</span><br><span class="line">            syslog(LOG_INFO,<span class="string">"got SIGTERM;exiting.\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            syslog(LOG_INFO,<span class="string">"unexpected signal %d.\n"</span>,signo);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">pthread_t</span>           tid;</span><br><span class="line">    <span class="keyword">char</span>                *cmd;</span><br><span class="line">    <span class="keyword">struct</span> sigaction    sa;</span><br><span class="line">    <span class="keyword">if</span>((cmd = strrchr(argv[<span class="number">0</span>],<span class="string">'/'</span>)) == <span class="literal">NULL</span>)</span><br><span class="line">        cmd = argv[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        cmd++;</span><br><span class="line">    daemonize(cmd);</span><br><span class="line">    <span class="keyword">if</span>(already_running())</span><br><span class="line">    &#123;</span><br><span class="line">          syslog(LOG_ERR,<span class="string">"daemon already running.\n"</span>);</span><br><span class="line">          <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    sa.sa_handler =SIG_DFL;</span><br><span class="line">    sigemptyset(&amp;sa.sa_mask);</span><br><span class="line">    sa.sa_flags = <span class="number">0</span>;</span><br><span class="line">    sigaction(SIGHUP,&amp;sa,<span class="literal">NULL</span>);</span><br><span class="line">    sigfillset(&amp;mask);</span><br><span class="line">    pthread_sigmask(SIG_BLOCK,&amp;mask,<span class="literal">NULL</span>);</span><br><span class="line">    pthread_create(&amp;tid,<span class="literal">NULL</span>,thread_func,<span class="number">0</span>);</span><br><span class="line">    sleep(<span class="number">90</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/守护进程/" rel="tag">#守护进程</a>
+          
+            <a href="/tags/操作系统/" rel="tag">#操作系统</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/八大排序算法的Python实现/" rel="next" title="八大排序算法的Python实现">
+                <i class="fa fa-chevron-left"></i> 八大排序算法的Python实现
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/29/What-Makes-a-Good-Programmer-Good/" rel="prev" title="What Makes a Good Programmer Good?">
+                What Makes a Good Programmer Good? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/29/守护进程是个什么玩意儿/"
+           data-title="守护进程是个什么玩意儿" data-url="http://yoursite.com/2016/10/29/守护进程是个什么玩意儿/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#守护进程的特征"><span class="nav-number">1.</span> <span class="nav-text">守护进程的特征</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护进程编程规则"><span class="nav-number">2.</span> <span class="nav-text">守护进程编程规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#出错记录"><span class="nav-number">3.</span> <span class="nav-text">出错记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单实例守护进程"><span class="nav-number">4.</span> <span class="nav-text">单实例守护进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护进程的惯例"><span class="nav-number">5.</span> <span class="nav-text">守护进程的惯例</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>
