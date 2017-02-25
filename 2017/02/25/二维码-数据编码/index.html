@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="你今天真好看">
 <meta property="og:description" content="每种编码模式都使用不同的方法将文本转换为二进制数字，并且使用尽可能短的二进制数字来编码数据。
 本文主要讲解二维码的详细编码过程。">
-<meta property="og:updated_time" content="2017-02-25T05:00:42.584Z">
+<meta property="og:updated_time" content="2017-02-25T05:02:24.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码 - 数据编码">
 <meta name="twitter:description" content="每种编码模式都使用不同的方法将文本转换为二进制数字，并且使用尽可能短的二进制数字来编码数据。
@@ -305,7 +305,33 @@
 <a id="more"></a>
 <h1 id="1-选择错误校正级别"><a href="#1-选择错误校正级别" class="headerlink" title="1. 选择错误校正级别"></a>1. 选择错误校正级别</h1><p>在编码数据之前，首先应当选择错误校正级别。如前文中所述，二维码使用<a href="https://zh.wikipedia.org/wiki/%E9%87%8C%E5%BE%B7-%E6%89%80%E7%BD%97%E9%97%A8%E7%A0%81" target="_blank" rel="external">里德-所罗门码</a>。该过程基于编码数据创建纠错码，二维码阅读器可以使用这些纠错码来确定它是否正确地读取数据，并且可以使用纠错码来纠正错误。</p>
 <p>二维码中有四种级别的纠错：L，M，Q，H。</p>
-<p>下表列出了级别及其纠错能力：<br>|  纠错级别    |  纠错能力  |<br>| :———:| :—————-:|<br>| L          | 7%的字码可被修正   |<br>| M          | 15%的字码可被修正  |<br>| Q          | 25%的字码可被修正  |<br>| H          | 30%的字码可被修正  |</p>
+<p>下表列出了级别及其纠错能力：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">纠错级别</th>
+<th style="text-align:center">纠错能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">7%的字码可被修正</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">15%的字码可被修正</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">25%的字码可被修正</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">30%的字码可被修正</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>注意: 更高级别的纠错需要更多的字节，因此纠错级别越高，二维码尺寸就越大。</p>
 </blockquote>
