@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="你今天真好看">
 <meta property="og:description" content="每种编码模式都使用不同的方法将文本转换为二进制数字，并且使用尽可能短的二进制数字来编码数据。
 本文主要讲解二维码的详细编码过程。">
-<meta property="og:updated_time" content="2017-02-25T05:02:24.788Z">
+<meta property="og:updated_time" content="2017-02-25T10:25:13.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码 - 数据编码">
 <meta name="twitter:description" content="每种编码模式都使用不同的方法将文本转换为二进制数字，并且使用尽可能短的二进制数字来编码数据。
@@ -339,10 +339,197 @@
 <p>计算公式是：<code>(V-1)*4 + 21</code>（V是版本号）。</p>
 <p>最高Version 40，(40-1)*4+21 = 177，所以最大是177 x 177 的正方形。</p>
 <p>每个版本都有最大容量，具体取决于使用的模式。此外，纠错级别也进一步限制容量。</p>
-<p><a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E5%AD%97%E7%AC%A6%E5%AE%B9%E9%87%8F%E8%A1%A8/" target="_blank" rel="external">字符容量表</a>列出了给定编码模式和纠错级别的所有二维码版本的容量。</p>
-<h2 id="如何确定最小的版本"><a href="#如何确定最小的版本" class="headerlink" title="如何确定最小的版本"></a>如何确定最小的版本</h2><p>计算要编码的字符数，并确定对应编码模式的包含的字符数量和符合纠错级别的最小版本。</p>
+<p><a href="../二维码-字符容量表/">字符容量表</a>列出了给定编码模式和纠错级别的所有二维码版本的容量。</p>
+<h2 id="2-1-如何确定最小的版本"><a href="#2-1-如何确定最小的版本" class="headerlink" title="2.1 如何确定最小的版本"></a>2.1 如何确定最小的版本</h2><p>计算要编码的字符数，并确定对应编码模式的包含的字符数量和符合纠错级别的最小版本。</p>
 <p>举个栗子。</p>
-<p>字符串 <strong>HELLO WORLD</strong> 有11个字符。 假设纠错级别为 <code>Q</code>。查看<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E5%AD%97%E7%AC%A6%E5%AE%B9%E9%87%8F%E8%A1%A8/" target="_blank" rel="external">字符容量表</a>，发现版本1下纠错级别Q在字符模式下只能包含10个字符。因此，在这种情况下可以使用的最小版本是版本2。</p>
+<p>字符串 <strong>HELLO WORLD</strong> 有11个字符。 假设纠错级别为 <code>Q</code>。查看<a href="../二维码-字符容量表/">字符容量表</a>，发现版本1下纠错级别Q在字符模式下只能包含10个字符。因此，在这种情况下可以使用的最小版本是版本2。</p>
+<h2 id="2-2-最大限制"><a href="#2-2-最大限制" class="headerlink" title="2.2 最大限制"></a>2.2 最大限制</h2><p>二维码的最高容量是<code>40-L</code>，Version 40 &amp; Error correction level L。<br>下面的表格列出了40-L 二维码对应四种编码模式的容量。这是单个二维码可以包含的最大可能字符数。版本40-M，40-Q和40-H具有较低的容量，因为它们将更多的空间用于纠错码。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">纠错级别</th>
+<th style="text-align:center">40-L 模式下可以编码的数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数字编码</td>
+<td style="text-align:center">7089个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">字符编码</td>
+<td style="text-align:center">4296个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">字节编码</td>
+<td style="text-align:center">2953个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">日文编码</td>
+<td style="text-align:center">1817个字符</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-增加模式指示符"><a href="#3-增加模式指示符" class="headerlink" title="3 增加模式指示符"></a>3 增加模式指示符</h1><p>每个编码模式都具有指示它的四位模式指示符。编码数据必须以适当的模式指示符开始，用于指示后面的位串的模式。</p>
+<p>举个栗子，如果以字符模式编码HELLO WORLD，模式指示符为0010。</p>
+<p>下表列出了每种模式的模式指示符：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">指示符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数字模式</td>
+<td style="text-align:center">0001</td>
+</tr>
+<tr>
+<td style="text-align:center">字符模式</td>
+<td style="text-align:center">0010</td>
+</tr>
+<tr>
+<td style="text-align:center">字节模式</td>
+<td style="text-align:center">0100</td>
+</tr>
+<tr>
+<td style="text-align:center">日文模式</td>
+<td style="text-align:center">1000</td>
+</tr>
+<tr>
+<td style="text-align:center">ECI模式</td>
+<td style="text-align:center">0111</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-增加字符计数指示符"><a href="#4-增加字符计数指示符" class="headerlink" title="4 增加字符计数指示符"></a>4 增加字符计数指示符</h1><p>字符计数指示符是一串二进制数字（位串），表示正在编码的字符数。字符计数指示符必须放在模式指示符之后。此外，字符计数指示符有特定的位长，具体取决于二维码的版本和编码模式。</p>
+<p>具体步骤是：</p>
+<p>计算原始输入文本的字符数，将其转为二进制数字。根据版本和编码模式找到对应的位长，不够位长的在前面加0补齐。</p>
+<p>举个栗子：</p>
+<p>举个栗子，如果以字符模式编码HELLO WORLD，版本号为1，则字符计数指示符必须为9位长。</p>
+<p>HELLO WORLD的字符数为11。在二进制中，11为1011。</p>
+<p>在左侧填充0，使其长度达到9位：000001011。</p>
+<p>将这个指示符放在模式指示符之后，获得以下位串：0010 000001011。</p>
+<p>下表列出了每种版本的对应的字符计数指示符位长：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">版本号</th>
+<th style="text-align:center">编码模式</th>
+<th style="text-align:center">字符计数指示符位长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Version 1 - 9</td>
+<td style="text-align:center">数字编码模式</td>
+<td style="text-align:center">10 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">字符编码模式</td>
+<td style="text-align:center">9 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">字节编码模式</td>
+<td style="text-align:center">8 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">日文编码模式</td>
+<td style="text-align:center">8 bits</td>
+</tr>
+<tr>
+<td style="text-align:center">Version 10 - 26</td>
+<td style="text-align:center">数字编码模式</td>
+<td style="text-align:center">12 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">字符编码模式</td>
+<td style="text-align:center">11 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">字节编码模式</td>
+<td style="text-align:center">16 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">日文编码模式</td>
+<td style="text-align:center">10 bits</td>
+</tr>
+<tr>
+<td style="text-align:center">Version 27 - 40</td>
+<td style="text-align:center">数字编码模式</td>
+<td style="text-align:center">14 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">字符编码模式</td>
+<td style="text-align:center">13 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">字节编码模式</td>
+<td style="text-align:center">16 bits</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">日文编码模式</td>
+<td style="text-align:center">12 bits</td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-使用所选模式进行编码"><a href="#5-使用所选模式进行编码" class="headerlink" title="5 使用所选模式进行编码"></a>5 使用所选模式进行编码</h1><p>上文数据分析中解释了如何为给定字符串选择适当的编码模式。点击下面的链接，了解每种模式的编码过程。</p>
+<ul>
+<li><a href="../二维码-数字编码/">数字编码</a></li>
+<li><a href="../二维码-字符编码/">字符编码</a></li>
+<li><a href="../二维码-字节编码/">字节编码</a></li>
+<li><a href="../二维码-日文编码/">日文编码</a></li>
+</ul>
+<h1 id="6-分成8位码字和添加补齐码（如果必要的话）"><a href="#6-分成8位码字和添加补齐码（如果必要的话）" class="headerlink" title="6 分成8位码字和添加补齐码（如果必要的话）"></a>6 分成8位码字和添加补齐码（如果必要的话）</h1><p>在获得由模式指示符，字符计数指示符和数据位组成的位串之后，可能需要添加0和补齐码，因为二维码规范要求位串必须完全填充二维码的总容量。</p>
+<p>以下部分说明将0和补齐码添加到位串的过程。</p>
+<h2 id="6-1-确定此二维码所需的位数"><a href="#6-1-确定此二维码所需的位数" class="headerlink" title="6.1 确定此二维码所需的位数"></a>6.1 确定此二维码所需的位数</h2><p>要确定特定QR码需要多少数据位，请参阅<a href="../二维码-纠错码和块信息/">纠错表</a>。</p>
+<p>找到当前文本生成二维码所使用的版本和错误纠正级别，并在标有“数据码字总数”的对应列中找到该编号。将此数乘以8以获得此版本和纠错级别所需的数据位的总数。</p>
+<p>例如，根据该表，二维码 <code>1-Q</code> 具有13个总数据码字。因此，该QR码所需的总比特数为<code>13×8 = 104</code>比特。</p>
+<h2 id="6-2-添加终止符（如有需要）"><a href="#6-2-添加终止符（如有需要）" class="headerlink" title="6.2 添加终止符（如有需要）"></a>6.2 添加终止符（如有需要）</h2><p>如果位串小于所需位的总数，则必须在字符串的右侧添加最多四个0的终止符。</p>
+<p>如果所需位数比位串大四位及以上，则将四个0加到结尾。否则只添加达到所需位数所需的0的个数。</p>
+<p>例如，如果在 <code>1-Q</code> 的二维码中编码HELLO WORLD，则所需比特的总数是104比特。而步骤五中HELLO WORLD数据位字符串为74位长。终止符的长度最多只能为4位，因此在字符串的右侧添加4个0。结果字符串仍然太短，无法填充104位容量，但二维码规范要求终止符的长度最多为4个0。如果字符串已经是102位，则终止符的长度将仅为2位。</p>
+<p>下面是添加了终止符的HELLO WORLD字符串示例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式指示符</th>
+<th style="text-align:center">字符计数指示符</th>
+<th style="text-align:center">数据位</th>
+<th style="text-align:center">终止符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0010</td>
+<td style="text-align:center">000001011</td>
+<td style="text-align:center">01100001011 01111000110 10001011100 10110111000 10011010100 001101</td>
+<td style="text-align:center">0000</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-3-添加更多0，使长度为8的倍数"><a href="#6-3-添加更多0，使长度为8的倍数" class="headerlink" title="6.3 添加更多0，使长度为8的倍数"></a>6.3 添加更多0，使长度为8的倍数</h2><p>添加终止符后，如果字符串中的位数不是8的倍数，首先使用0来填充右侧的字符串，使字符串的长度为8的倍数。</p>
+<p>例如，在将终止符添加到HELLO WORLD字符串之后，长度变为78位长。这不是8的倍数。位串显示为8位二进制字节：</p>
+<p>00100000 01011011 00001011 01111000 11010001 01110010 11011100 01001101 01000011 010000</p>
+<p>最后有六位。添加两个0使其成为8位二进制字节：</p>
+<p>00100000 01011011 00001011 01111000 11010001 01110010 11011100 01001101 01000011 010000<strong>00</strong></p>
+<h2 id="6-4-如果字符串仍然太短，则添加补齐码（Pad-Bytes）"><a href="#6-4-如果字符串仍然太短，则添加补齐码（Pad-Bytes）" class="headerlink" title="6.4 如果字符串仍然太短，则添加补齐码（Pad Bytes）"></a>6.4 如果字符串仍然太短，则添加补齐码（Pad Bytes）</h2><p>如果字符串仍然不足以填充最大容量，请将以下字节添加到字符串的末尾，不断重复，直到字符串已达到最大长度：</p>
+<p><strong>11101100 00010001</strong></p>
+<p>这些字节分别等于236和17，二维码针对在6.3后字符串仍然太短的情况特别规定了补齐码(Pad Bytes)。</p>
+<p>例如，上面的<code>HELLO WORLD</code>字符串为80位长。而<code>1-Q</code>二维码所需的容量为104位。</p>
+<p>需要填充的位数为104 - 80 = 24.</p>
+<p>将它除以8：24/8 = 3.</p>
+<p>因此，必须将三个填充字节添加到数据字符串的末尾。如下所示：</p>
+<p>00100000 01011011 00001011 01111000 11010001 01110010 11011100 01001101 01000011 01000000 <strong>11101100 00010001 11101100</strong></p>
 
       
     </div>
@@ -457,7 +644,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -496,7 +683,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-选择错误校正级别"><span class="nav-number">1.</span> <span class="nav-text">1. 选择错误校正级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-确定数据的最小版本"><span class="nav-number">2.</span> <span class="nav-text">2. 确定数据的最小版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何确定最小的版本"><span class="nav-number">2.1.</span> <span class="nav-text">如何确定最小的版本</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-选择错误校正级别"><span class="nav-number">1.</span> <span class="nav-text">1. 选择错误校正级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-确定数据的最小版本"><span class="nav-number">2.</span> <span class="nav-text">2. 确定数据的最小版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-如何确定最小的版本"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 如何确定最小的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-最大限制"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 最大限制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-增加模式指示符"><span class="nav-number">3.</span> <span class="nav-text">3 增加模式指示符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-增加字符计数指示符"><span class="nav-number">4.</span> <span class="nav-text">4 增加字符计数指示符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-使用所选模式进行编码"><span class="nav-number">5.</span> <span class="nav-text">5 使用所选模式进行编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-分成8位码字和添加补齐码（如果必要的话）"><span class="nav-number">6.</span> <span class="nav-text">6 分成8位码字和添加补齐码（如果必要的话）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-确定此二维码所需的位数"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 确定此二维码所需的位数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-添加终止符（如有需要）"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 添加终止符（如有需要）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-添加更多0，使长度为8的倍数"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 添加更多0，使长度为8的倍数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-如果字符串仍然太短，则添加补齐码（Pad-Bytes）"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 如果字符串仍然太短，则添加补齐码（Pad Bytes）</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
