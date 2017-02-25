@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="你今天真好看">
 <meta property="og:description" content="每种编码模式都使用不同的方法将文本转换为二进制数字，并且使用尽可能短的二进制数字来编码数据。
 本文主要讲解二维码的详细编码过程。">
-<meta property="og:updated_time" content="2017-02-25T03:58:56.766Z">
+<meta property="og:updated_time" content="2017-02-25T05:00:42.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码 - 数据编码">
 <meta name="twitter:description" content="每种编码模式都使用不同的方法将文本转换为二进制数字，并且使用尽可能短的二进制数字来编码数据。
@@ -305,36 +305,18 @@
 <a id="more"></a>
 <h1 id="1-选择错误校正级别"><a href="#1-选择错误校正级别" class="headerlink" title="1. 选择错误校正级别"></a>1. 选择错误校正级别</h1><p>在编码数据之前，首先应当选择错误校正级别。如前文中所述，二维码使用<a href="https://zh.wikipedia.org/wiki/%E9%87%8C%E5%BE%B7-%E6%89%80%E7%BD%97%E9%97%A8%E7%A0%81" target="_blank" rel="external">里德-所罗门码</a>。该过程基于编码数据创建纠错码，二维码阅读器可以使用这些纠错码来确定它是否正确地读取数据，并且可以使用纠错码来纠正错误。</p>
 <p>二维码中有四种级别的纠错：L，M，Q，H。</p>
-<p>下表列出了级别及其纠错能力：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">纠错级别</th>
-<th style="text-align:center">纠错能力</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">L</td>
-<td style="text-align:center">7%的字码可被修正</td>
-</tr>
-<tr>
-<td style="text-align:center">M</td>
-<td style="text-align:center">15%的字码可被修正</td>
-</tr>
-<tr>
-<td style="text-align:center">Q</td>
-<td style="text-align:center">25%的字码可被修正</td>
-</tr>
-<tr>
-<td style="text-align:center">H</td>
-<td style="text-align:center">30%的字码可被修正</td>
-</tr>
-</tbody>
-</table>
+<p>下表列出了级别及其纠错能力：<br>|  纠错级别    |  纠错能力  |<br>| :———:| :—————-:|<br>| L          | 7%的字码可被修正   |<br>| M          | 15%的字码可被修正  |<br>| Q          | 25%的字码可被修正  |<br>| H          | 30%的字码可被修正  |</p>
 <blockquote>
 <p>注意: 更高级别的纠错需要更多的字节，因此纠错级别越高，二维码尺寸就越大。</p>
 </blockquote>
+<h1 id="2-确定数据的最小版本"><a href="#2-确定数据的最小版本" class="headerlink" title="2. 确定数据的最小版本"></a>2. 确定数据的最小版本</h1><p>二维码一共有40个尺寸。官方叫版本Version。Version 1是21 x 21的矩阵，Version 2是 25 x 25的矩阵，Version 3是29的尺寸，每增加一个version，就会增加4的尺寸。</p>
+<p>计算公式是：<code>(V-1)*4 + 21</code>（V是版本号）。</p>
+<p>最高Version 40，(40-1)*4+21 = 177，所以最大是177 x 177 的正方形。</p>
+<p>每个版本都有最大容量，具体取决于使用的模式。此外，纠错级别也进一步限制容量。</p>
+<p><a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E5%AD%97%E7%AC%A6%E5%AE%B9%E9%87%8F%E8%A1%A8/" target="_blank" rel="external">字符容量表</a>列出了给定编码模式和纠错级别的所有二维码版本的容量。</p>
+<h2 id="如何确定最小的版本"><a href="#如何确定最小的版本" class="headerlink" title="如何确定最小的版本"></a>如何确定最小的版本</h2><p>计算要编码的字符数，并确定对应编码模式的包含的字符数量和符合纠错级别的最小版本。</p>
+<p>举个栗子。</p>
+<p>字符串 <strong>HELLO WORLD</strong> 有11个字符。 假设纠错级别为 <code>Q</code>。查看<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E5%AD%97%E7%AC%A6%E5%AE%B9%E9%87%8F%E8%A1%A8/" target="_blank" rel="external">字符容量表</a>，发现版本1下纠错级别Q在字符模式下只能包含10个字符。因此，在这种情况下可以使用的最小版本是版本2。</p>
 
       
     </div>
@@ -488,7 +470,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-选择错误校正级别"><span class="nav-number">1.</span> <span class="nav-text">1. 选择错误校正级别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-选择错误校正级别"><span class="nav-number">1.</span> <span class="nav-text">1. 选择错误校正级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-确定数据的最小版本"><span class="nav-number">2.</span> <span class="nav-text">2. 确定数据的最小版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何确定最小的版本"><span class="nav-number">2.1.</span> <span class="nav-text">如何确定最小的版本</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
