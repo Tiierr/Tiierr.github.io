@@ -90,7 +90,7 @@
 <meta property="og:description" content="写在前面二维码是由Denso Wave Incorporated创建的特殊类型的条形码。二维码使用易于被光学扫描仪读取的像素图案来编码文本和数字。
 本教程旨在教授程序员如何在二维码中编码信息。建议有一定计算机基础的人阅读。
 如果你仅仅想创建二维码，则不需要阅读本教程。点击二维码生成器即可创建二维码。">
-<meta property="og:updated_time" content="2017-02-24T14:33:53.246Z">
+<meta property="og:updated_time" content="2017-02-25T02:09:02.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码生成原理教程">
 <meta name="twitter:description" content="写在前面二维码是由Denso Wave Incorporated创建的特殊类型的条形码。二维码使用易于被光学扫描仪读取的像素图案来编码文本和数字。
@@ -307,13 +307,13 @@
 <p>本教程旨在教授程序员如何在二维码中编码信息。建议有一定计算机基础的人阅读。</p>
 <p>如果你仅仅想创建二维码，则不需要阅读本教程。点击<a href="http://www.thonky.com/qrcode/" target="_blank" rel="external">二维码生成器</a>即可创建二维码。</p>
 <a id="more"></a>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>二维码是一种特殊类型的条形码，可对数字，字母和汉字字符等信息进行编码。本教程是为想要学习二维码的编码过程的程序员编写的。编码过程很复杂，特别是在生成纠错码(error correction code words)的步骤中。本教程将尝试用简单的术语解释整个过程。<strong>本教程假设您至少有基本的编程知识。</strong></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>二维码是一种特殊类型的条形码，可对数字，字母和日文字符等信息进行编码。本教程是为想要学习二维码的编码过程的程序员编写的。编码过程很复杂，特别是在生成纠错码(error correction code words)的步骤中。本教程将尝试用简单的术语解释整个过程。<strong>本教程假设您至少有基本的编程知识。</strong></p>
 <h2 id="历史和信息"><a href="#历史和信息" class="headerlink" title="历史和信息"></a>历史和信息</h2><p>二维码格式在1994年由日本公司Denso-Wave创建，该公司是丰田的子公司，生产汽车零部件。该标准定义在<a href="http://www.iso.org/iso/catalogue_detail?csnumber=43655" target="_blank" rel="external">ISO / IEC 18004：2006</a>中。</p>
 <p>最小的二维码是21x21像素，最大的是177x177像素。尺寸称为<code>Version</code>。 21x21像素大小是<code>Version 1</code>，25x25像素大小是<code>Version 2</code>，依此类推。 177x177大小像素是<code>Version 40</code>。</p>
 <p>此外，二维码包括纠错：当您编码二维码时，您还创建一些冗余数据，这将有助于QR读取器准确读取二维码，即使它的一部分是不可读的数据，也不会影响读取正确的信息。</p>
 <p>二维码中有四种级别的纠错，最低的是L，它可以校准7%的字码。之后是可以校准15％的M，然后是可以校准25％的Q，最后是可以校准30％的H。</p>
-<p>一个二维码的容量取决于它的版本和错误纠正级别，以及编码的数据类型。二维码可以编码四种数据模式：数字，字母数字，字节或汉字。（ps：实际上还有 Extended Channel Interpretation (ECI) mode、Structured Append mode 和 FNC1 mode，一般情况下用不到，所以作者也没有介绍。）</p>
-<h2 id="创建二维码的基本步骤"><a href="#创建二维码的基本步骤" class="headerlink" title="创建二维码的基本步骤"></a>创建二维码的基本步骤</h2><h3 id="第一步：数据分析"><a href="#第一步：数据分析" class="headerlink" title="第一步：数据分析"></a>第一步：数据分析</h3><p>二维码编码一串文本。 二维码标准有四种编码模式：数字，字母数字，字节和汉字。每种编码模式将文本编码为一串二进制数字（1和0），但每个模式使用不同的方法将文本转换为二进制数字，并且每个编码模式使用尽可能最短的一串二进制数字来编码数据。因此，第一步应该是进行<a href="#">数据分析</a>，以确定该文本是否可以符合数字，字母，字节或汉字模式的编码，然后选择最优化的编码模式。</p>
+<p>一个二维码的容量取决于它的版本和错误纠正级别，以及编码的数据类型。二维码可以编码四种数据模式：数字，字母数字，字节或日文。（ps：实际上还有 Extended Channel Interpretation (ECI) mode、Structured Append mode 和 FNC1 mode，一般情况下用不到，所以作者也没有介绍。）</p>
+<h2 id="创建二维码的基本步骤"><a href="#创建二维码的基本步骤" class="headerlink" title="创建二维码的基本步骤"></a>创建二维码的基本步骤</h2><h3 id="第一步：数据分析"><a href="#第一步：数据分析" class="headerlink" title="第一步：数据分析"></a>第一步：数据分析</h3><p>二维码编码一串文本。 二维码标准有四种编码模式：数字，字母数字，字节和日文。每种编码模式将文本编码为一串二进制数字（1和0），但每个模式使用不同的方法将文本转换为二进制数字，并且每个编码模式使用尽可能最短的一串二进制数字来编码数据。因此，第一步应该是进行<a href="#">数据分析</a>，以确定该文本是否可以符合数字，字母，字节或日文模式的编码，然后选择最优化的编码模式。</p>
 <h3 id="第二步：数据编码"><a href="#第二步：数据编码" class="headerlink" title="第二步：数据编码"></a>第二步：数据编码</h3><p>当你为需要编码的文本选择了合适的编码模式，下一步是对该文本进行编码。数据编码部分介绍了每种编码模式的详细过程。此步骤的结果若干组8位长的数据码。</p>
 <h3 id="第三步：纠错编码"><a href="#第三步：纠错编码" class="headerlink" title="第三步：纠错编码"></a>第三步：纠错编码</h3><p>如上所述，二维码使用纠错。这意味着你得到了该文本对应的数据码后，必须再使用这些数据码生成纠错码（Reed-Solomon error correction）。</p>
 <p>二维码扫描器读取数据码和纠错码。通过比较两种码字，扫描仪可以确定是否正确地读取了数据，如果它没有正确地读取数据，则可以利用纠错码纠正数据码的错误。纠错编码部分详细解释了由数据码产生纠错码的过程。</p>
@@ -359,6 +359,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/25/二维码-数据分析/" rel="prev" title="二维码 - 数据分析">
+                二维码 - 数据分析 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -433,7 +437,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
