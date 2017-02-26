@@ -1,0 +1,874 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二维码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码 - 生成纠错码">
+<meta property="og:url" content="http://yoursite.com/2017/02/26/二维码-生成纠错码/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。">
+<meta property="og:updated_time" content="2017-02-26T04:44:42.899Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码 - 生成纠错码">
+<meta name="twitter:description" content="纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 二维码 - 生成纠错码 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                二维码 - 生成纠错码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-26T10:26:00+08:00" content="2017-02-26">
+              2017-02-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/26/二维码-生成纠错码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/26/二维码-生成纠错码/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。</p>
+<a id="more"></a>
+<h1 id="1-将数据码分组"><a href="#1-将数据码分组" class="headerlink" title="1 将数据码分组"></a>1 将数据码分组</h1><p>在生成纠错码之前，如果二维码大于Version 2，则可能需要将数据码分解成更小的块。</p>
+<p>例如，如果创建一个 <code>5-Q</code> 二维码，纠错表表明<code>5-Q码</code>具有62个数据码字（8位二进制数的串）。</p>
+<p>(codeword #1)  01000011<br>(codeword #2)  01010101<br>(codeword #3)  01000110<br>(codeword #4)  10000110<br>(codeword #5)  01010111<br>(codeword #6)  00100110<br>(codeword #7)  01010101<br>(codeword #8)  11000010<br>(codeword #9)  01110111<br>(codeword #10) 00110010<br>(codeword #11) 00000110<br>(codeword #12) 00010010<br>(codeword #13) 00000110<br>(codeword #14) 01100111<br>(codeword #15) 00100110<br>(codeword #16) 11110110<br>(codeword #17) 11110110<br>(codeword #18) 01000010<br>(codeword #19) 00000111<br>(codeword #20) 01110110<br>(codeword #21) 10000110<br>(codeword #22) 11110010<br>(codeword #23) 00000111<br>(codeword #24) 00100110<br>(codeword #25) 01010110<br>(codeword #26) 00010110<br>(codeword #27) 11000110<br>(codeword #28) 11000111<br>(codeword #29) 10010010<br>(codeword #30) 00000110<br>(codeword #31) 10110110<br>(codeword #32) 11100110<br>(codeword #33) 11110111<br>(codeword #34) 01110111<br>(codeword #35) 00110010<br>(codeword #36) 00000111<br>(codeword #37) 01110110<br>(codeword #38) 10000110<br>(codeword #39) 01010111<br>(codeword #40) 00100110<br>(codeword #41) 01010010<br>(codeword #42) 00000110<br>(codeword #43) 10000110<br>(codeword #44) 10010111<br>(codeword #45) 00110010<br>(codeword #46) 00000111<br>(codeword #47) 01000110<br>(codeword #48) 11110111<br>(codeword #49) 01110110<br>(codeword #50) 01010110<br>(codeword #51) 11000010<br>(codeword #52) 00000110<br>(codeword #53) 10010111<br>(codeword #54) 00110010<br>(codeword #55) 11100000<br>(codeword #56) 11101100<br>(codeword #57) 00010001<br>(codeword #58) 11101100<br>(codeword #59) 00010001<br>(codeword #60) 11101100<br>(codeword #61) 00010001<br>(codeword #62) 11101100</p>
+<p>纠错表中包含“组1”和“组2”，以及“块数”。这意味着数据码字必须被分割成多达两个组，并且在每个组内，数据码字可以进一步分成块。数据码字被顺序地分解（即从码字1开始，然后从码字2开始，等等）</p>
+<p>对于5-Q码，其存在两个组，第一组应被分解成2个块，每个块包含15个数据码字，第二组应被分解成2个块，每个块包含16个数据码字。</p>
+<p>15 + 15 + 16 + 16 = 62是数据码字的总数。</p>
+<p>下表列出了如何将5-Q码的码字分解成正确的组和块。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">组号</th>
+<th style="text-align:center">块号</th>
+<th style="text-align:center">每组包含的数据码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">组 1</td>
+<td style="text-align:center">块 1</td>
+<td style="text-align:center">(codeword #1) 01000011<br>(codeword #2) 01010101<br>(codeword #3) 01000110<br>(codeword #4) 10000110<br>(codeword #5) 01010111<br>(codeword #6) 00100110<br>(codeword #7) 01010101<br>(codeword #8) 11000010<br>(codeword #9) 01110111<br>(codeword #10) 00110010<br>(codeword #11) 00000110<br>(codeword #12) 00010010<br>(codeword #13) 00000110<br>(codeword #14) 01100111<br>(codeword #15) 00100110</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">块 2</td>
+<td style="text-align:center">(codeword #16) 11110110<br>(codeword #17) 11110110<br>(codeword #18) 01000010<br>(codeword #19) 00000111<br>(codeword #20) 01110110<br>(codeword #21) 10000110<br>(codeword #22) 11110010<br>(codeword #23) 00000111<br>(codeword #24) 00100110<br>(codeword #25) 01010110<br>(codeword #26) 00010110<br>(codeword #27) 11000110<br>(codeword #28) 11000111<br>(codeword #29) 10010010<br>(codeword #30) 00000110</td>
+</tr>
+<tr>
+<td style="text-align:center">组 2</td>
+<td style="text-align:center">块 1</td>
+<td style="text-align:center">(codeword #31) 10110110<br>(codeword #32) 11100110<br>(codeword #33) 11110111<br>(codeword #34) 01110111<br>(codeword #35) 00110010<br>(codeword #36) 00000111<br>(codeword #37) 01110110<br>(codeword #38) 10000110<br>(codeword #39) 01010111<br>(codeword #40) 00100110<br>(codeword #41) 01010010<br>(codeword #42) 00000110<br>(codeword #43) 10000110<br>(codeword #44) 10010111<br>(codeword #45) 00110010<br>(codeword #46) 00000111</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">块 2</td>
+<td style="text-align:center">(codeword #47) 01000110<br>(codeword #48) 11110111<br>(codeword #49) 01110110<br>(codeword #50) 01010110<br>(codeword #51) 11000010<br>(codeword #52) 00000110<br>(codeword #53) 10010111<br>(codeword #54) 00110010<br>(codeword #55) 11100000<br>(codeword #56) 11101100<br>(codeword #57) 00010001<br>(codeword #58) 11101100<br>(codeword #59) 00010001<br>(codeword #60) 11101100<br>(codeword #61) 00010001<br>(codeword #62) 11101100</td>
+</tr>
+</tbody>
+</table>
+<p>在表中，注意组1中的块由15个数据码字组成，组2中的块由的16个数据码字组成，具体分为多少个数据码字是主要根据<a href="../二维码-纠错码和块信息/">纠错表</a>。还要注意，它们是顺序分解。也就是说，它们的顺序与在被分成块之前的顺序相同。</p>
+<p>根据纠错表，对于5-Q码，每个块有18个纠错码字。在该示例中，存在四个块，因此对于总共72个纠错码字，存在四组18个纠错码字。</p>
+<p>如<a href="../二维码-纠错码和块信息/">纠错表</a>所示，较小的二维码不需要将数据码字分解，因此，对于1-M码，所有16个数据码字将被用作单个块，并且只需要生成10个纠错码字。</p>
+<p>在继续5-Q示例之前，有必要解释一下 Reed-Solomon 纠错的基本步骤。</p>
+<h1 id="理解多项式长除法"><a href="#理解多项式长除法" class="headerlink" title="理解多项式长除法"></a>理解多项式长除法</h1><p>纠错码字将使用称为Reed-Solomon纠错的方法来生成，部分过程是执行多项式长除法。也就是说，用一个多项式除以另一个多项式。本教程假设你了解如何手工进行标准长除法（即用数字而不是多项式）。</p>
+<p>多项式长除法比标准长除法稍微复杂一些。为了帮助澄清过程，这里是一个简单的多项式长除法的例子。</p>
+<p>此示例展示了 <strong>3x<sup>2</sup> + x - 1 </strong> (被除数) 除以 <strong>x + 1</strong>（除数）的过程。这些多项式首先被放入一个表格中（见维基百科上关于<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E9%95%BF%E9%99%A4%E6%B3%95" target="_blank" rel="external">多项式长除法</a>的文章）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 + x - 1</span><br></pre></td></tr></table></figure>
+<p>在长除法的每个步骤中，将x + 1乘以某个值，使其第一项与表格底部的多项式相等。</p>
+<p>对于第一步，<strong>3x<sup>2</sup> + x - 1 </strong> 位于表格的底部，因此将x + 1乘以3x。得到结果<strong>3x<sup>2</sup> + 3x</strong>，其具有与在表格底部的多项式的第一项相同的第一项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">        3x  </span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br></pre></td></tr></table></figure>
+<p>现在从 <strong>3x<sup>2</sup> + x - 1 </strong> 中减去<strong>3x<sup>2</sup> + 3x</strong>。得到<strong>-2x-1</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        3x  </span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br><span class="line">        —————————</span><br><span class="line">             - 2x - 1</span><br></pre></td></tr></table></figure></p>
+<p>再将x + 1乘以一个项，这将生成一个多项式，其第一项与底部多项式的多项式相同。在这种情况下，执行-2（x + 1）得到-2x - 2。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        3x - 2</span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br><span class="line">        —————————</span><br><span class="line">             - 2x - 1</span><br><span class="line">             - 2x - 2</span><br></pre></td></tr></table></figure></p>
+<p>再次减去两个多项式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        3x - 2</span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br><span class="line">        —————————</span><br><span class="line">             - 2x - 1</span><br><span class="line">             - 2x - 2</span><br><span class="line">             ————————</span><br><span class="line">                    1</span><br></pre></td></tr></table></figure>
+<p>横线之上的多项式即为商，而剩下的1就是余数。</p>
+<blockquote>
+<p> <strong>多项式长除法的步骤：</strong></p>
+<ol>
+<li>把被除式、除式按某个字母作降幂排列，并把所缺的项用零补齐。</li>
+<li>将分子的第一项除以分母的最高次项（即次数最高的项)，结果写在横线之上。</li>
+<li>将分母乘以刚得到结果（最终商的第一项），乘积写在分子前两项之下（同类项对齐）。</li>
+<li>从分子的相应项中减去刚得到的乘积（消去相等项，把不相等的项结合起来），结果写在下面。然后，将分子的下一项“拿下来”。</li>
+<li>把减得的差当作新的被除式，重复前三步（直到余式为零或余式的次数低于除式的次数时为止．被除式=除式×商式+余式 ）</li>
+<li>重复第四步。直到得出结果。横线之上的多项式即为商，而剩下的数字就是余数。</li>
+</ol>
+</blockquote>
+<p>对于Reed-Solomon纠错所需的多项式长除法在某些方面比该例子更简单，因为不必处理多项式项的指数。</p>
+<h1 id="3-理解伽罗瓦域"><a href="#3-理解伽罗瓦域" class="headerlink" title="3 理解伽罗瓦域"></a>3 理解伽罗瓦域</h1><p>如上所述，为了生成纠错码字，该过程使用称为Reed-Solomon纠错的方法。<br>而多项式长除法则用到了伽罗瓦域，其本质上是数字的有限集合，以及创建仍在该集合中的数字的一些数学运算。</p>
+<p>二维码标准使用<strong>逐位模2</strong>算法和<strong>逐字节模100011101</strong>算法。这意味着使用伽罗瓦域<strong>2<sup>8</sup></strong>，换句话说是<strong>伽罗瓦域256</strong>，有时也写为<strong>GF(256)</strong>。</p>
+<p><strong>GF(256)</strong> 中的数字在0到255（包括）的范围内。也可以用八位字节表示的相同数字范围（最大可能的八位字节是11111111，等于255）。</p>
+<p>这意味着<strong>GF(256)</strong>中的所有数学运算将可以表示为八位字节的数字的运算。</p>
+<h1 id="4-理解伽罗瓦域算法"><a href="#4-理解伽罗瓦域算法" class="headerlink" title="4 理解伽罗瓦域算法"></a>4 理解伽罗瓦域算法</h1><p>如上所述，<strong>GF(256)</strong> 中的数字在0到255（包括）的范围内。GF(256)中的数学运算本质上是循环的，这意味着如果在结果大于255的数的GF(256)内执行数学运算，则需要使用模运算来获得仍然在伽罗瓦域中的数。</p>
+<p>在伽罗瓦域中，负数具有与正数相同的值，因此-n = n。换句话说，总是使用伽罗瓦域算法中的数字的绝对值。</p>
+<p>在伽罗瓦域内的加法和减法是相同的事情。伽罗瓦域中的加法和减法通过执行正常的加法或减法，然后模运算来计算。由于我们使用逐位模2算法（如二维码标准中所述），这与执行XOR运算相同。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 + 1 = 2 % 2 = 0</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">1 ^ 1 = 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 + 1 = 1 % 2 = 1</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">0 ^ 1 = 1</span><br></pre></td></tr></table></figure>
+<p>编码二维码的过程中，GF(256)中的所有加法和减法将通过这两个数异或来执行。</p>
+<h1 id="5-使用逐字节模100011101生成2的幂"><a href="#5-使用逐字节模100011101生成2的幂" class="headerlink" title="5 使用逐字节模100011101生成2的幂"></a>5 使用逐字节模100011101生成2的幂</h1><p>GF(256)中的所有数可以表示为2的幂。具体地，GF(256)中的所有数可以表示为2<sup>n</sup>，其中0≤n≤255。然而，如前所述，GF(256)中的所有数字本身必须在0到255的范围内，因此<strong>2<sup>8</sup></strong>对于Galois域似乎太大，因为它等于256。</p>
+<p>2从0到8的幂为：</p>
+<p>2<sup>0</sup> = 1<br>2<sup>1</sup> = 2<br>2<sup>2</sup> = 4<br>2<sup>3</sup> = 8<br>2<sup>4</sup> = 16<br>2<sup>5</sup> = 32<br>2<sup>6</sup> = 64<br>2<sup>7</sup> = 128<br>2<sup>8</sup> = 256</p>
+<p>二维码标准中规定使用逐字节模100011101算法（其中100011101是十进制285的二进制数）。当数字为256或更大时，它应与285异或。</p>
+<p>例如:</p>
+<p>2<sup>8</sup> = 256 ^ 285 = 29</p>
+<p>当继续到2<sup>9</sup>时，不要直接用它的值512和与285异或（结果太大）。由于<strong>2<sup>9</sup> = 2<sup>8</sup> * 2</strong>，请使用在上一步中计算的值28。</p>
+<p>即：</p>
+<p>2<sup>9</sup> = 2<sup>8</sup> × 2 = 29 × 2 = 58</p>
+<p>同样：</p>
+<p>2<sup>10</sup> = 2<sup>9</sup> × 2 = 58 × 2 = 116<br>2<sup>11</sup> = 2<sup>10</sup> × 2 = 116 × 2 = 232</p>
+<p>当结果大于或等于256的值时，再次与285进行异或：</p>
+<p>2<sup>12</sup> = 2<sup>11</sup> × 2 = 464 ^ 285 = 205</p>
+<h1 id="6-对数与反对数乘法"><a href="#6-对数与反对数乘法" class="headerlink" title="6 对数与反对数乘法"></a>6 对数与反对数乘法</h1><p>因为所有值可以用2<sup>n</sup>来表示，所以可以用对数和反对数简化GF(256)中的乘法。(<a href="https://en.wikipedia.org/wiki/Slide_rule" target="_blank" rel="external">slide rule</a>，不限于GF(256)）。<br>通常情况下（即不仅在Galois Fields中），可以用以下操作将两个数p和q相乘：</p>
+<p><strong>b<sup>(log<sub>b</sub>p + log<sub>b</sub>q)</sup><br></strong></p><p></p>
+<p>假设基数为2，则上述操作变为：</p>
+<p><strong>2<sup>(log<sub>2</sub>p + log<sub>2</sub>q)</sup><br></strong></p>
+<p>而log<sub>2</sub>x操作告诉我们乘以多少次2得到x。换句话说，当2<sup>n</sup> = x时，它可以确定n。</p>
+<p>这种方式提供了一个用于GF(256)中的数字进行乘法操作的快捷方式。当乘以具有相同基数的两个数字（例如2<sup>2</sup> × 2<sup>8</sup> ）时，这等效于将两个指数加在一起，如下：</p>
+<p>2<sup>2</sup> × 2<sup>8</sup> = 2<sup>(2 + 8)</sup> = 2<sup>10</sup></p>
+<p>由于所有GF(256)值都可以表示为2的幂，所以GF(256)中的所有乘法都可以作为基数为2的指数加法运算。</p>
+<p>例如，16 × 32，结果与2<sup>4</sup> × 2<sup>5</sup>相同，等价于2<sup>(4 + 5)</sup> = 2<sup>9</sup>。</p>
+<p>2<sup>9</sup>的值在前面已经计算过了，因此在逐字节模285的GF(256)中，16 × 32是2<sup>9</sup>，结果等于58。</p>
+<p>当指数相加时，如果指数大于或等于256，只需将指数模255。</p>
+<p>即：<br>2<sup>170</sup> × 2<sup>164</sup> = 2<sup>(170+164)</sup> = 2<sup>334</sup> → 2<sup>334 % 255</sup> = 2<sup>79</sup>.</p>
+<p>因此，在GF(256)中执行乘法所需要的是生成2的所有幂。<br>这些值可以在<a href="../二维码-对数与反对数表/">对数-反对数表</a>中找到。该表使用阿尔法符号，其中α= 2。</p>
+<h1 id="7-生成多项式"><a href="#7-生成多项式" class="headerlink" title="7 生成多项式"></a>7 生成多项式</h1><p>如上所述，纠错码使用多项式长除法。为此，我们需要两个多项式。第一个多项式称为消息多项式(message polynomial)。消息多项式使用数据编码步骤中得到的数据码字作为其系数。</p>
+<p>举个栗子：</p>
+<p>如果被转换为整数的数据码字是25,218和35，则消息多项式将是25×<sup>2</sup> + 218×+ 35。实际中，用于标准二维码的消息多项式比本例长得多。</p>
+<p>消息多项式将与生成多项式进行除法操作。生成多项式是通过<strong>(x - α<sup>0</sup>) … (x - α<sup>n-1</sup>)</strong>乘法生成的多项式。其中n是必须生成的纠错码字的数目（参见纠错表）。如前面部分所述，α等于2。</p>
+<p>可以以编程方式创建可能需要的所有生成多项式。在此过程中，本文将使用α和本文前面所述的对数-反对数乘法。</p>
+<p>二维码标准中附件A中列出了从7-68的生成多项式(具体参见ISO/IEC 18004)。</p>
+<p>虽然标准二维码将总是需要每块多于2个纠错码字，但是为了计算方便，该文将解释如何计算用于2个纠错码字的生成多项式。</p>
+<h2 id="7-1-2个纠错码字的生成多项式"><a href="#7-1-2个纠错码字的生成多项式" class="headerlink" title="7.1 2个纠错码字的生成多项式"></a>7.1 2个纠错码字的生成多项式</h2><p>首先，将(x - α<sup>0</sup>) 和 (x - α<sup>1</sup>)相乘。<br>因为x的系数为1，且α<sup>0</sup> = 1，可以写成如下形式：</p>
+<p>(α<sup>0</sup>x - α<sup>0</sup>) × (α<sup>0</sup>x - α<sup>1</sup>)</p>
+<p>将第一部分的每个项乘以第二部分的每个项以得到：</p>
+<p>(α<sup>0</sup>x<sup>1</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>0</sup>x<sup>0</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>0</sup>x<sup>1</sup> × α<sup>1</sup>x<sup>0</sup>) + (α<sup>0</sup>x<sup>0</sup> × α<sup>1</sup>x<sup>0</sup>)</p>
+<p>这里可以使用指数加法来执行乘法：</p>
+<p>(α<sup>(0+0)</sup>x<sup>(1+1)</sup>) + (α<sup>(0+0)</sup>x<sup>(0+1)</sup>) + (α<sup>(0+1)</sup>x<sup>(1+0)</sup>) + (α<sup>(0+1)</sup>x<sup>(0+0)</sup>)</p>
+<p>结果为：</p>
+<p>α<sup>0</sup>x<sup>2</sup> + α<sup>0</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup></p>
+<p>合并同类项：</p>
+<p>α<sup>0</sup>x<sup>2</sup> + (α<sup>0</sup>+α<sup>1</sup>)x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup></p>
+<p>因为GF(256)中的加法通过异或执行。使用<a href="../二维码-对数与反对数表/">对数-反对数表</a>换为其对应的整数，然后执行异或运算。</p>
+<p>x<sup>2</sup> + (1^2)x<sup>1</sup> + 2x<sup>0</sup><br><br>x<sup>2</sup> + 3x<sup>1</sup> + 2x<sup>0</sup></p>
+<p>将系数转为α符号，得到：</p>
+<p><strong>α<sup>0</sup>x<sup>2</sup> + α<sup>25</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup></strong></p>
+<p>这就是2个纠错码字的生成多项式。</p>
+<h2 id="7-2-3个纠错码字的生成多项式"><a href="#7-2-3个纠错码字的生成多项式" class="headerlink" title="7.2 3个纠错码字的生成多项式"></a>7.2 3个纠错码字的生成多项式</h2><p>所有其余的生成多项式可以使用每个上一步骤的生成多项式以相同的方式创建。从上一个生成多项式开始，并乘以下一个因子(x - α<sup>2</sup>)。</p>
+<p>(α<sup>0</sup>x<sup>2</sup> + α<sup>25</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup>) * (α<sup>0</sup>x<sup>1</sup> + α<sup>2</sup>x<sup>0</sup>)</p>
+<p>(α<sup>0</sup>x<sup>2</sup> <em> α<sup>0</sup>x<sup>1</sup>) + (α<sup>25</sup>x<sup>1</sup> </em> α<sup>0</sup>x<sup>1</sup>) + (α<sup>1</sup>x<sup>0</sup> <em> α<sup>0</sup>x<sup>1</sup>) + (α<sup>0</sup>x<sup>2</sup> </em> α<sup>2</sup>x<sup>0</sup>) + (α<sup>25</sup>x<sup>1</sup> <em> α<sup>2</sup>x<sup>0</sup>) + (α<sup>1</sup>x<sup>0</sup> </em> α<sup>2</sup>x<sup>0</sup>)</p>
+<p>使用指数加法来执行乘法：</p>
+<p>(α<sup>(0+0)</sup>x<sup>(2+1)</sup>) + (α<sup>(25+0)</sup>x<sup>(1+1)</sup>) + (α<sup>(1+0)</sup>x<sup>(0+1)</sup>) + (α<sup>(0+2)</sup>x<sup>(2+0)</sup>) + (α<sup>(25+2)</sup>x<sup>(1+0)</sup>) + (α<sup>(1+2)</sup>x<sup>(0+0)</sup>)</p>
+<p>得到：</p>
+<p>α<sup>0</sup>x<sup>3</sup> + α<sup>25</sup>x<sup>2</sup> + α<sup>1</sup>x<sup>1</sup> + α<sup>2</sup>x<sup>2</sup> + α<sup>27</sup>x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>合并同类项：</p>
+<p>α<sup>0</sup>x<sup>3</sup> + (α<sup>25</sup> ^ α<sup>2</sup>)x<sup>2</sup> + (α<sup>1</sup> ^ α<sup>27</sup>)x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>α<sup>0</sup>x<sup>3</sup> + (3 ^ 4)x<sup>2</sup> + (2 ^ 12)x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>α<sup>0</sup>x<sup>3</sup> + 7x<sup>2</sup> + 14x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>α<sup>0</sup>x<sup>3</sup> + α<sup>198</sup>x<sup>2</sup> + α<sup>199</sup>x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>这就是3个纠错码字的生成多项式。</p>
+<h2 id="7-3-当指数大于或等于256时"><a href="#7-3-当指数大于或等于256时" class="headerlink" title="7.3 当指数大于或等于256时"></a>7.3 当指数大于或等于256时</h2><p>当通过将指数加在一起来执行乘法时，有时这可能导致大于或等于256的指数。在这种情况下，在组合类似项之前应用模255。</p>
+<p>例如:<br>α<sup>257</sup>x<sup>4</sup> = α<sup>(257 % 255)</sup>x<sup>4</sup> = α<sup>2</sup>x<sup>4</sup></p>
+<h2 id="其他生成多项式"><a href="#其他生成多项式" class="headerlink" title="其他生成多项式"></a>其他生成多项式</h2><p>通常情况下，可以创建所有生成多项式g(x)，如下所示：</p>
+<p>(g(x) for 2 error correction codewords) <em> (x - α<sup>2</sup>) = (g(x) for 3 error correction codewords)<br>(g(x) for 3 error correction codewords) </em> (x - α<sup>3</sup>) = (g(x) for 4 error correction codewords)<br>(g(x) for 4 error correction codewords) <em> (x - α<sup>4</sup>) = (g(x) for 5 error correction codewords)<br>…<br>(g(x) for n-1 error correction codewords) </em> (x - α<sup>n-1</sup>) = (g(x) for n error correction codewords)</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二维码/" rel="tag">#二维码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/25/二维码-日文编码/" rel="next" title="二维码 - 日文编码">
+                <i class="fa fa-chevron-left"></i> 二维码 - 日文编码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/26/二维码-对数与反对数表/" rel="prev" title="二维码 - 对数与反对数表">
+                二维码 - 对数与反对数表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/26/二维码-生成纠错码/"
+           data-title="二维码 - 生成纠错码" data-url="http://yoursite.com/2017/02/26/二维码-生成纠错码/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-将数据码分组"><span class="nav-number">1.</span> <span class="nav-text">1 将数据码分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#理解多项式长除法"><span class="nav-number">2.</span> <span class="nav-text">理解多项式长除法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-理解伽罗瓦域"><span class="nav-number">3.</span> <span class="nav-text">3 理解伽罗瓦域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-理解伽罗瓦域算法"><span class="nav-number">4.</span> <span class="nav-text">4 理解伽罗瓦域算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-使用逐字节模100011101生成2的幂"><span class="nav-number">5.</span> <span class="nav-text">5 使用逐字节模100011101生成2的幂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-对数与反对数乘法"><span class="nav-number">6.</span> <span class="nav-text">6 对数与反对数乘法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-生成多项式"><span class="nav-number">7.</span> <span class="nav-text">7 生成多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-2个纠错码字的生成多项式"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 2个纠错码字的生成多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-3个纠错码字的生成多项式"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 3个纠错码字的生成多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-当指数大于或等于256时"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 当指数大于或等于256时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他生成多项式"><span class="nav-number">7.4.</span> <span class="nav-text">其他生成多项式</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>
