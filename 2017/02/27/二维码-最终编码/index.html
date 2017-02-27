@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/27/二维码-最终编码/index.html">
 <meta property="og:site_name" content="你今天真好看">
 <meta property="og:description" content="在生成纠错码部分，说明了Reed-Solomon 纠错的处理过程。你现在应该具有数据码字及其对应的纠错码字了。如上一步所述，较大的二维码需要将数据码字分成较小的块，并为每个块分别生成纠错码字。在这种情况下，数据块和纠错码字必须根据二维码标准交替排列。本文详细介绍了交替排列过程。">
-<meta property="og:updated_time" content="2017-02-27T03:59:22.677Z">
+<meta property="og:updated_time" content="2017-02-27T04:01:20.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码 - 最终编码">
 <meta name="twitter:description" content="在生成纠错码部分，说明了Reed-Solomon 纠错的处理过程。你现在应该具有数据码字及其对应的纠错码字了。如上一步所述，较大的二维码需要将数据码字分成较小的块，并为每个块分别生成纠错码字。在这种情况下，数据块和纠错码字必须根据二维码标准交替排列。本文详细介绍了交替排列过程。">
@@ -301,7 +301,7 @@
 <a id="more"></a>
 <h1 id="1-确定块数和纠错码字"><a href="#1-确定块数和纠错码字" class="headerlink" title="1 确定块数和纠错码字"></a>1 确定块数和纠错码字</h1><p>纠错表列出了对于每个版本和纠错级别，每个块需要多少数据块和纠错码字。</p>
 <h2 id="1-1-对于较小版本，直接使用数据和纠错码"><a href="#1-1-对于较小版本，直接使用数据和纠错码" class="headerlink" title="1.1 对于较小版本，直接使用数据和纠错码"></a>1.1 对于较小版本，直接使用数据和纠错码</h2><p>请注意，较小版本的二维码仅包括一个数据码字块，具有用于该块的一组纠错码字。在这种情况下，不需要交替排列。只需将纠错码字放置在数据码字之后，即可进入下一步，将模块放置在矩阵中。</p>
-<h2 id="1-1-将较大版本的二维码分组"><a href="#1-1-将较大版本的二维码分组" class="headerlink" title="1.1 将较大版本的二维码分组"></a>1.1 将较大版本的二维码分组</h2><p>在生成纠错码一文上，我使用了5-Q码的示例。纠错表中5-Q码的第一组由2个块组成，每块有15个数据码字，第二组由2个块组成，每块有16个数据码字。这里是在生成纠错码上列出的表，列出了如何将5-Q码的码字分解成正确的组和块。</p>
+<h2 id="1-2-将较大版本的二维码分组"><a href="#1-2-将较大版本的二维码分组" class="headerlink" title="1.2 将较大版本的二维码分组"></a>1.2 将较大版本的二维码分组</h2><p>在生成纠错码一文上，我使用了5-Q码的示例。纠错表中5-Q码的第一组由2个块组成，每块有15个数据码字，第二组由2个块组成，每块有16个数据码字。这里是在生成纠错码上列出的表，列出了如何将5-Q码的码字分解成正确的组和块。</p>
 <table>
 <thead>
 <tr>
@@ -511,7 +511,7 @@
 <p>…</p>
 <p>不断重复此过程，直到排列完最后一列:</p>
 <p>67, 246, 182, 70, 85, 246, 230, 247, 70, 66, 247, 118, 134, 7, 119, 86, 87, 118, 50, 194, 38, 134, 7, 6, 85, 242, 118, 151, 194, 7, 134, 50, 119, 38, 87, 16, 50, 86, 38, 236, 6, 22, 82, 17, 18, 198, 6, 236, 6, 199, 134, 17, 103, 146, 151, 236, 38, 6, 50, 17, 7, 236</p>
-<h2 id="2-1-交替排列纠错码字"><a href="#2-1-交替排列纠错码字" class="headerlink" title="2.1 交替排列纠错码字"></a>2.1 交替排列纠错码字</h2><p>用下面的表和描述来说明交替排列纠错码字的过程：</p>
+<h2 id="2-2-交替排列纠错码字"><a href="#2-2-交替排列纠错码字" class="headerlink" title="2.2 交替排列纠错码字"></a>2.2 交替排列纠错码字</h2><p>用下面的表和描述来说明交替排列纠错码字的过程：</p>
 <table>
 <thead>
 <tr>
@@ -970,7 +970,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-确定块数和纠错码字"><span class="nav-number">1.</span> <span class="nav-text">1 确定块数和纠错码字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-对于较小版本，直接使用数据和纠错码"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 对于较小版本，直接使用数据和纠错码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-将较大版本的二维码分组"><span class="nav-number">1.2.</span> <span class="nav-text">1.1 将较大版本的二维码分组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-交替排列"><span class="nav-number">2.</span> <span class="nav-text">2 交替排列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-交替排列数据码字"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 交替排列数据码字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-交替排列纠错码字"><span class="nav-number">2.2.</span> <span class="nav-text">2.1 交替排列纠错码字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-在数据代码字之后插入纠错码字"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 在数据代码字之后插入纠错码字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-转为二进制"><span class="nav-number">3.</span> <span class="nav-text">3 转为二进制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加剩余位"><span class="nav-number">4.</span> <span class="nav-text">4 添加剩余位</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-确定块数和纠错码字"><span class="nav-number">1.</span> <span class="nav-text">1 确定块数和纠错码字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-对于较小版本，直接使用数据和纠错码"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 对于较小版本，直接使用数据和纠错码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-将较大版本的二维码分组"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 将较大版本的二维码分组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-交替排列"><span class="nav-number">2.</span> <span class="nav-text">2 交替排列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-交替排列数据码字"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 交替排列数据码字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-交替排列纠错码字"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 交替排列纠错码字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-在数据代码字之后插入纠错码字"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 在数据代码字之后插入纠错码字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-转为二进制"><span class="nav-number">3.</span> <span class="nav-text">3 转为二进制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加剩余位"><span class="nav-number">4.</span> <span class="nav-text">4 添加剩余位</span></a></li></ol></div>
             
           </div>
         </section>
