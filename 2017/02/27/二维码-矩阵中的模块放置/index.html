@@ -1,0 +1,1186 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二维码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在前一步骤(最终编码)中，数据和纠错码字被交替排列，并且获得最终编码比特串。下一步是将它们与所需的功能模式一起放在二维码矩阵中。功能图案是二维码标准所需的二维码的非数据元素，例如二维码矩阵的角中的三个定位图案。
+本文说明了如何放置功能模式和数据位。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码 - 矩阵中的模块放置">
+<meta property="og:url" content="http://yoursite.com/2017/02/27/二维码-矩阵中的模块放置/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="在前一步骤(最终编码)中，数据和纠错码字被交替排列，并且获得最终编码比特串。下一步是将它们与所需的功能模式一起放在二维码矩阵中。功能图案是二维码标准所需的二维码的非数据元素，例如二维码矩阵的角中的三个定位图案。
+本文说明了如何放置功能模式和数据位。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4wphm7brj20ek0eyq3w">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4x3s4xv2j202r03xmwx">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4xjfldssj20v00begnu">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4xk1tm88j20mx07dq34">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4xruqdr3j20ju03k745">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4ybf0fy7j213p0frabi">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4ycurtjuj20bf0axdge">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4ydgfct5j20x10c4mzs">
+<meta property="og:updated_time" content="2017-02-27T05:25:21.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码 - 矩阵中的模块放置">
+<meta name="twitter:description" content="在前一步骤(最终编码)中，数据和纠错码字被交替排列，并且获得最终编码比特串。下一步是将它们与所需的功能模式一起放在二维码矩阵中。功能图案是二维码标准所需的二维码的非数据元素，例如二维码矩阵的角中的三个定位图案。
+本文说明了如何放置功能模式和数据位。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4wphm7brj20ek0eyq3w">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 二维码 - 矩阵中的模块放置 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                二维码 - 矩阵中的模块放置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-27T13:21:23+08:00" content="2017-02-27">
+              2017-02-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/27/二维码-矩阵中的模块放置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/27/二维码-矩阵中的模块放置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在前一步骤(最终编码)中，数据和纠错码字被交替排列，并且获得最终编码比特串。下一步是将它们与所需的功能模式一起放在二维码矩阵中。功能图案是二维码标准所需的二维码的非数据元素，例如二维码矩阵的角中的三个定位图案。</p>
+<p>本文说明了如何放置功能模式和数据位。</p>
+<a id="more"></a>
+<h1 id="1-术语：像素与模块"><a href="#1-术语：像素与模块" class="headerlink" title="1 术语：像素与模块"></a>1 术语：像素与模块</h1><p>在本文中，我将二维码的黑白方块称为模块而不是像素。这是为了区分屏幕上的像素和二维码的黑色和白色方块。<br>例如，版本1的二维码总是21<em>21个模块，即使它在计算机屏幕上占用42</em>42像素，或105x105等等。</p>
+<h1 id="2-功能模式概述"><a href="#2-功能模式概述" class="headerlink" title="2 功能模式概述"></a>2 功能模式概述</h1><p>二维码必须包括功能模式。这些是必须放置在二维码的特定区域中的图案，以确保二维码扫描器可以正确地识别和定向用于解码的代码。</p>
+<p>下图给出了功能模式是什么以及它们位于何处的示例。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4wphm7brj20ek0eyq3w" alt=""></p>
+<p><code>finder patterns</code> 是二维码左上角，右上角和左下角的角落中的三个块。</p>
+<p><code>separators</code> 是<code>finder patterns</code>旁边的空白区域。</p>
+<p><code>alignment patterns</code>类似于<code>finder patterns</code>，但是更小，并且被放置在整个代码中。它们在版本2和更大版本中使用，它们的位置取决于二维码版本。</p>
+<p><code>timing patterns</code>是连接<code>finder patterns</code>的虚线。</p>
+<p><code>dark module</code>是一个单一的黑色模块，总是放置在左下角的<code>finder patterns</code>旁边。</p>
+<p>以下部分将详细地说明如何放置功能图案。</p>
+<h1 id="3-添加-Finder-Patterns"><a href="#3-添加-Finder-Patterns" class="headerlink" title="3 添加 Finder Patterns"></a>3 添加 Finder Patterns</h1><p>首先，将<code>finder patterns</code>放入矩阵。</p>
+<p><code>finder patterns</code>(如下所示)外部由一个黑色正方形组成，为7<em>7个模块，内部为一个白色正方形为5</em>5个模块，中间有一个实心黑色正方形，3*3个模块。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4x3s4xv2j202r03xmwx" alt=""></p>
+<p><code>finder patterns</code>被设计为不可能出现在二维码的其他部分内的图案。Finder Patterns的模块宽度具有1：1：3：1：1的比率。二维码扫描器可以搜索亮到暗模块的这个比率以检测<code>finder patterns</code>并且正确地定位二维码用于解码。</p>
+<p>无论使用哪个版本，<code>finder patterns</code>始终放置在二维码的左上角，右上角和左下角。</p>
+<p>下面的图片显示了<code>finder patterns</code>的位置。第一张图是版本1的二维码，第二张图是版本18的二维码。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4xjfldssj20v00begnu" alt=""></p>
+<p>二维码的大小可以用公式(((V-1)*4)+21)计算，其中V是二维码版本。</p>
+<p>例如，版本32是(((32-1)<em> 4)+21)=145</em>145个模块。</p>
+<p><code>finder patterns</code>的位置可以概括如下：</p>
+<ul>
+<li>左上角的<code>finder patterns</code>始终放在(0,0);</li>
+<li>右上角的<code>finder patterns</code>的顶部LEFT角始终位于([(((V-1)* 4)+21)-7]，0);</li>
+<li>左下角的<code>finder patterns</code>的顶部LEFT角总是放置在(0，[(((V-1)* 4)+21)-7]).</li>
+</ul>
+<h1 id="4-添加-Separators"><a href="#4-添加-Separators" class="headerlink" title="4 添加 Separators"></a>4 添加 Separators</h1><p>Separators 是白色模块线，一个模块宽，放置在<code>finder patterns</code>旁边，以将它们与二维码的其余部分分离。分隔符只会放置在触摸二维码内部Separators的边缘。例如：</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4xk1tm88j20mx07dq34" alt=""></p>
+<h1 id="5-添加-Alignment-Patterns"><a href="#5-添加-Alignment-Patterns" class="headerlink" title="5 添加 Alignment Patterns"></a>5 添加 Alignment Patterns</h1><p>二维码标准要求版本2以上的必须有<code>Alignment Patterns</code>。<code>Alignment Patterns</code>如下所示，由5<em>5个模块的黑色方块组成，内部由3</em>3个模块的白色方块组成，中间有一个黑色模块。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4xruqdr3j20ju03k745" alt=""></p>
+<p> Alignment Patterns 的位置根据Alignment Pattern Locations Table的坐标放置。</p>
+<p> 例如，版本2具有数字6和18.这意味着 Alignment Patterns 的中心模块将被放置在（6,6)，（6,18)，（18,6)和（18,18) 。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Version</th>
+<th style="text-align:center">Center Module Row and Column</th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">QR Version 2</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 3</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">22</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 4</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 6</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 7</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">22</td>
+<td style="text-align:center">38</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 8</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">42</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 9</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">46</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 11</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 12</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 13</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">62</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 14</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">46</td>
+<td style="text-align:center">66</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 15</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">48</td>
+<td style="text-align:center">70</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 16</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">74</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 17</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">78</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 18</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 19</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 20</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">62</td>
+<td style="text-align:center">90</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 21</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">72</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 22</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">74</td>
+<td style="text-align:center">98</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 23</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">78</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 24</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">106</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 25</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">84</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 26</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">114</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 27</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">62</td>
+<td style="text-align:center">90</td>
+<td style="text-align:center">118</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 28</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">74</td>
+<td style="text-align:center">98</td>
+<td style="text-align:center">122</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 29</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">78</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center">126</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 30</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">52</td>
+<td style="text-align:center">78</td>
+<td style="text-align:center">104</td>
+<td style="text-align:center">130</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 31</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center">108</td>
+<td style="text-align:center">134</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 32</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">112</td>
+<td style="text-align:center">138</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 33</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">114</td>
+<td style="text-align:center">142</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 34</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">62</td>
+<td style="text-align:center">90</td>
+<td style="text-align:center">118</td>
+<td style="text-align:center">146</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 35</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">78</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center">126</td>
+<td style="text-align:center">150</td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 36</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">76</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center">128</td>
+<td style="text-align:center">154</td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 37</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">106</td>
+<td style="text-align:center">132</td>
+<td style="text-align:center">158</td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 38</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">84</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">136</td>
+<td style="text-align:center">162</td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 39</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">138</td>
+<td style="text-align:center">166</td>
+</tr>
+<tr>
+<td style="text-align:center">QR Version 40</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">114</td>
+<td style="text-align:center">142</td>
+</tr>
+</tbody>
+</table>
+<p>然而，在放置Finder Patterns和Separators之后，必须将Alignment Patterns放入矩阵中，并且Alignment Patterns与Finder Patterns或Separators不能重叠。</p>
+<p>以下表示版本2的二维码，其放置在（6,6），（6,18），（18,6）和（18,18）坐标上。</p>
+<p>然而，如左图所示，以红色突出显示的Alignment Patterns不能放置在矩阵中，因为它们与Finder Patterns和Separators重叠。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4ybf0fy7j213p0frabi" alt=""></p>
+<p>下面的图像是版本8的二维码的Alignment Patterns。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4ycurtjuj20bf0axdge" alt=""></p>
+<h1 id="6-添加-Timing-Patterns"><a href="#6-添加-Timing-Patterns" class="headerlink" title="6 添加 Timing Patterns"></a>6 添加 Timing Patterns</h1><p>Timing Patterns是暗模块和亮模块交替的两条线，一条水平线和一条垂直线。Timing Patterns放置在Separators之间的二维码的第6行上。</p>
+<p>Alignment Patterns可以与Timing Patterns重叠，因为它们的亮和暗模块总是与Timing Patterns的亮和暗模块重合。下图显示不同版本的二维码的Timing Patterns。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4ydgfct5j20x10c4mzs" alt=""></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二维码/" rel="tag">#二维码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/二维码-最终编码/" rel="next" title="二维码 - 最终编码">
+                <i class="fa fa-chevron-left"></i> 二维码 - 最终编码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/27/二维码-矩阵中的模块放置/"
+           data-title="二维码 - 矩阵中的模块放置" data-url="http://yoursite.com/2017/02/27/二维码-矩阵中的模块放置/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-术语：像素与模块"><span class="nav-number">1.</span> <span class="nav-text">1 术语：像素与模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-功能模式概述"><span class="nav-number">2.</span> <span class="nav-text">2 功能模式概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-添加-Finder-Patterns"><span class="nav-number">3.</span> <span class="nav-text">3 添加 Finder Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加-Separators"><span class="nav-number">4.</span> <span class="nav-text">4 添加 Separators</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-添加-Alignment-Patterns"><span class="nav-number">5.</span> <span class="nav-text">5 添加 Alignment Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-添加-Timing-Patterns"><span class="nav-number">6.</span> <span class="nav-text">6 添加 Timing Patterns</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>
