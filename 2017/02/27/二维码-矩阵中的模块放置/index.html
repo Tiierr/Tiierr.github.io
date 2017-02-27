@@ -96,7 +96,27 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4ybf0fy7j213p0frabi">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4ycurtjuj20bf0axdge">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4ydgfct5j20x10c4mzs">
-<meta property="og:updated_time" content="2017-02-27T05:25:21.993Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4yvowt12j20qt0933zq">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4yzagz65j20si0ccdjy">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z2l0q62j20l80d7wfv">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z3jbr0jj209c05faa5">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z4ujxolj218d09gn07">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z5p7em2j20al05l0su">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z63bi5vj218w09faef">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z7410hjj20d30k1ta1">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z8manlkj2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z8t7005j2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z9687k8j2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z9enlfaj2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4z9kq1ztj2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zazuhxyj2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zbkphucj2089089dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zbr4yobj2089089glf">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zdxfimxj2082082dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zebtfarj2082082dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zeh3kgkj2082082dfn">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd4zf34k48j2082082glf">
+<meta property="og:updated_time" content="2017-02-27T05:52:43.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码 - 矩阵中的模块放置">
 <meta name="twitter:description" content="在前一步骤(最终编码)中，数据和纠错码字被交替排列，并且获得最终编码比特串。下一步是将它们与所需的功能模式一起放在二维码矩阵中。功能图案是二维码标准所需的二维码的非数据元素，例如二维码矩阵的角中的三个定位图案。
@@ -337,7 +357,7 @@
 <li>右上角的<code>finder patterns</code>的顶部LEFT角始终位于([(((V-1)* 4)+21)-7]，0);</li>
 <li>左下角的<code>finder patterns</code>的顶部LEFT角总是放置在(0，[(((V-1)* 4)+21)-7]).</li>
 </ul>
-<h1 id="4-添加-Separators"><a href="#4-添加-Separators" class="headerlink" title="4 添加 Separators"></a>4 添加 Separators</h1><p>Separators 是白色模块线，一个模块宽，放置在<code>finder patterns</code>旁边，以将它们与二维码的其余部分分离。分隔符只会放置在触摸二维码内部Separators的边缘。例如：</p>
+<h1 id="4-添加-Separators"><a href="#4-添加-Separators" class="headerlink" title="4 添加 Separators"></a>4 添加 Separators</h1><p>Separators 是白色模块线，一个模块宽，放置在<code>finder patterns</code>旁边，以将它们与二维码的其余部分分离。Separators只会放置在触摸二维码内部Separators的边缘。例如：</p>
 <p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4xk1tm88j20mx07dq34" alt=""></p>
 <h1 id="5-添加-Alignment-Patterns"><a href="#5-添加-Alignment-Patterns" class="headerlink" title="5 添加 Alignment Patterns"></a>5 添加 Alignment Patterns</h1><p>二维码标准要求版本2以上的必须有<code>Alignment Patterns</code>。<code>Alignment Patterns</code>如下所示，由5<em>5个模块的黑色方块组成，内部由3</em>3个模块的白色方块组成，中间有一个黑色模块。</p>
 <p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4xruqdr3j20ju03k745" alt=""></p>
@@ -757,6 +777,47 @@
 <h1 id="6-添加-Timing-Patterns"><a href="#6-添加-Timing-Patterns" class="headerlink" title="6 添加 Timing Patterns"></a>6 添加 Timing Patterns</h1><p>Timing Patterns是暗模块和亮模块交替的两条线，一条水平线和一条垂直线。Timing Patterns放置在Separators之间的二维码的第6行上。</p>
 <p>Alignment Patterns可以与Timing Patterns重叠，因为它们的亮和暗模块总是与Timing Patterns的亮和暗模块重合。下图显示不同版本的二维码的Timing Patterns。</p>
 <p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4ydgfct5j20x10c4mzs" alt=""></p>
+<h1 id="7-添加暗模块和保留区域"><a href="#7-添加暗模块和保留区域" class="headerlink" title="7 添加暗模块和保留区域"></a>7 添加暗模块和保留区域</h1><p>在添加数据码之前，必须添加暗模块和为格式和版本位保留的矩阵区。</p>
+<h2 id="7-1-暗模块"><a href="#7-1-暗模块" class="headerlink" title="7.1 暗模块"></a>7.1 暗模块</h2><p>如上所述，所有二维码在左下角 Finder Patterns 旁边有一个黑暗的模块。<br>更具体地说，暗模块总是位于坐标（[（4 * V）+ 9]，8），其中V是二维码的版本。</p>
+<h2 id="7-2-保留格式信息区"><a href="#7-2-保留格式信息区" class="headerlink" title="7.2 保留格式信息区"></a>7.2 保留格式信息区</h2><p>必须为格式信息区域保留Separators旁边的模块条，如下所示：</p>
+<ul>
+<li>在左上方Finder Patterns附近，必须在Separators的下方和右侧保留单模块条带。</li>
+<li>在右上方Finder Patterns附近，必须在Separators下方保留单模块条带。</li>
+<li>在左下方Finder Patterns附近，必须在Separators的右侧保留单模块条带。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4yvowt12j20qt0933zq" alt=""></p>
+<h2 id="7-3-保留版本信息区"><a href="#7-3-保留版本信息区" class="headerlink" title="7.3 保留版本信息区"></a>7.3 保留版本信息区</h2><p>二维码版本7以上必须包含两个版本信息位区域。这些区域是在左下Finder Patterns上方的6×3块和在右上方Finder Patterns左侧的3×6块。以下图像显示保留区域的位置为蓝色。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4yzagz65j20si0ccdjy" alt=""></p>
+<h1 id="8-放置数据码"><a href="#8-放置数据码" class="headerlink" title="8 放置数据码"></a>8 放置数据码</h1><h2 id="8-1-放置方法"><a href="#8-1-放置方法" class="headerlink" title="8.1 放置方法"></a>8.1 放置方法</h2><p>数据位从矩阵的右下方开始放置，并且在2个模块宽的列中向上前进。当列到达顶部时，下一列在上一列的左侧，并继续向下。每当当前列到达矩阵的边缘时，移动到下一列并改变方向。如果遇到功能模式或保留区，则数据位将放置在下一个未使用的模块中。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z2l0q62j20l80d7wfv" alt=""></p>
+<h2 id="8-2-向上放置"><a href="#8-2-向上放置" class="headerlink" title="8.2 向上放置"></a>8.2 向上放置</h2><p>下图显示了当列向上移动时放置数据位的顺序。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z3jbr0jj209c05faa5" alt=""></p>
+<p>以下示例说明了数据码在首列中向上移动的过程。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z4ujxolj218d09gn07" alt=""></p>
+<h2 id="8-3-向下放置"><a href="#8-3-向下放置" class="headerlink" title="8.3 向下放置"></a>8.3 向下放置</h2><p>下图显示了当列向下移动时放置数据位的顺序。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z5p7em2j20al05l0su" alt=""></p>
+<p>以下示例说明了数据码向下移动的过程。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z63bi5vj218w09faef" alt=""></p>
+<h2 id="8-4-跳过功能模式"><a href="#8-4-跳过功能模式" class="headerlink" title="8.4 跳过功能模式"></a>8.4 跳过功能模式</h2><p>当遇到功能模式时，跳过已被占用的模块，直到到达下一个未使用的模块。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z7410hjj20d30k1ta1" alt=""></p>
+<p>当遇到Alignment Patterns时，只需跳过Alignment Patterns的模块并继续向上。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z8manlkj2089089dfn" alt="1"></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z8t7005j2089089dfn" alt="2"></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z9687k8j2089089dfn" alt="3"></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z9enlfaj2089089dfn" alt="4"></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4z9kq1ztj2089089dfn" alt="5"></p>
+<p>然后按照正常的方式继续向列添加模块。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zazuhxyj2089089dfn" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zbkphucj2089089dfn" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zbr4yobj2089089glf" alt=""></p>
+<p>总之，总是沿着列正常进行，跳过功能模式或保留区域使用的任何模块。唯一的例外是Vertical Timing Pattern。</p>
+<h2 id="8-5-Exception-Vertical-Timing-Pattern"><a href="#8-5-Exception-Vertical-Timing-Pattern" class="headerlink" title="8.5 Exception: Vertical Timing Pattern"></a>8.5 Exception: Vertical Timing Pattern</h2><p>Vertical Timing Pattern是该规则唯一的例外。当达到Vertical Timing Pattern时，始终在其左边的下一列开始。任何列都不应该与Vertical Timing Pattern重叠。</p>
+<p>在下图中，上一列（向上）突出显示。此列上方的其余模块由功能模式和保留区域占用，因此必须开始下一列。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zdxfimxj2082082dfn" alt=""></p>
+<p>如下图所示，下一列开始于Vertical Timing Pattern的左侧。该列不与Vertical Timing Pattern重叠。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zebtfarj2082082dfn" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zeh3kgkj2082082dfn" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd4zf34k48j2082082glf" alt=""></p>
 
       
     </div>
@@ -906,7 +967,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-术语：像素与模块"><span class="nav-number">1.</span> <span class="nav-text">1 术语：像素与模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-功能模式概述"><span class="nav-number">2.</span> <span class="nav-text">2 功能模式概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-添加-Finder-Patterns"><span class="nav-number">3.</span> <span class="nav-text">3 添加 Finder Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加-Separators"><span class="nav-number">4.</span> <span class="nav-text">4 添加 Separators</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-添加-Alignment-Patterns"><span class="nav-number">5.</span> <span class="nav-text">5 添加 Alignment Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-添加-Timing-Patterns"><span class="nav-number">6.</span> <span class="nav-text">6 添加 Timing Patterns</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-术语：像素与模块"><span class="nav-number">1.</span> <span class="nav-text">1 术语：像素与模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-功能模式概述"><span class="nav-number">2.</span> <span class="nav-text">2 功能模式概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-添加-Finder-Patterns"><span class="nav-number">3.</span> <span class="nav-text">3 添加 Finder Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加-Separators"><span class="nav-number">4.</span> <span class="nav-text">4 添加 Separators</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-添加-Alignment-Patterns"><span class="nav-number">5.</span> <span class="nav-text">5 添加 Alignment Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-添加-Timing-Patterns"><span class="nav-number">6.</span> <span class="nav-text">6 添加 Timing Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-添加暗模块和保留区域"><span class="nav-number">7.</span> <span class="nav-text">7 添加暗模块和保留区域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-暗模块"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 暗模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-保留格式信息区"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 保留格式信息区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-保留版本信息区"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 保留版本信息区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-放置数据码"><span class="nav-number">8.</span> <span class="nav-text">8 放置数据码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-放置方法"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 放置方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-向上放置"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 向上放置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-向下放置"><span class="nav-number">8.3.</span> <span class="nav-text">8.3 向下放置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-跳过功能模式"><span class="nav-number">8.4.</span> <span class="nav-text">8.4 跳过功能模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5-Exception-Vertical-Timing-Pattern"><span class="nav-number">8.5.</span> <span class="nav-text">8.5 Exception: Vertical Timing Pattern</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
