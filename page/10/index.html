@@ -252,6 +252,113 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/04/Python关键字yield的解释/" itemprop="url">
+                  Python关键字yield的解释
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-04T20:42:20+08:00" content="2016-10-04">
+              2016-10-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/04/Python关键字yield的解释/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/Python关键字yield的解释/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>译者注:    这是<code>stackoverflow</code>上一个很热的帖子，这里是投票最高的<a href="http://stackoverflow.com/users/9951/e-satis">e-satis</a>大神的答案    <a href="http://stackoverflow.com/questions/231767/the-python-yield-keyword-explained">[原文]</a></p>
+<h1 id="提问者的问题"><a href="#提问者的问题" class="headerlink" title="提问者的问题"></a>提问者的问题</h1><p>Python关键字<code>yield</code>的作用是什么？用来干什么的？</p>
+<p>比如，我正在试图理解下面的代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">node</span>.<span class="title">_get_child_candidates</span><span class="params">(self, distance, min_dist, max_dist)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self._leftchild <span class="keyword">and</span> distance - max_dist &lt; self._median:</span><br><span class="line">        <span class="keyword">yield</span> self._leftchild</span><br><span class="line">    <span class="keyword">if</span> self._rightchild <span class="keyword">and</span> distance + max_dist &gt;= self._median:</span><br><span class="line">        <span class="keyword">yield</span> self._rightchild</span><br></pre></td></tr></table></figure></p>
+<p>下面的是调用:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">result, candidates = list(), [self]</span><br><span class="line"><span class="keyword">while</span> candidates:</span><br><span class="line">    node = candidates.pop()</span><br><span class="line">    distance = node._get_dist(obj)</span><br><span class="line">    <span class="keyword">if</span> distance &lt;= max_dist <span class="keyword">and</span> distance &gt;= min_dist:</span><br><span class="line">        result.extend(node._values)</span><br><span class="line">    candidates.extend(node._get_child_candidates(distance, min_dist, max_dist))</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p>
+<p>当调用 <code>_get_child_candidates</code> 的时候发生了什么？返回了一个链表？返回了一个元素？被重复调用了么？ 什么时候这个调用结束呢？<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/04/Python关键字yield的解释/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/03/深刻理解Python中的元类-metaclass/" itemprop="url">
                   深刻理解Python中的元类(metaclass)
                 </a>
@@ -648,109 +755,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/25/理解OAuth-2-0-阮一峰/" itemprop="url">
-                  理解OAuth 2.0 --阮一峰
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-25T22:26:11+08:00" content="2016-09-25">
-              2016-09-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/25/理解OAuth-2-0-阮一峰/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/25/理解OAuth-2-0-阮一峰/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。<br>本文对OAuth 2.0的设计思路和运行流程，做一个简明通俗的解释，主要参考材料为RFC 6749。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/25/理解OAuth-2-0-阮一峰/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -796,7 +800,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">64</span>
+              <span class="site-state-item-count">65</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

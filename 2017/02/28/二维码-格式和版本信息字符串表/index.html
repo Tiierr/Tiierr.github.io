@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="部署,Django," />
+  <meta name="keywords" content="二维码," />
 
 
 
@@ -80,25 +80,19 @@
 
 
 
-<meta name="description" content="为了提高 Django 应用的安全和性能，在生产环境非常有必要使用 Apache 或 Nginx，即使它本身就可以启动运行。
-本帖介绍怎么在 Python 虚拟环境中安装配置 Django，并和 Apache 集成。
-Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于前者更加稳定，这里我们通过wsgi的方式来进行集成 mod_wsgi 的 Apache">
+<meta name="description" content="二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。
+为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Ubuntu 16.04上部署Django">
-<meta property="og:url" content="http://yoursite.com/2016/12/13/在Ubuntu-16-04上部署Django/index.html">
+<meta property="og:title" content="二维码 - 格式和版本信息字符串表">
+<meta property="og:url" content="http://yoursite.com/2017/02/28/二维码-格式和版本信息字符串表/index.html">
 <meta property="og:site_name" content="你今天真好看">
-<meta property="og:description" content="为了提高 Django 应用的安全和性能，在生产环境非常有必要使用 Apache 或 Nginx，即使它本身就可以启动运行。
-本帖介绍怎么在 Python 虚拟环境中安装配置 Django，并和 Apache 集成。
-Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于前者更加稳定，这里我们通过wsgi的方式来进行集成 mod_wsgi 的 Apache">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/647dc635jw1fap2xkn0suj20pt07qgm3.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/647dc635jw1fap2yv9jnsj20p00az0sz.jpg">
-<meta property="og:updated_time" content="2017-01-12T10:55:58.279Z">
+<meta property="og:description" content="二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。
+为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。">
+<meta property="og:updated_time" content="2017-02-28T04:42:58.746Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Ubuntu 16.04上部署Django">
-<meta name="twitter:description" content="为了提高 Django 应用的安全和性能，在生产环境非常有必要使用 Apache 或 Nginx，即使它本身就可以启动运行。
-本帖介绍怎么在 Python 虚拟环境中安装配置 Django，并和 Apache 集成。
-Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于前者更加稳定，这里我们通过wsgi的方式来进行集成 mod_wsgi 的 Apache">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/647dc635jw1fap2xkn0suj20pt07qgm3.jpg">
+<meta name="twitter:title" content="二维码 - 格式和版本信息字符串表">
+<meta name="twitter:description" content="二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。
+为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。">
 
 
 
@@ -116,7 +110,7 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
   };
 </script>
 
-  <title> 在Ubuntu 16.04上部署Django | 你今天真好看 </title>
+  <title> 二维码 - 格式和版本信息字符串表 | 你今天真好看 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -259,7 +253,7 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
             
             
               
-                在Ubuntu 16.04上部署Django
+                二维码 - 格式和版本信息字符串表
               
             
           </h1>
@@ -271,8 +265,8 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-12-13T12:46:08+08:00" content="2016-12-13">
-              2016-12-13
+            <time itemprop="dateCreated" datetime="2017-02-28T12:42:30+08:00" content="2017-02-28">
+              2017-02-28
             </time>
           </span>
 
@@ -282,8 +276,8 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/13/在Ubuntu-16-04上部署Django/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/在Ubuntu-16-04上部署Django/" itemprop="commentsCount"></span>
+                <a href="/2017/02/28/二维码-格式和版本信息字符串表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/二维码-格式和版本信息字符串表/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -306,43 +300,333 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
       
 
       
-        <p>为了提高 Django 应用的安全和性能，在生产环境非常有必要使用 Apache 或 Nginx，即使它本身就可以启动运行。</p>
-<p>本帖介绍怎么在 Python 虚拟环境中安装配置 Django，并和 Apache 集成。</p>
-<p>Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于前者更加稳定，这里我们通过wsgi的方式来进行集成 mod_wsgi 的 Apache 的一个模块，Apache 可以通过 WSGI 接口和 Django 沟通。</p>
+        <p>二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。</p>
+<p>为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。</p>
 <a id="more"></a>
-<h2 id="安装配置Django"><a href="#安装配置Django" class="headerlink" title="安装配置Django"></a>安装配置Django</h2><p>以<a href="https://github.com/RayYu03/ONE" target="_blank" rel="external">ONE</a>这个项目为例, 本文适用于 Python.5。</p>
-<p>首先 clone 该项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/RayYu03/ONE</span><br><span class="line">$ cd ONE</span><br></pre></td></tr></table></figure></p>
-<p>安装Python虚拟环境：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip3 install virtualenv</span><br></pre></td></tr></table></figure></p>
-<p>创建虚拟环境：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv venv</span><br></pre></td></tr></table></figure></p>
-<p>激活新虚拟环境：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ source venv/bin/activate</span><br></pre></td></tr></table></figure></p>
-<p>安装 requirements:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>初始化并数据库：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py makemigrations</span><br><span class="line">(venv)$ python manage.py migrate</span><br></pre></td></tr></table></figure></p>
-<p>为项目创建管理员用户：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py createsuperuser</span><br></pre></td></tr></table></figure></p>
-<p>配置静态文件目录，在 ONE/settings.py 文件尾修改<code>STATIC_ROOT</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STATIC_ROOT = &apos;ONE/static&apos;</span><br></pre></td></tr></table></figure></p>
-<p>可以自己选择目录，按照路径创建文件夹</p>
-<p>把静态文件放到static目录：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py collectstatic</span><br></pre></td></tr></table></figure></p>
-<p>打开8000端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw allow 8000</span><br></pre></td></tr></table></figure></p>
-<p>测试Django项目，启动server：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python manage.py runserver <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8000</span></span><br></pre></td></tr></table></figure></p>
-<p>使用浏览器访问：<a href="http://server_domain_or_IP:8000，你应该能看到如下页面：" target="_blank" rel="external">http://server_domain_or_IP:8000，你应该能看到如下页面：</a><br><img src="https://ws3.sinaimg.cn/large/647dc635jw1fap2xkn0suj20pt07qgm3.jpg" alt=""></p>
-<p>使用浏览器访问：<a href="http://server_domain_or_IP:8000/admin，进入管理员登录界面：" target="_blank" rel="external">http://server_domain_or_IP:8000/admin，进入管理员登录界面：</a><br><img src="https://ws3.sinaimg.cn/large/647dc635jw1fap2yv9jnsj20p00az0sz.jpg" alt=""></p>
-<p>Ctrl+C 终止 Django 应用，然后退出 Python 虚拟环境。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ deactivate</span><br></pre></td></tr></table></figure></p>
-<h2 id="配置Apache"><a href="#配置Apache" class="headerlink" title="配置Apache"></a>配置Apache</h2><p>现在你应该有了一个可以正常工作的 Django 项目了，接下来配置 Apache 做为它的前端。</p>
-<p>首先安装 <code>apache2</code> 和 <code>mod_wsgi</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install Python-pip apache2 libapache2-mod-wsgi-py3</span><br></pre></td></tr></table></figure></p>
-<p>编辑默认 Virtual Host 配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/apache2/sites-available/000-default.conf</span><br></pre></td></tr></table></figure></p>
-<p>所有 static 的请求映射到 Django 项目的 /static 目录，在 VirtualHost 块中添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Alias /static /home/rayyu/myproject/static</span><br><span class="line">&lt;Directory /home/rayyu/myproject/static&gt;</span><br><span class="line">    Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure></p>
-<p>配置 apache 有访问项目目录中 wsgi.py 的权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory /home/rayyu/myproject/myproject&gt;</span><br><span class="line">    &lt;Files wsgi.py&gt;</span><br><span class="line">        Require all granted</span><br><span class="line">    &lt;/Files&gt;</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
-<p>Django 建议使用 daemon 模式运行 WSGI 进程，配置 WSGIDaemonProcess：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WSGIDaemonProcess myproject python-home=/home/rayyu/mynewenv python-path=/home/rayyu/myproject</span><br><span class="line">    WSGIProcessGroup myproject</span><br><span class="line">    WSGIScriptAlias / /home/rayyu/myproject/myproject/wsgi.py</span><br></pre></td></tr></table></figure></p>
-<p>注意替换上面的Python虚拟环境路径和项目路径。</p>
-<p>完整示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Alias /static /home/ubuntu/ONE/static</span><br><span class="line">&lt;Directory /home/ubuntu/ONE/static&gt;</span><br><span class="line">    Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line"></span><br><span class="line">&lt;Directory /home/ubuntu/ONE/ONE&gt;</span><br><span class="line">    &lt;Files wsgi.py&gt;</span><br><span class="line">     Require all granted</span><br><span class="line">    &lt;/Files&gt;</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line"></span><br><span class="line">WSGIDaemonProcess ONE python-home=/home/ubuntu/ONE/venv python-path=/home/ubuntu/ONE</span><br><span class="line">WSGIProcessGroup ONE</span><br><span class="line">WSGIScriptAlias / /home/ubuntu/ONE/ONE/wsgi.py</span><br></pre></td></tr></table></figure></p>
-<p>修正一些目录和文件权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 664 ~/myproject/db.sqlite3</span><br><span class="line">$ sudo chown :www-data ~/myproject/db.sqlite3</span><br><span class="line">$ sudo chown :www-data ~/myproject</span><br></pre></td></tr></table></figure></p>
-<p>如果你配置了防火墙，开启80、443端口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw delete allow 8000</span><br><span class="line">$ sudo ufw allow &apos;Apache Full&apos;</span><br></pre></td></tr></table></figure>
-<p>检查Apache配置文件是否有语法错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apache2ctl configtest</span><br></pre></td></tr></table></figure></p>
-<p>如果没有语法错误，重启Apache：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart apache2</span><br></pre></td></tr></table></figure></p>
-<p>现在使用浏览器访问 <a href="http://your_doamin_or_IP/admin/" target="_blank" rel="external">http://your_doamin_or_IP/admin/</a> 测试 Django 部署是否成功。</p>
-<p>到此，完成Django-Apache的部署。</p>
+<p>此页面列出了所有可能的格式和版本字符串。</p>
+<h1 id="1-格式信息字符串"><a href="#1-格式信息字符串" class="headerlink" title="1 格式信息字符串"></a>1 格式信息字符串</h1><p>二维码使用纠错编码。这是一种生成冗余数据的方式，二维码扫描器可以用来检测和修复扫描的代码中的错误。</p>
+<p>二维码也使用掩码模式。掩模图案是用于改变代码中的像素的特定图案的颜色（暗到亮或者从亮到暗）的算法，以便于扫描仪更容易准确地读取。</p>
+<p>二维码必须包括格式字符串，该格式字符串包含关于在代码中使用哪个级别的纠错编码和哪个掩码模式的信息。</p>
+<p>此页面列出所有28种可能的格式字符串。有关如何生成这些字符串的详细说明，请访问格式和版本信息文章阅读。</p>
+<h2 id="1-1-所有格式信息字符串的列表"><a href="#1-1-所有格式信息字符串的列表" class="headerlink" title="1.1 所有格式信息字符串的列表"></a>1.1 所有格式信息字符串的列表</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">纠错级别</th>
+<th style="text-align:center">掩码格式</th>
+<th style="text-align:center">格式信息字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">111011111000100</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">111001011110011</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">111110110101010</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">111100010011101</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">110011000101111</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">110001100011000</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">110110001000001</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">110100101110110</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">101010000010010</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">101000100100101</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">101111001111100</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">101101101001011</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">100010111111001</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">100000011001110</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">100111110010111</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">100101010100000</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">011010101011111</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">011000001101000</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">011111100110001</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">011101000000110</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">010010010110100</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">010000110000011</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">010111011011010</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">010101111101101</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">001011010001001</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">001001110111110</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">001110011100111</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">001100111010000</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">000011101100010</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">000001001010101</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">000110100001100</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">000100000111011</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-版本信息字符串"><a href="#2-版本信息字符串" class="headerlink" title="2 版本信息字符串"></a>2 版本信息字符串</h1><p>二维码的大小由称为版本号的数字表示。</p>
+<p>此外，对于版本7及其以上版本，二维码标准要求二维码包括两个版本信息字符串(6x3矩形块)，其告诉二维码扫描器该代码是哪个版本。<br>有关如何生成这些字符串的详细说明，请访问格式和版本信息文章阅读。</p>
+<h2 id="1-2-所有版本信息字符串的列表"><a href="#1-2-所有版本信息字符串的列表" class="headerlink" title="1.2 所有版本信息字符串的列表"></a>1.2 所有版本信息字符串的列表</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">版本号</th>
+<th style="text-align:center">版本信息字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">000111110010010100</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">001000010110111100</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">001001101010011001</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">001010010011010011</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">001011101111110110</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">001100011101100010</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">001101100001000111</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">001110011000001101</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">001111100100101000</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">010000101101111000</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">010001010001011101</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center">010010101000010111</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center">010011010100110010</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">010100100110100110</td>
+</tr>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">010101011010000011</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center">010110100011001001</td>
+</tr>
+<tr>
+<td style="text-align:center">23</td>
+<td style="text-align:center">010111011111101100</td>
+</tr>
+<tr>
+<td style="text-align:center">24</td>
+<td style="text-align:center">011000111011000100</td>
+</tr>
+<tr>
+<td style="text-align:center">25</td>
+<td style="text-align:center">011001000111100001</td>
+</tr>
+<tr>
+<td style="text-align:center">26</td>
+<td style="text-align:center">011010111110101011</td>
+</tr>
+<tr>
+<td style="text-align:center">27</td>
+<td style="text-align:center">011011000010001110</td>
+</tr>
+<tr>
+<td style="text-align:center">28</td>
+<td style="text-align:center">011100110000011010</td>
+</tr>
+<tr>
+<td style="text-align:center">29</td>
+<td style="text-align:center">011101001100111111</td>
+</tr>
+<tr>
+<td style="text-align:center">30</td>
+<td style="text-align:center">011110110101110101</td>
+</tr>
+<tr>
+<td style="text-align:center">31</td>
+<td style="text-align:center">011111001001010000</td>
+</tr>
+<tr>
+<td style="text-align:center">32</td>
+<td style="text-align:center">100000100111010101</td>
+</tr>
+<tr>
+<td style="text-align:center">33</td>
+<td style="text-align:center">100001011011110000</td>
+</tr>
+<tr>
+<td style="text-align:center">34</td>
+<td style="text-align:center">100010100010111010</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center">100011011110011111</td>
+</tr>
+<tr>
+<td style="text-align:center">36</td>
+<td style="text-align:center">100100101100001011</td>
+</tr>
+<tr>
+<td style="text-align:center">37</td>
+<td style="text-align:center">100101010000101110</td>
+</tr>
+<tr>
+<td style="text-align:center">38</td>
+<td style="text-align:center">100110101001100100</td>
+</tr>
+<tr>
+<td style="text-align:center">39</td>
+<td style="text-align:center">100111010101000001</td>
+</tr>
+<tr>
+<td style="text-align:center">40</td>
+<td style="text-align:center">101000110001101001</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -363,9 +647,7 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
       
         <div class="post-tags">
           
-            <a href="/tags/部署/" rel="tag">#部署</a>
-          
-            <a href="/tags/Django/" rel="tag">#Django</a>
+            <a href="/tags/二维码/" rel="tag">#二维码</a>
           
         </div>
       
@@ -374,17 +656,13 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/20/软件测试学习笔记/" rel="next" title="软件测试学习笔记">
-                <i class="fa fa-chevron-left"></i> 软件测试学习笔记
+              <a href="/2017/02/28/二维码-掩码图案/" rel="next" title="二维码 - 掩码图案">
+                <i class="fa fa-chevron-left"></i> 二维码 - 掩码图案
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/27/Linux-IO模式及-select、poll、epoll详解/" rel="prev" title="Linux IO模式及 select、poll、epoll详解">
-                Linux IO模式及 select、poll、epoll详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,8 +691,8 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/13/在Ubuntu-16-04上部署Django/"
-           data-title="在Ubuntu 16.04上部署Django" data-url="http://yoursite.com/2016/12/13/在Ubuntu-16-04上部署Django/">
+      <div class="ds-thread" data-thread-key="2017/02/28/二维码-格式和版本信息字符串表/"
+           data-title="二维码 - 格式和版本信息字符串表" data-url="http://yoursite.com/2017/02/28/二维码-格式和版本信息字符串表/">
       </div>
     
   </div>
@@ -498,7 +776,7 @@ Django 集成到 Apache 有两种方式：python_mod 和 wsgi，后者相对于�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置Django"><span class="nav-number">1.</span> <span class="nav-text">安装配置Django</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Apache"><span class="nav-number">2.</span> <span class="nav-text">配置Apache</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-格式信息字符串"><span class="nav-number">1.</span> <span class="nav-text">1 格式信息字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-所有格式信息字符串的列表"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 所有格式信息字符串的列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-版本信息字符串"><span class="nav-number">2.</span> <span class="nav-text">2 版本信息字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-所有版本信息字符串的列表"><span class="nav-number">2.1.</span> <span class="nav-text">1.2 所有版本信息字符串的列表</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
