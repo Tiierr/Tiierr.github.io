@@ -80,21 +80,22 @@
 
 
 
-<meta name="description" content="二维码编码一串文本。 二维码标准有四种编码模式：数字，字母数字，字节和日文。每种模式都使用不同的方法将文本编码为一串二进制数字（1和0），并且使用尽可能短的二进制数字来编码数据。
-本文主要讲解如何确定正确的编码模式。">
+<meta name="description" content="写在前面二维码是由Denso Wave Incorporated创建的特殊类型的条形码。二维码使用易于被光学扫描仪读取的像素图案来编码文本和数字。
+本教程旨在教授程序员如何在二维码中编码信息。建议有一定计算机基础的人阅读。
+如果你仅仅想创建二维码，则不需要阅读本教程。点击二维码生成器即可创建二维码。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二维码 - 数据分析">
-<meta property="og:url" content="http://yoursite.com/2017/02/25/二维码-数据分析/index.html">
+<meta property="og:title" content="二维码 - 生成原理">
+<meta property="og:url" content="http://yoursite.com/2017/02/24/二维码-生成原理/index.html">
 <meta property="og:site_name" content="你今天真好看">
-<meta property="og:description" content="二维码编码一串文本。 二维码标准有四种编码模式：数字，字母数字，字节和日文。每种模式都使用不同的方法将文本编码为一串二进制数字（1和0），并且使用尽可能短的二进制数字来编码数据。
-本文主要讲解如何确定正确的编码模式。">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd2hzt28fgj20j204774z">
-<meta property="og:updated_time" content="2017-02-28T08:58:02.149Z">
+<meta property="og:description" content="写在前面二维码是由Denso Wave Incorporated创建的特殊类型的条形码。二维码使用易于被光学扫描仪读取的像素图案来编码文本和数字。
+本教程旨在教授程序员如何在二维码中编码信息。建议有一定计算机基础的人阅读。
+如果你仅仅想创建二维码，则不需要阅读本教程。点击二维码生成器即可创建二维码。">
+<meta property="og:updated_time" content="2017-02-28T08:58:15.533Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二维码 - 数据分析">
-<meta name="twitter:description" content="二维码编码一串文本。 二维码标准有四种编码模式：数字，字母数字，字节和日文。每种模式都使用不同的方法将文本编码为一串二进制数字（1和0），并且使用尽可能短的二进制数字来编码数据。
-本文主要讲解如何确定正确的编码模式。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd2hzt28fgj20j204774z">
+<meta name="twitter:title" content="二维码 - 生成原理">
+<meta name="twitter:description" content="写在前面二维码是由Denso Wave Incorporated创建的特殊类型的条形码。二维码使用易于被光学扫描仪读取的像素图案来编码文本和数字。
+本教程旨在教授程序员如何在二维码中编码信息。建议有一定计算机基础的人阅读。
+如果你仅仅想创建二维码，则不需要阅读本教程。点击二维码生成器即可创建二维码。">
 
 
 
@@ -112,7 +113,7 @@
   };
 </script>
 
-  <title> 二维码 - 数据分析 | 你今天真好看 </title>
+  <title> 二维码 - 生成原理 | 你今天真好看 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -255,7 +256,7 @@
             
             
               
-                二维码 - 数据分析
+                二维码 - 生成原理
               
             
           </h1>
@@ -267,8 +268,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-02-25T11:17:07+08:00" content="2017-02-25">
-              2017-02-25
+            <time itemprop="dateCreated" datetime="2017-02-24T22:31:02+08:00" content="2017-02-24">
+              2017-02-24
             </time>
           </span>
 
@@ -278,8 +279,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/02/25/二维码-数据分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/二维码-数据分析/" itemprop="commentsCount"></span>
+                <a href="/2017/02/24/二维码-生成原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/24/二维码-生成原理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -302,32 +303,26 @@
       
 
       
-        <p>二维码编码一串文本。 二维码标准有四种编码模式：数字，字母数字，字节和日文。每种模式都使用不同的方法将文本编码为一串二进制数字（1和0），并且使用尽可能短的二进制数字来编码数据。</p>
-<p>本文主要讲解如何确定正确的编码模式。</p>
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>二维码是由<a href="http://www.denso-wave.com/en/adcd/" target="_blank" rel="external">Denso Wave Incorporated</a>创建的特殊类型的条形码。二维码使用易于被光学扫描仪读取的像素图案来编码文本和数字。</p>
+<p>本教程旨在教授程序员如何在二维码中编码信息。建议有一定计算机基础的人阅读。</p>
+<p>如果你仅仅想创建二维码，则不需要阅读本教程。点击<a href="http://www.thonky.com/qrcode/" target="_blank" rel="external">二维码生成器</a>即可创建二维码。</p>
 <a id="more"></a>
-<h1 id="二维码编码模式"><a href="#二维码编码模式" class="headerlink" title="二维码编码模式"></a>二维码编码模式</h1><p><strong>数字编码(Numeric mode)</strong>: 从0到9。如果需要编码的数字的个数不是3的倍数，那么，最后剩下的1或2位数会被转成4或7bits，则其它的每3位数字会被编成 10，12，14bits，编成多长还要看二维码的尺寸。</p>
-<p><strong>字符编码(Alphanumeric mode)</strong>: 包括 <code>0-9</code>，大写的<code>A-Z（</code>没有小写），以及符号<code>$ % * + – . /</code>: 包括空格。这些字符会映射成一个字符索引表。如下所示：（其中的SP是空格，Char是字符，Value是其索引值） 编码的过程是把字符两两分组，然后转成下表的45进制，然后转成11bits的二进制，如果最后有一个落单的，那就转成6bits的二进制。而编码模式和字符的个数需要根据不同的Version尺寸编成9, 11或13个二进制。</p>
-<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd2hzt28fgj20j204774z" alt="Alphanumeric mode"></p>
-<p><strong>字节编码(Byte mode)</strong>: 可以是<code>0-255</code>的<a href="https://zh.wikipedia.org/zh-hans/ISO/IEC_8859-1" target="_blank" rel="external">ISO-8859-1</a>字符。有些二维码的扫描器可以自动检测是否是 <code>UTF-8</code> 的编码。</p>
-<p><strong>日文编码(Kanji mode)</strong>: 也是双字节编码，使用<a href="https://zh.wikipedia.org/wiki/Shift_JIS" target="_blank" rel="external">Shift JIS</a>字符集。</p>
-<p><strong>Extended Channel Interpretation (ECI) mode</strong>: 主要用于特殊的字符集。并不是所有的扫描器都支持这种编码。</p>
-<p><strong>Structured Append mode</strong>: 用于混合编码，也就是说，这个二维码中包含了多种编码格式。</p>
-<p><strong>FNC1 mode</strong>: 这种编码方式主要是给一些特殊的工业或行业用的。比如GS1条形码之类的。</p>
-<h1 id="关于日文编码"><a href="#关于日文编码" class="headerlink" title="关于日文编码"></a>关于日文编码</h1><p>一些二维码读取器可以识别字节编码模式中使用<code>UTF-8</code>编码的日文。由于所有<code>Shift JIS</code>字符都可以用<code>UTF-8</code>编码中的字符表示，因此日文编码模式可以使用UTF-8编码中的日文字符集。虽然<code>UTF-8</code>可以编码日文字符，但必须使用三个或四个字节。而<code>Shift JIS</code>仅使用两个字节来编码每个日文字符，使日文编码模式更有效地压缩日文字符。</p>
-<p>日文编码同样也可以用于中文编码。日文和汉字的编码会减去一个值。如：在<code>0X8140 to 0X9FFC</code>中的字符会减去<code>8140</code>，在<code>0XE040</code>到<code>0XEBBF</code>中的字符要减去<code>0XC140</code>，然后把结果前两个16进制位拿出来乘以<code>0XC0</code>，然后再加上后两个16进制位，最后转成13bit的编码。</p>
-<h1 id="关于-UTF-8-编码"><a href="#关于-UTF-8-编码" class="headerlink" title="关于 UTF-8 编码"></a>关于 UTF-8 编码</h1><p>一些二维码阅读器可以自动检测 <code>UTF-8</code> 是否在字节编码模式下使用，但如果在字节模式下使用<code>UTF-8</code>，则可能显示不正确的字符。为了解决这个问题，可以使用 <code>ECI</code> 模式，如上所述，可以在字节模式下指定一个与默认 <code>ISO-8859-1</code> 字符集不同的字符集。不幸的是，并不是所有的二维码阅读器都支持<code>ECI</code>模式。</p>
-<h1 id="如何选择最有效的编码模式"><a href="#如何选择最有效的编码模式" class="headerlink" title="如何选择最有效的编码模式"></a>如何选择最有效的编码模式</h1><p>要为二维码选择最有效的模式，请检查输入字符串中的字符符合下面的哪种条件：</p>
-<ol>
-<li>如果输入字符串只包含数字（<code>0-9</code>），请使用数字编码模式。</li>
-<li>在数字编码模式不适用的情况下，如果可以在<a href="http://www.thonky.com/qr-code-tutorial/alphanumeric-table" target="_blank" rel="external">字符索引表</a>的左列中找到输入字符串中的所有字符，请使用字符编码模式。<br>注意：小写字母不能使用字符编码模式。</li>
-<li>在字符编码模式不适用的情况下，如果字符可以在<a href="https://zh.wikipedia.org/zh-hans/ISO/IEC_8859-1" target="_blank" rel="external">ISO-8859-1</a>字符集中找到，则使用字节编码模式。</li>
-<li>如果所有字符都在<a href="https://zh.wikipedia.org/wiki/Shift_JIS" target="_blank" rel="external">Shift JIS</a>字符集中，请使用日文编码模式。<code>Shift JIS</code>字符可以用<code>UTF-8</code>编码代替，因此可以在字节编码模式下编码日文字符，但是使用<code>Shift JIS</code>和日文模式对日文字符编码通常更有效。</li>
-</ol>
-<h1 id="混合模式和最优化"><a href="#混合模式和最优化" class="headerlink" title="混合模式和最优化"></a>混合模式和最优化</h1><p>在单个二维码中可以使用多种编码模式。二维码国际标准(<code>ISO/IEC
-18004</code>)中讲解了如何以最优化的方式切换编码模式。</p>
-<p>本教程仅仅讨论单个编码模式。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过检查输入文本中的字符，可以选择用于编码该文本的最优模式。在选择模式时，请务必考虑到二维码阅读器的限制，并且请注意，并非所有二维码阅读器都遵守该标准。此外，根据用户的需求来决定是使用日文编码模式还是在字节编码模式下使用<code>UTF-8</code>编码。</p>
-<p>下一节: <a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%95%B0%E6%8D%AE%E7%BC%96%E7%A0%81/" target="_blank" rel="external">&gt;&gt; 数据编码</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>二维码是一种特殊类型的条形码，可对数字，字母和日文字符等信息进行编码。本教程是为想要学习二维码的编码过程的程序员编写的。编码过程很复杂，特别是在生成纠错码(error correction code words)的步骤中。本教程将尝试用简单的术语解释整个过程。<strong>本教程假设您至少有基本的编程知识。</strong></p>
+<h2 id="历史和信息"><a href="#历史和信息" class="headerlink" title="历史和信息"></a>历史和信息</h2><p>二维码格式在1994年由日本公司Denso-Wave创建，该公司是丰田的子公司，生产汽车零部件。该标准定义在<a href="http://www.iso.org/iso/catalogue_detail?csnumber=43655" target="_blank" rel="external">ISO / IEC 18004：2006</a>中。</p>
+<p>最小的二维码是21x21像素，最大的是177x177像素。尺寸称为<code>Version</code>。 21x21像素大小是<code>Version 1</code>，25x25像素大小是<code>Version 2</code>，依此类推。 177x177大小像素是<code>Version 40</code>。</p>
+<p>此外，二维码包括纠错：当您编码二维码时，您还创建一些冗余数据，这将有助于QR读取器准确读取二维码，即使它的一部分是不可读的数据，也不会影响读取正确的信息。</p>
+<p>二维码中有四种级别的纠错，最低的是L，它可以校准7%的字码。之后是可以校准15％的M，然后是可以校准25％的Q，最后是可以校准30％的H。</p>
+<p>一个二维码的容量取决于它的版本和错误纠正级别，以及编码的数据类型。二维码可以编码四种数据模式：数字，字符，字节或日文。（ps：实际上还有 Extended Channel Interpretation (ECI) mode、Structured Append mode 和 FNC1 mode，一般情况下用不到，所以作者也没有介绍。）</p>
+<h2 id="创建二维码的基本步骤"><a href="#创建二维码的基本步骤" class="headerlink" title="创建二维码的基本步骤"></a>创建二维码的基本步骤</h2><h3 id="第一步：数据分析"><a href="#第一步：数据分析" class="headerlink" title="第一步：数据分析"></a>第一步：<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" target="_blank" rel="external">数据分析</a></h3><p>二维码编码一串文本。 二维码标准有四种编码模式：数字，字符，字节和日文。每种编码模式将文本编码为一串二进制数字（1和0），但每个模式使用不同的方法将文本转换为二进制数字，并且每个编码模式使用尽可能最短的一串二进制数字来编码数据。因此，第一步应该是进行<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" target="_blank" rel="external">数据分析</a>，以确定该文本是否可以符合数字，字母，字节或日文模式的编码，然后选择最优化的编码模式。</p>
+<h3 id="第二步：数据编码"><a href="#第二步：数据编码" class="headerlink" title="第二步：数据编码"></a>第二步：<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%95%B0%E6%8D%AE%E7%BC%96%E7%A0%81/" target="_blank" rel="external">数据编码</a></h3><p>当你为需要编码的文本选择了合适的编码模式，下一步是对该文本进行编码。<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%95%B0%E6%8D%AE%E7%BC%96%E7%A0%81/" target="_blank" rel="external">数据编码</a><br>部分介绍了每种编码模式的详细过程。此步骤的结果若干组8位长的数据码。</p>
+<h3 id="第三步：生成纠错码"><a href="#第三步：生成纠错码" class="headerlink" title="第三步：生成纠错码"></a>第三步：<a href="http://tiierr.xyz/2017/02/26/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%94%9F%E6%88%90%E7%BA%A0%E9%94%99%E7%A0%81/" target="_blank" rel="external">生成纠错码</a></h3><p>如上所述，二维码使用纠错码。这意味着你得到了该文本对应的数据码后，必须再使用这些数据码生成纠错码（Reed-Solomon error correction）。</p>
+<p>二维码扫描器读取数据码和纠错码。通过比较两种码字，扫描仪可以确定是否正确地读取了数据，如果它没有正确地读取数据，则可以利用纠错码纠正数据码的错误。<a href="http://tiierr.xyz/2017/02/26/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%94%9F%E6%88%90%E7%BA%A0%E9%94%99%E7%A0%81/" target="_blank" rel="external">生成纠错码</a>部分详细解释了由数据码产生纠错码的过程。</p>
+<p>想要了解更多信息，请阅读维基百科上关于的<a href="https://zh.wikipedia.org/wiki/%E9%87%8C%E5%BE%B7-%E6%89%80%E7%BD%97%E9%97%A8%E7%A0%81" target="_blank" rel="external">里德-所罗门码</a>的文章。</p>
+<h3 id="第四步：最终编码"><a href="#第四步：最终编码" class="headerlink" title="第四步：最终编码"></a>第四步：<a href="http://tiierr.xyz/2017/02/27/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%9C%80%E7%BB%88%E7%BC%96%E7%A0%81/" target="_blank" rel="external">最终编码</a></h3><p>前面步骤生成的数据码和纠错码必须以一定的顺序排列。对于大尺寸的二维码，数据码和纠错码必须分块排列，这些块必须依据二维码的规格说明交错排列。</p>
+<h3 id="第五步：矩阵中的模块放置"><a href="#第五步：矩阵中的模块放置" class="headerlink" title="第五步：矩阵中的模块放置"></a>第五步：<a href="http://tiierr.xyz/2017/02/27/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E6%94%BE%E7%BD%AE/" target="_blank" rel="external">矩阵中的模块放置</a></h3><p>前面产生数据码和纠错码在正确的顺序排列它们之后，必须将这些二进制数字以特定的方式放置在二维码矩阵中。</p>
+<h3 id="第六步：掩码图案"><a href="#第六步：掩码图案" class="headerlink" title="第六步：掩码图案"></a>第六步：<a href="http://tiierr.xyz/2017/02/28/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%8E%A9%E7%A0%81%E5%9B%BE%E6%A1%88/" target="_blank" rel="external">掩码图案</a></h3><p>二维码扫描器有时很难正确读取特定模式的码字。针对这种情况，二维码规范中定义了八个掩码图案，每种特定的图案都可以改变原始的二维码图案。</p>
+<h3 id="第七步：格式和版本信息"><a href="#第七步：格式和版本信息" class="headerlink" title="第七步：格式和版本信息"></a>第七步：<a href="http://tiierr.xyz/2017/02/28/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%A0%BC%E5%BC%8F%E5%92%8C%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF/" target="_blank" rel="external">格式和版本信息</a></h3><p>最后一步是在先前步骤留下空白的特定区域中增加格式和（如有必要）的版本信息。格式信息定义了纠错等级和掩码图案的模式。版本信息定义了二维码矩阵的大小和并且仅存在于较大的二维码中。有关最后一步的详细信息，请阅读的格式和版本信息部分。</p>
+<p>下一节：<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" target="_blank" rel="external">&gt;&gt; 数据分析</a></p>
 
       
     </div>
@@ -357,16 +352,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/24/二维码-生成原理/" rel="next" title="二维码 - 生成原理">
-                <i class="fa fa-chevron-left"></i> 二维码 - 生成原理
+              <a href="/2016/12/31/在Ubuntu-14-04上部署Flask/" rel="next" title="在Ubuntu 14.04上部署Flask">
+                <i class="fa fa-chevron-left"></i> 在Ubuntu 14.04上部署Flask
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/25/二维码-数据编码/" rel="prev" title="二维码 - 数据编码">
-                二维码 - 数据编码 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/25/二维码-数据分析/" rel="prev" title="二维码 - 数据分析">
+                二维码 - 数据分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -396,8 +391,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/25/二维码-数据分析/"
-           data-title="二维码 - 数据分析" data-url="http://yoursite.com/2017/02/25/二维码-数据分析/">
+      <div class="ds-thread" data-thread-key="2017/02/24/二维码-生成原理/"
+           data-title="二维码 - 生成原理" data-url="http://yoursite.com/2017/02/24/二维码-生成原理/">
       </div>
     
   </div>
@@ -481,7 +476,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码编码模式"><span class="nav-number">1.</span> <span class="nav-text">二维码编码模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于日文编码"><span class="nav-number">2.</span> <span class="nav-text">关于日文编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于-UTF-8-编码"><span class="nav-number">3.</span> <span class="nav-text">关于 UTF-8 编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何选择最有效的编码模式"><span class="nav-number">4.</span> <span class="nav-text">如何选择最有效的编码模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#混合模式和最优化"><span class="nav-number">5.</span> <span class="nav-text">混合模式和最优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#历史和信息"><span class="nav-number">2.1.</span> <span class="nav-text">历史和信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建二维码的基本步骤"><span class="nav-number">2.2.</span> <span class="nav-text">创建二维码的基本步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：数据分析"><span class="nav-number">2.2.1.</span> <span class="nav-text">第一步：数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：数据编码"><span class="nav-number">2.2.2.</span> <span class="nav-text">第二步：数据编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：生成纠错码"><span class="nav-number">2.2.3.</span> <span class="nav-text">第三步：生成纠错码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步：最终编码"><span class="nav-number">2.2.4.</span> <span class="nav-text">第四步：最终编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步：矩阵中的模块放置"><span class="nav-number">2.2.5.</span> <span class="nav-text">第五步：矩阵中的模块放置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六步：掩码图案"><span class="nav-number">2.2.6.</span> <span class="nav-text">第六步：掩码图案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七步：格式和版本信息"><span class="nav-number">2.2.7.</span> <span class="nav-text">第七步：格式和版本信息</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
