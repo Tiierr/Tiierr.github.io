@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd5y921avqj20f00f0jrq">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd5yh6728oj20f00f0t97">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd5ynjfokij20ma0xrdjb">
-<meta property="og:updated_time" content="2017-02-28T02:14:47.665Z">
+<meta property="og:updated_time" content="2017-02-28T02:16:18.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二维码 - 掩码图案">
 <meta name="twitter:description" content="现在模块已经被放置在矩阵中，必须确定最佳掩模图案。掩模图案根据特定规则改变模块的亮暗。此步骤的目的是修改二维码图案以使二维码扫描器更容易读取。">
@@ -344,15 +344,15 @@
 </tr>
 <tr>
 <td style="text-align:center">5</td>
-<td style="text-align:left">((i <em> j) mod 2) + ((i </em> j) mod 3) == 0</td>
+<td style="text-align:left">((i × j) mod 2) + ((i × j) mod 3) == 0</td>
 </tr>
 <tr>
 <td style="text-align:center">6</td>
-<td style="text-align:left">( ((i <em> j) mod 2) + ((i </em> j) mod 3) ) mod 2 == 0</td>
+<td style="text-align:left">( ((i × j) mod 2) + ((i × j) mod 3) ) mod 2 == 0</td>
 </tr>
 <tr>
 <td style="text-align:center">7</td>
-<td style="text-align:left">( ((i + j) mod 2) + ((i * j) mod 3) ) mod 2 == 0</td>
+<td style="text-align:left">( ((i + j) mod 2) + ((i × j) mod 3) ) mod 2 == 0</td>
 </tr>
 </tbody>
 </table>
