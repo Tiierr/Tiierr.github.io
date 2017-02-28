@@ -252,6 +252,109 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/" itemprop="url">
+                  CRC循环冗余检测(Cyclic Redundancy Check)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-23T11:57:17+08:00" content="2016-10-23">
+              2016-10-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性的检验。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/23/CRC循环冗余检测-Cyclic-Redundancy-Check/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/22/详解re-sub的用法/" itemprop="url">
                   详解re.sub的用法
                 </a>
@@ -653,112 +756,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/13/在Python中调用外部命令/" itemprop="url">
-                  在Python中调用外部命令?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-13T22:51:43+08:00" content="2016-10-13">
-              2016-10-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/13/在Python中调用外部命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/在Python中调用外部命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="怎么在Python脚本里调用外部命令-就好像直接输入在Unix-shell中或者windows的命令行里"><a href="#怎么在Python脚本里调用外部命令-就好像直接输入在Unix-shell中或者windows的命令行里" class="headerlink" title="怎么在Python脚本里调用外部命令?(就好像直接输入在Unix shell中或者windows的命令行里)"></a>怎么在Python脚本里调用外部命令?(就好像直接输入在Unix shell中或者windows的命令行里)</h2><p>1 <code>os.system</code>(“命令加参数”)把命令和参数传递给你系统的<code>shell</code>中.用这个命令的好处在于你可以一次运行好多命令还可以设置管道来进行重定向。</p>
-<p>举个栗子:</p>
-<ul>
-<li><code>os.system</code>(“命令 &lt; 出入文件 | 另一个命令 &gt; 输出文件”)尽管它非常方便,但是你还是不得不手动输入像空格这样的shell字符.从另一方面讲,对于运行简单的shell命令而不去调用外部程序来说的话还是非常好用的。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/13/在Python中调用外部命令/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -804,7 +801,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

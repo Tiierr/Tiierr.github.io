@@ -252,6 +252,112 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/13/在Python中调用外部命令/" itemprop="url">
+                  在Python中调用外部命令?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-13T22:51:43+08:00" content="2016-10-13">
+              2016-10-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/13/在Python中调用外部命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/在Python中调用外部命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="怎么在Python脚本里调用外部命令-就好像直接输入在Unix-shell中或者windows的命令行里"><a href="#怎么在Python脚本里调用外部命令-就好像直接输入在Unix-shell中或者windows的命令行里" class="headerlink" title="怎么在Python脚本里调用外部命令?(就好像直接输入在Unix shell中或者windows的命令行里)"></a>怎么在Python脚本里调用外部命令?(就好像直接输入在Unix shell中或者windows的命令行里)</h2><p>1 <code>os.system</code>(“命令加参数”)把命令和参数传递给你系统的<code>shell</code>中.用这个命令的好处在于你可以一次运行好多命令还可以设置管道来进行重定向。</p>
+<p>举个栗子:</p>
+<ul>
+<li><code>os.system</code>(“命令 &lt; 出入文件 | 另一个命令 &gt; 输出文件”)尽管它非常方便,但是你还是不得不手动输入像空格这样的shell字符.从另一方面讲,对于运行简单的shell命令而不去调用外部程序来说的话还是非常好用的。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/13/在Python中调用外部命令/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/13/编程题-interview/" itemprop="url">
                   编程题(interview)
                 </a>
@@ -657,120 +763,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/11/操作系统-interview/" itemprop="url">
-                  操作系统(interview)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T22:41:35+08:00" content="2016-10-11">
-              2016-10-11
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/11/操作系统-interview/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/操作系统-interview/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-select-poll和epoll"><a href="#1-select-poll和epoll" class="headerlink" title="1 select,poll和epoll"></a>1 select,poll和epoll</h2><p>其实所有的I/O都是轮询的方法,只不过实现的层面不同罢了.</p>
-<p>这个问题可能有点深入了,但相信能回答出这个问题是对I/O多路复用有很好的了解了.其中tornado使用的就是epoll的.</p>
-<p><a href="http://www.cnblogs.com/Anker/p/3265058.html">selec,poll和epoll区别总结</a></p>
-<p>基本上select有3个缺点:</p>
-<ol>
-<li>连接数受限</li>
-<li>查找配对速度慢</li>
-<li>数据由内核拷贝到用户态</li>
-</ol>
-<p>poll改善了第一个缺点</p>
-<p>epoll改了三个缺点.</p>
-<p>关于epoll的: <a href="http://www.cnblogs.com/my_life/articles/3968782.html">http://www.cnblogs.com/my_life/articles/3968782.html</a><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/11/操作系统-interview/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -816,7 +808,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

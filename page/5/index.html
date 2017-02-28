@@ -252,6 +252,110 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/11/浅谈Python中的深浅复制与垃圾回收机制/" itemprop="url">
+                  浅谈Python中的深浅复制与垃圾回收机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-11T18:41:08+08:00" content="2016-11-11">
+              2016-11-11
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/11/浅谈Python中的深浅复制与垃圾回收机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/11/浅谈Python中的深浅复制与垃圾回收机制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy  </span><br><span class="line"></span><br><span class="line"><span class="comment"># copy 和 deepcopy 的区别  </span></span><br><span class="line"></span><br><span class="line">l1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]]  </span><br><span class="line"><span class="comment"># copy 浅复制，不会拷贝其子对象，修改子对象，将受影响  </span></span><br><span class="line">l2 = copy.copy(l1)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># deepcopy 深复制，将拷贝其子对象，修改子对象，将不受影响  </span></span><br><span class="line">l3 = copy.deepcopy(l1)  </span><br><span class="line"></span><br><span class="line">l1[<span class="number">3</span>].append(<span class="string">'c'</span>)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'l1:'</span>, l1  </span><br><span class="line"><span class="keyword">print</span> <span class="string">'l2:'</span>, l2  </span><br><span class="line"><span class="keyword">print</span> <span class="string">'l3:'</span>, l3</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l1: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]]</span><br><span class="line">l2: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]]</span><br><span class="line">l3: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]]</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/11/浅谈Python中的深浅复制与垃圾回收机制/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/07/计算机网络之运输层的碎碎念/" itemprop="url">
                   计算机网络之运输层的碎碎念
                 </a>
@@ -652,109 +756,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/30/SQLAlchemy-ORM教程之三：Relationship/" itemprop="url">
-                  SQLAlchemy ORM教程之三：Relationship
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T18:44:07+08:00" content="2016-10-30">
-              2016-10-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/30/SQLAlchemy-ORM教程之三：Relationship/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/SQLAlchemy-ORM教程之三：Relationship/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>『关系』是关系型数据库的一大特色，也是我们在建模过程中的一个重要的抽象过程。在前面的两个教程中，我们分别回顾了使用<code>SQLAlchemy</code>在数据库中进行创建和简单查询的方法，今天我们来深入到更为复杂和抽象部分。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/30/SQLAlchemy-ORM教程之三：Relationship/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -800,7 +801,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
