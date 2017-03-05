@@ -1,0 +1,1164 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二维码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码 - 生成纠错码">
+<meta property="og:url" content="http://tiierr.xyz/二维码-生成纠错码/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。">
+<meta property="og:updated_time" content="2017-03-02T02:37:29.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码 - 生成纠错码">
+<meta name="twitter:description" content="纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 二维码 - 生成纠错码 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                二维码 - 生成纠错码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-26T10:26:00+08:00" content="2017-02-26">
+              2017-02-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/二维码-生成纠错码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="二维码-生成纠错码/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>纠错码字允许二维码阅读器检测和纠正二维码中的错误。本文主要说明如何在数据编码后创建这些纠错码。</p>
+<a id="more"></a>
+<h1 id="1-将数据码分组"><a href="#1-将数据码分组" class="headerlink" title="1 将数据码分组"></a>1 将数据码分组</h1><p>在生成纠错码之前，如果二维码大于Version 2，则可能需要将数据码分解成更小的块。</p>
+<p>例如，如果创建一个 <code>5-Q</code> 二维码，<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>表明<code>5-Q码</code>具有62个数据码字（8位二进制数的串）。</p>
+<p>(codeword #1)  01000011<br>(codeword #2)  01010101<br>(codeword #3)  01000110<br>(codeword #4)  10000110<br>(codeword #5)  01010111<br>(codeword #6)  00100110<br>(codeword #7)  01010101<br>(codeword #8)  11000010<br>(codeword #9)  01110111<br>(codeword #10) 00110010<br>(codeword #11) 00000110<br>(codeword #12) 00010010<br>(codeword #13) 00000110<br>(codeword #14) 01100111<br>(codeword #15) 00100110<br>(codeword #16) 11110110<br>(codeword #17) 11110110<br>(codeword #18) 01000010<br>(codeword #19) 00000111<br>(codeword #20) 01110110<br>(codeword #21) 10000110<br>(codeword #22) 11110010<br>(codeword #23) 00000111<br>(codeword #24) 00100110<br>(codeword #25) 01010110<br>(codeword #26) 00010110<br>(codeword #27) 11000110<br>(codeword #28) 11000111<br>(codeword #29) 10010010<br>(codeword #30) 00000110<br>(codeword #31) 10110110<br>(codeword #32) 11100110<br>(codeword #33) 11110111<br>(codeword #34) 01110111<br>(codeword #35) 00110010<br>(codeword #36) 00000111<br>(codeword #37) 01110110<br>(codeword #38) 10000110<br>(codeword #39) 01010111<br>(codeword #40) 00100110<br>(codeword #41) 01010010<br>(codeword #42) 00000110<br>(codeword #43) 10000110<br>(codeword #44) 10010111<br>(codeword #45) 00110010<br>(codeword #46) 00000111<br>(codeword #47) 01000110<br>(codeword #48) 11110111<br>(codeword #49) 01110110<br>(codeword #50) 01010110<br>(codeword #51) 11000010<br>(codeword #52) 00000110<br>(codeword #53) 10010111<br>(codeword #54) 00110010<br>(codeword #55) 11100000<br>(codeword #56) 11101100<br>(codeword #57) 00010001<br>(codeword #58) 11101100<br>(codeword #59) 00010001<br>(codeword #60) 11101100<br>(codeword #61) 00010001<br>(codeword #62) 11101100</p>
+<p><a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>中包含“组1”和“组2”，以及“块数”。这意味着数据码字必须被分割成多达两个组，并且在每个组内，数据码字可以进一步分成块。数据码字被顺序地分解（即从码字1开始，然后从码字2开始，等等）</p>
+<p>对于5-Q码，其存在两个组，第一组应被分解成2个块，每个块包含15个数据码字，第二组应被分解成2个块，每个块包含16个数据码字。</p>
+<p>15 + 15 + 16 + 16 = 62是数据码字的总数。</p>
+<p>下表列出了如何将5-Q码的码字分解成正确的组和块。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">组号</th>
+<th style="text-align:center">块号</th>
+<th style="text-align:center">每组包含的数据码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">组 1</td>
+<td style="text-align:center">块 1</td>
+<td style="text-align:center">(codeword #1) 01000011<br>(codeword #2) 01010101<br>(codeword #3) 01000110<br>(codeword #4) 10000110<br>(codeword #5) 01010111<br>(codeword #6) 00100110<br>(codeword #7) 01010101<br>(codeword #8) 11000010<br>(codeword #9) 01110111<br>(codeword #10) 00110010<br>(codeword #11) 00000110<br>(codeword #12) 00010010<br>(codeword #13) 00000110<br>(codeword #14) 01100111<br>(codeword #15) 00100110</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">块 2</td>
+<td style="text-align:center">(codeword #16) 11110110<br>(codeword #17) 11110110<br>(codeword #18) 01000010<br>(codeword #19) 00000111<br>(codeword #20) 01110110<br>(codeword #21) 10000110<br>(codeword #22) 11110010<br>(codeword #23) 00000111<br>(codeword #24) 00100110<br>(codeword #25) 01010110<br>(codeword #26) 00010110<br>(codeword #27) 11000110<br>(codeword #28) 11000111<br>(codeword #29) 10010010<br>(codeword #30) 00000110</td>
+</tr>
+<tr>
+<td style="text-align:center">组 2</td>
+<td style="text-align:center">块 1</td>
+<td style="text-align:center">(codeword #31) 10110110<br>(codeword #32) 11100110<br>(codeword #33) 11110111<br>(codeword #34) 01110111<br>(codeword #35) 00110010<br>(codeword #36) 00000111<br>(codeword #37) 01110110<br>(codeword #38) 10000110<br>(codeword #39) 01010111<br>(codeword #40) 00100110<br>(codeword #41) 01010010<br>(codeword #42) 00000110<br>(codeword #43) 10000110<br>(codeword #44) 10010111<br>(codeword #45) 00110010<br>(codeword #46) 00000111</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">块 2</td>
+<td style="text-align:center">(codeword #47) 01000110<br>(codeword #48) 11110111<br>(codeword #49) 01110110<br>(codeword #50) 01010110<br>(codeword #51) 11000010<br>(codeword #52) 00000110<br>(codeword #53) 10010111<br>(codeword #54) 00110010<br>(codeword #55) 11100000<br>(codeword #56) 11101100<br>(codeword #57) 00010001<br>(codeword #58) 11101100<br>(codeword #59) 00010001<br>(codeword #60) 11101100<br>(codeword #61) 00010001<br>(codeword #62) 11101100</td>
+</tr>
+</tbody>
+</table>
+<p>在表中，注意组1中的块由15个数据码字组成，组2中的块由的16个数据码字组成，具体分为多少个数据码字是主要根据<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>。还要注意，它们是顺序分解。也就是说，它们的顺序与在被分成块之前的顺序相同。</p>
+<p>根据<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>，对于5-Q码，每个块有18个纠错码字。在该示例中，存在四个块，因此对于总共72个纠错码字，存在四组18个纠错码字。</p>
+<p>如<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>所示，较小的二维码不需要将数据码字分解，因此，对于1-M码，所有16个数据码字将被用作单个块，并且只需要生成10个纠错码字。</p>
+<p>在继续5-Q示例之前，有必要解释一下 Reed-Solomon 纠错的基本步骤。</p>
+<h1 id="2-多项式长除法"><a href="#2-多项式长除法" class="headerlink" title="2 多项式长除法"></a>2 多项式长除法</h1><p>纠错码字将使用称为Reed-Solomon纠错的方法来生成，部分过程是执行多项式长除法。也就是说，用一个多项式除以另一个多项式。本教程假设你了解如何手工进行标准长除法（即用数字而不是多项式）。</p>
+<p>多项式长除法比标准长除法稍微复杂一些。为了帮助澄清过程，这里是一个简单的多项式长除法的例子。</p>
+<p>此示例展示了 <strong>3x<sup>2</sup> + x - 1 </strong> (被除数) 除以 <strong>x + 1</strong>（除数）的过程。这些多项式首先被放入一个表格中（见维基百科上关于<a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E9%95%BF%E9%99%A4%E6%B3%95" target="_blank" rel="external">多项式长除法</a>的文章）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 + x - 1</span><br></pre></td></tr></table></figure>
+<p>在长除法的每个步骤中，将x + 1乘以某个值，使其第一项与表格底部的多项式相等。</p>
+<p>对于第一步，<strong>3x<sup>2</sup> + x - 1 </strong> 位于表格的底部，因此将x + 1乘以3x。得到结果<strong>3x<sup>2</sup> + 3x</strong>，其具有与在表格底部的多项式的第一项相同的第一项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">        3x  </span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br></pre></td></tr></table></figure>
+<p>现在从 <strong>3x<sup>2</sup> + x - 1 </strong> 中减去<strong>3x<sup>2</sup> + 3x</strong>。得到<strong>-2x-1</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        3x  </span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br><span class="line">        —————————</span><br><span class="line">             - 2x - 1</span><br></pre></td></tr></table></figure></p>
+<p>再将x + 1乘以一个项，这将生成一个多项式，其第一项与底部多项式的多项式相同。在这种情况下，执行-2（x + 1）得到-2x - 2。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        3x - 2</span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br><span class="line">        —————————</span><br><span class="line">             - 2x - 1</span><br><span class="line">             - 2x - 2</span><br></pre></td></tr></table></figure></p>
+<p>再次减去两个多项式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        3x - 2</span><br><span class="line">       ——————————————</span><br><span class="line">x + 1 | 3x^2 +  x - 1</span><br><span class="line">        3x^2 + 3x</span><br><span class="line">        —————————</span><br><span class="line">             - 2x - 1</span><br><span class="line">             - 2x - 2</span><br><span class="line">             ————————</span><br><span class="line">                    1</span><br></pre></td></tr></table></figure>
+<p>横线之上的多项式即为商，而剩下的1就是余数。</p>
+<blockquote>
+<p> <strong>多项式长除法的步骤：</strong></p>
+<ol>
+<li>把被除式、除式按某个字母作降幂排列，并把所缺的项用零补齐。</li>
+<li>将分子的第一项除以分母的最高次项（即次数最高的项)，结果写在横线之上。</li>
+<li>将分母乘以刚得到结果（最终商的第一项），乘积写在分子前两项之下（同类项对齐）。</li>
+<li>从分子的相应项中减去刚得到的乘积（消去相等项，把不相等的项结合起来），结果写在下面。然后，将分子的下一项“拿下来”。</li>
+<li>把减得的差当作新的被除式，重复前三步（直到余式为零或余式的次数低于除式的次数时为止．被除式=除式×商式+余式 ）</li>
+<li>重复第四步。直到得出结果。横线之上的多项式即为商，而剩下的数字就是余数。</li>
+</ol>
+</blockquote>
+<p>对于Reed-Solomon纠错所需的多项式长除法在某些方面比该例子更简单，因为不必处理多项式项的指数。</p>
+<h1 id="3-伽罗瓦域"><a href="#3-伽罗瓦域" class="headerlink" title="3 伽罗瓦域"></a>3 伽罗瓦域</h1><p>如上所述，为了生成纠错码字，该过程使用称为Reed-Solomon纠错的方法。<br>而多项式长除法则用到了伽罗瓦域，其本质上是数字的有限集合，以及创建仍在该集合中的数字的一些数学运算。</p>
+<p>二维码标准使用<strong>逐位模2</strong>算法和<strong>逐字节模100011101</strong>算法。这意味着使用伽罗瓦域<strong>2<sup>8</sup></strong>，换句话说是<strong>伽罗瓦域256</strong>，有时也写为<strong>GF(256)</strong>。</p>
+<p><strong>GF(256)</strong> 中的数字在0到255（包括）的范围内。也可以用八位字节表示的相同数字范围（最大可能的八位字节是11111111，等于255）。</p>
+<p>这意味着<strong>GF(256)</strong>中的所有数学运算将可以表示为八位字节的数字的运算。</p>
+<h1 id="4-伽罗瓦域算法"><a href="#4-伽罗瓦域算法" class="headerlink" title="4 伽罗瓦域算法"></a>4 伽罗瓦域算法</h1><p>如上所述，<strong>GF(256)</strong> 中的数字在0到255（包括）的范围内。GF(256)中的数学运算本质上是循环的，这意味着如果在结果大于255的数的GF(256)内执行数学运算，则需要使用模运算来获得仍然在伽罗瓦域中的数。</p>
+<p>在伽罗瓦域中，负数具有与正数相同的值，因此-n = n。换句话说，总是使用伽罗瓦域算法中的数字的绝对值。</p>
+<p>在伽罗瓦域内的加法和减法是相同的事情。伽罗瓦域中的加法和减法通过执行正常的加法或减法，然后模运算来计算。由于我们使用逐位模2算法（如二维码标准中所述），这与执行XOR运算相同。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 + 1 = 2 % 2 = 0</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">1 ^ 1 = 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 + 1 = 1 % 2 = 1</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">0 ^ 1 = 1</span><br></pre></td></tr></table></figure>
+<p>编码二维码的过程中，GF(256)中的所有加法和减法将通过这两个数异或来执行。</p>
+<h1 id="5-使用逐字节模100011101生成2的幂"><a href="#5-使用逐字节模100011101生成2的幂" class="headerlink" title="5 使用逐字节模100011101生成2的幂"></a>5 使用逐字节模100011101生成2的幂</h1><p>GF(256)中的所有数可以表示为2的幂。具体地，GF(256)中的所有数可以表示为2<sup>n</sup>，其中0≤n≤255。然而，如前所述，GF(256)中的所有数字本身必须在0到255的范围内，因此<strong>2<sup>8</sup></strong>对于Galois域似乎太大，因为它等于256。</p>
+<p>2从0到8的幂为：</p>
+<p>2<sup>0</sup> = 1<br>2<sup>1</sup> = 2<br>2<sup>2</sup> = 4<br>2<sup>3</sup> = 8<br>2<sup>4</sup> = 16<br>2<sup>5</sup> = 32<br>2<sup>6</sup> = 64<br>2<sup>7</sup> = 128<br>2<sup>8</sup> = 256</p>
+<p>二维码标准中规定使用逐字节模100011101算法（其中100011101是十进制285的二进制数）。当数字为256或更大时，它应与285异或。</p>
+<p>例如:</p>
+<p>2<sup>8</sup> = 256 ^ 285 = 29</p>
+<p>当继续到2<sup>9</sup>时，不要直接用它的值512和与285异或（结果太大）。由于<strong>2<sup>9</sup> = 2<sup>8</sup> * 2</strong>，请使用在上一步中计算的值28。</p>
+<p>即：</p>
+<p>2<sup>9</sup> = 2<sup>8</sup> × 2 = 29 × 2 = 58</p>
+<p>同样：</p>
+<p>2<sup>10</sup> = 2<sup>9</sup> × 2 = 58 × 2 = 116<br>2<sup>11</sup> = 2<sup>10</sup> × 2 = 116 × 2 = 232</p>
+<p>当结果大于或等于256的值时，再次与285进行异或：</p>
+<p>2<sup>12</sup> = 2<sup>11</sup> × 2 = 464 ^ 285 = 205</p>
+<h1 id="6-对数与反对数乘法"><a href="#6-对数与反对数乘法" class="headerlink" title="6 对数与反对数乘法"></a>6 对数与反对数乘法</h1><p>因为所有值可以用2<sup>n</sup>来表示，所以可以用对数和反对数简化GF(256)中的乘法。(<a href="https://en.wikipedia.org/wiki/Slide_rule" target="_blank" rel="external">slide rule</a>，不限于GF(256)）。<br>通常情况下（即不仅在Galois Fields中），可以用以下操作将两个数p和q相乘：</p>
+<p><strong>b<sup>(log<sub>b</sub>p + log<sub>b</sub>q)</sup>
+</strong></p>
+<p>假设基数为2，则上述操作变为：</p>
+<p><strong>2<sup>(log<sub>2</sub>p + log<sub>2</sub>q)</sup><br></strong></p>
+<p>而log<sub>2</sub>x操作告诉我们乘以多少次2得到x。换句话说，当2<sup>n</sup> = x时，它可以确定n。</p>
+<p>这种方式提供了一个用于GF(256)中的数字进行乘法操作的快捷方式。当乘以具有相同基数的两个数字（例如2<sup>2</sup> × 2<sup>8</sup> ）时，这等效于将两个指数加在一起，如下：</p>
+<p>2<sup>2</sup> × 2<sup>8</sup> = 2<sup>(2 + 8)</sup> = 2<sup>10</sup></p>
+<p>由于所有GF(256)值都可以表示为2的幂，所以GF(256)中的所有乘法都可以作为基数为2的指数加法运算。</p>
+<p>例如，16 × 32，结果与2<sup>4</sup> × 2<sup>5</sup>相同，等价于2<sup>(4 + 5)</sup> = 2<sup>9</sup>。</p>
+<p>2<sup>9</sup>的值在前面已经计算过了，因此在逐字节模285的GF(256)中，16 × 32是2<sup>9</sup>，结果等于58。</p>
+<p>当指数相加时，如果指数大于或等于256，只需将指数模255。</p>
+<p>即：<br>2<sup>170</sup> × 2<sup>164</sup> = 2<sup>(170+164)</sup> = 2<sup>334</sup> → 2<sup>334 % 255</sup> = 2<sup>79</sup>.</p>
+<p>因此，在GF(256)中执行乘法所需要的是生成2的所有幂。<br>这些值可以在<a href="../二维码-对数与反对数表/">对数-反对数表</a>中找到。该表使用阿尔法符号，其中α= 2。</p>
+<h1 id="7-生成多项式"><a href="#7-生成多项式" class="headerlink" title="7 生成多项式"></a>7 生成多项式</h1><p>如上所述，纠错码使用多项式长除法。为此，我们需要两个多项式。第一个多项式称为消息多项式(message polynomial)。消息多项式使用数据编码步骤中得到的数据码字作为其系数。</p>
+<p>举个栗子：</p>
+<p>如果被转换为整数的数据码字是25,218和35，则消息多项式将是25×<sup>2</sup> + 218×+ 35。实际中，用于标准二维码的消息多项式比本例长得多。</p>
+<p>消息多项式将与生成多项式进行除法操作。生成多项式是通过<strong>(x - α<sup>0</sup>) … (x - α<sup>n-1</sup>)</strong>乘法生成的多项式。其中n是必须生成的纠错码字的数目（参见<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>）。如前面部分所述，α等于2。</p>
+<p>可以以编程方式创建可能需要的所有生成多项式。在此过程中，本文将使用α和本文前面所述的对数-反对数乘法。</p>
+<p>二维码标准中附件A中列出了从7-68的生成多项式(具体参见ISO/IEC 18004)。</p>
+<p>虽然标准二维码将总是需要每块多于2个纠错码字，但是为了计算方便，该文将解释如何计算用于2个纠错码字的生成多项式。</p>
+<h2 id="7-1-2个纠错码字的生成多项式"><a href="#7-1-2个纠错码字的生成多项式" class="headerlink" title="7.1 2个纠错码字的生成多项式"></a>7.1 2个纠错码字的生成多项式</h2><p>首先，将(x - α<sup>0</sup>) 和 (x - α<sup>1</sup>)相乘。<br>因为x的系数为1，且α<sup>0</sup> = 1，可以写成如下形式：</p>
+<p>(α<sup>0</sup>x - α<sup>0</sup>) × (α<sup>0</sup>x - α<sup>1</sup>)</p>
+<p>将第一部分的每个项乘以第二部分的每个项以得到：</p>
+<p>(α<sup>0</sup>x<sup>1</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>0</sup>x<sup>0</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>0</sup>x<sup>1</sup> × α<sup>1</sup>x<sup>0</sup>) + (α<sup>0</sup>x<sup>0</sup> × α<sup>1</sup>x<sup>0</sup>)</p>
+<p>这里可以使用指数加法来执行乘法：</p>
+<p>(α<sup>(0+0)</sup>x<sup>(1+1)</sup>) + (α<sup>(0+0)</sup>x<sup>(0+1)</sup>) + (α<sup>(0+1)</sup>x<sup>(1+0)</sup>) + (α<sup>(0+1)</sup>x<sup>(0+0)</sup>)</p>
+<p>结果为：</p>
+<p>α<sup>0</sup>x<sup>2</sup> + α<sup>0</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup></p>
+<p>合并同类项：</p>
+<p>α<sup>0</sup>x<sup>2</sup> + (α<sup>0</sup>+α<sup>1</sup>)x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup></p>
+<p>因为GF(256)中的加法通过异或执行。使用<a href="../二维码-对数与反对数表/">对数-反对数表</a>换为其对应的整数，然后执行异或运算。</p>
+<p>x<sup>2</sup> + (1^2)x<sup>1</sup> + 2x<sup>0</sup><br><br>x<sup>2</sup> + 3x<sup>1</sup> + 2x<sup>0</sup></p>
+<p>将系数转为α符号，得到：</p>
+<p><strong>α<sup>0</sup>x<sup>2</sup> + α<sup>25</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup></strong></p>
+<p>这就是2个纠错码字的生成多项式。</p>
+<h2 id="7-2-3个纠错码字的生成多项式"><a href="#7-2-3个纠错码字的生成多项式" class="headerlink" title="7.2 3个纠错码字的生成多项式"></a>7.2 3个纠错码字的生成多项式</h2><p>所有其余的生成多项式可以使用每个上一步骤的生成多项式以相同的方式创建。从上一个生成多项式开始，并乘以下一个因子(x - α<sup>2</sup>)。</p>
+<p>(α<sup>0</sup>x<sup>2</sup> + α<sup>25</sup>x<sup>1</sup> + α<sup>1</sup>x<sup>0</sup>) × (α<sup>0</sup>x<sup>1</sup> + α<sup>2</sup>x<sup>0</sup>)</p>
+<p>(α<sup>0</sup>x<sup>2</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>25</sup>x<sup>1</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>1</sup>x<sup>0</sup> × α<sup>0</sup>x<sup>1</sup>) + (α<sup>0</sup>x<sup>2</sup> × α<sup>2</sup>x<sup>0</sup>) + (α<sup>25</sup>x<sup>1</sup> × α<sup>2</sup>x<sup>0</sup>) + (α<sup>1</sup>x<sup>0</sup> × α<sup>2</sup>x<sup>0</sup>)</p>
+<p>使用指数加法来执行乘法：</p>
+<p>(α<sup>(0+0)</sup>x<sup>(2+1)</sup>) + (α<sup>(25+0)</sup>x<sup>(1+1)</sup>) + (α<sup>(1+0)</sup>x<sup>(0+1)</sup>) + (α<sup>(0+2)</sup>x<sup>(2+0)</sup>) + (α<sup>(25+2)</sup>x<sup>(1+0)</sup>) + (α<sup>(1+2)</sup>x<sup>(0+0)</sup>)</p>
+<p>得到：</p>
+<p>α<sup>0</sup>x<sup>3</sup> + α<sup>25</sup>x<sup>2</sup> + α<sup>1</sup>x<sup>1</sup> + α<sup>2</sup>x<sup>2</sup> + α<sup>27</sup>x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>合并同类项：</p>
+<p>α<sup>0</sup>x<sup>3</sup> + (α<sup>25</sup> ^ α<sup>2</sup>)x<sup>2</sup> + (α<sup>1</sup> ^ α<sup>27</sup>)x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>α<sup>0</sup>x<sup>3</sup> + (3 ^ 4)x<sup>2</sup> + (2 ^ 12)x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>α<sup>0</sup>x<sup>3</sup> + 7x<sup>2</sup> + 14x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>α<sup>0</sup>x<sup>3</sup> + α<sup>198</sup>x<sup>2</sup> + α<sup>199</sup>x<sup>1</sup> + α<sup>3</sup>x<sup>0</sup></p>
+<p>这就是3个纠错码字的生成多项式。</p>
+<h2 id="7-3-当指数大于或等于256时"><a href="#7-3-当指数大于或等于256时" class="headerlink" title="7.3 当指数大于或等于256时"></a>7.3 当指数大于或等于256时</h2><p>当通过将指数加在一起来执行乘法时，有时这可能导致大于或等于256的指数。在这种情况下，在组合类似项之前应用模255。</p>
+<p>例如:<br>α<sup>257</sup>x<sup>4</sup> = α<sup>(257 % 255)</sup>x<sup>4</sup> = α<sup>2</sup>x<sup>4</sup></p>
+<h2 id="7-4-其他生成多项式"><a href="#7-4-其他生成多项式" class="headerlink" title="7.4 其他生成多项式"></a>7.4 其他生成多项式</h2><p>通常情况下，可以创建所有生成多项式g(x)，如下所示：</p>
+<p>(g(x) for 2 error correction codewords) × (x - α<sup>2</sup>) = (g(x) for 3 error correction codewords)<br>(g(x) for 3 error correction codewords) × (x - α<sup>3</sup>) = (g(x) for 4 error correction codewords)<br>(g(x) for 4 error correction codewords) × (x - α<sup>4</sup>) = (g(x) for 5 error correction codewords)<br>…<br>(g(x) for n-1 error correction codewords) × (x - α<sup>n-1</sup>) = (g(x) for n error correction codewords)</p>
+<h1 id="8-生成纠错码"><a href="#8-生成纠错码" class="headerlink" title="8 生成纠错码"></a>8 生成纠错码</h1><p>现在终于可以开始生成纠错码字了。</p>
+<p>此部分使用来自字符编码中的HELLO WORLD示例。</p>
+<p>这些码字将被用作消息多项式的系数。此示例使用纠错级别M和版本1创建1-M代码。</p>
+<h2 id="8-1-消息多项式"><a href="#8-1-消息多项式" class="headerlink" title="8.1 消息多项式"></a>8.1 消息多项式</h2><p>数据编码步骤中HELLO WORLD的数据码如下：</p>
+<p>00100000 01011011 00001011 01111000 11010001 01110010 11011100 01001101 01000011 01000000 11101100 00010001 11101100 00010001 11101100 00010001</p>
+<p>将二进制转为十进制：</p>
+<p>32, 91, 11, 120, 209, 114, 220, 77, 67, 64, 236, 17, 236, 17, 236, 17</p>
+<p>这些十进制数字是消息多项式的系数。</p>
+<p>即</p>
+<p>32x<sup>15</sup> + 91x<sup>14</sup> + 11x<sup>13</sup> +… +17x<sup>0</sup></p>
+<h2 id="8-2-生成多项式"><a href="#8-2-生成多项式" class="headerlink" title="8.2 生成多项式"></a>8.2 生成多项式</h2><p>由于这是1-M码，查找<a href="http://tiierr.xyz/2017/02/25/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E7%BA%A0%E9%94%99%E7%A0%81%E5%92%8C%E5%9D%97%E4%BF%A1%E6%81%AF/">纠错表</a>，可知需要生成10个纠错码字。因此，使用以下生成多项式：</p>
+<p>x<sup>10</sup> + α<sup>251</sup>x<sup>9</sup> + α<sup>67</sup>x<sup>8</sup> + α<sup>46</sup>x<sup>7</sup> + α<sup>61</sup>x<sup>6</sup> + α<sup>118</sup>x<sup>5</sup> + α<sup>70</sup>x<sup>4</sup> + α<sup>64</sup>x<sup>3</sup> + α<sup>94</sup>x<sup>2</sup> + α<sup>32</sup>x + α<sup>45</sup></p>
+<h2 id="8-3-除法步骤"><a href="#8-3-除法步骤" class="headerlink" title="8.3 除法步骤"></a>8.3 除法步骤</h2><p>现在需要用生成多项式除消息多项式，具体步骤和前面介绍的大致相同。</p>
+<p>下面是包含伽罗瓦域算法的除法步骤：</p>
+<ol>
+<li>找到适当的项乘以生成多项式，乘法的结果应该具有与消息多项式（在首次乘法步骤中）或余数（在所有后续乘法步骤中）相同的第一项;</li>
+<li>将结果与消息多项式（在首次乘法步骤中）或余数（在所有后续乘法步骤中）进行异或运算。</li>
+<li>重复执行以上步骤n次，其中n是数据码字的数量。</li>
+</ol>
+<p>注意这些步骤和正常多项式长除法的步骤之间的差异。在乘法步骤之后进行减法的运算，我们用异或代替。</p>
+<p><strong>在划分两个多项式之后，将会有一个余数，该余数的系数就是纠错码字。</strong></p>
+<h1 id="9-用生成多项式除消息多项式"><a href="#9-用生成多项式除消息多项式" class="headerlink" title="9 用生成多项式除消息多项式"></a>9 用生成多项式除消息多项式</h1><p>除法的第一步是准备用于除法的消息多项式。完整的消息多项式是：</p>
+<p>32x<sup>15</sup> + 91x<sup>14</sup> + 11x<sup>13</sup> + 120x<sup>12</sup> + 209x<sup>11</sup> + 114x<sup>10</sup> + 220x<sup>9</sup> + 77x<sup>8</sup> + 67x<sup>7</sup> + 64x<sup>6</sup> + 236x<sup>5</sup> + 17x<sup>4</sup> + 236x<sup>3</sup> + 17x<sup>2</sup> + 236x<sup>1</sup> + 17</p>
+<p>为了确保首项的指数在除法期间不变得太小，将消息多项式乘以x<sup>n</sup>，其中n是所需的纠错码字的数量。</p>
+<p>在本例中，n为10，因此将消息多项式乘以x<sup>10</sup>，得到：</p>
+<p>32x<sup>25</sup> + 91x<sup>24</sup> + 11x<sup>23</sup> + 120x<sup>22</sup> + 209x<sup>21</sup> + 114x<sup>20</sup> + 220x<sup>19</sup> + 77x<sup>18</sup> + 67x<sup>17</sup> + 64x<sup>16</sup> + 236x<sup>15</sup> + 17x<sup>14</sup> + 236x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<p>生成多项式的首项也应该具有相同的指数，因此乘以x<sup>15</sup>得到:</p>
+<p>α<sup>0</sup>x<sup>25</sup> + α<sup>251</sup>x<sup>24</sup> + α<sup>67</sup>x<sup>23</sup> + α<sup>46</sup>x<sup>22</sup> + α<sup>61</sup>x<sup>21</sup> + α<sup>118</sup>x<sup>20</sup> + α<sup>70</sup>x<sup>19</sup> + α<sup>64</sup>x<sup>18</sup> + α<sup>94</sup>x<sup>17</sup> + α<sup>32</sup>x<sup>16</sup> + α<sup>45</sup>x<sup>15</sup></p>
+<p>现在可以重复的执行除法步骤了。除法的次数必须等于消息多项式中的项数。在本例中，除法将需要重复16个次来完成，最后剩余10项数字。这些项就是所需的10个纠错码字。</p>
+<h2 id="9-1-第一次运算"><a href="#9-1-第一次运算" class="headerlink" title="9.1 第一次运算"></a>9.1 第一次运算</h2><h3 id="9-1-1-用消息多项式的首项乘以发生多项式"><a href="#9-1-1-用消息多项式的首项乘以发生多项式" class="headerlink" title="9.1.1 用消息多项式的首项乘以发生多项式"></a>9.1.1 用消息多项式的首项乘以发生多项式</h3><p>第一步是将生成多项式乘以消息多项式的首项。本例中，首项是32<sup>25</sup>。</p>
+<p>使用α符号表示更容易进行乘法运算，因此建议将32<sup>25</sup>转换为α符号表示。</p>
+<p>根据对数-反对数表，对于整数值32，alpha指数为5。因此32 = α<sup>5</sup>。</p>
+<p>将生成多项式乘以α<sup>5</sup>：</p>
+<p>(α<sup>5</sup> × α<sup>0</sup>)x<sup>25</sup> + (α<sup>5</sup> × α<sup>251</sup>)x<sup>24</sup> + (α<sup>5</sup> × α<sup>67</sup>)x<sup>23</sup> + (α<sup>5</sup> × α<sup>46</sup>)x<sup>22</sup> + (α<sup>5</sup> × α<sup>61</sup>)x<sup>21</sup> + (α<sup>5</sup> × α<sup>118</sup>)x<sup>20</sup> + (α<sup>5</sup> × α<sup>70</sup>)x<sup>19</sup> + (α<sup>5</sup> × α<sup>64</sup>)x<sup>18</sup> + (α<sup>5</sup> × α<sup>94</sup>)x<sup>17</sup> + (α<sup>5</sup> × α<sup>32</sup>)x<sup>16</sup> + (α<sup>5</sup> × α<sup>45</sup>)x<sup>15</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中有一个大于255，因此执行模255：</p>
+<p>α<sup>5</sup>x<sup>25</sup> + α<sup>(256 % 255)</sup>x<sup>24</sup> + α<sup>72</sup>x<sup>23</sup> + α<sup>51</sup>x<sup>22</sup> + α<sup>66</sup>x<sup>21</sup> + α<sup>123</sup>x<sup>20</sup> + α<sup>75</sup>x<sup>19</sup> + α<sup>69</sup>x<sup>18</sup> + α<sup>99</sup>x<sup>17</sup> + α<sup>37</sup>x<sup>16</sup> + α<sup>50</sup>x<sup>15</sup></p>
+<p>结果得到：</p>
+<p>α<sup>5</sup>x<sup>25</sup> + α<sup>1</sup>x<sup>24</sup> + α<sup>72</sup>x<sup>23</sup> + α<sup>51</sup>x<sup>22</sup> + α<sup>66</sup>x<sup>21</sup> + α<sup>123</sup>x<sup>20</sup> + α<sup>75</sup>x<sup>19</sup> + α<sup>69</sup>x<sup>18</sup> + α<sup>99</sup>x<sup>17</sup> + α<sup>37</sup>x<sup>16</sup> + α<sup>50</sup>x<sup>15</sup></p>
+<p>将其转换为整数系数：</p>
+<p>32x<sup>25</sup> + 2x<sup>24</sup> + 101x<sup>23</sup> + 10x<sup>22</sup> + 97x<sup>21</sup> + 197x<sup>20</sup> + 15x<sup>19</sup> + 47x<sup>18</sup> + 134x<sup>17</sup> + 74x<sup>16</sup> + 5x<sup>15</sup></p>
+<h3 id="9-1-2-将结果与消息多项式进行异或运算"><a href="#9-1-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.1.2 将结果与消息多项式进行异或运算"></a>9.1.2 将结果与消息多项式进行异或运算</h3><p>由于这是第一个除法步骤，所以将9.1.1的结果与消息多项式进行异或运算。</p>
+<p>(32 ⊕ 32)x<sup>25</sup> + (91 ⊕ 2)x<sup>24</sup> + (11 ⊕ 101)x<sup>23</sup> + (120 ⊕ 10)x<sup>22</sup> + (209 ⊕ 97)x<sup>21</sup> + (114 ⊕ 197)x<sup>20</sup> + (220 ⊕ 15)x<sup>19</sup> + (77 ⊕ 47)x<sup>18</sup> + (67 ⊕ 134)x<sup>17</sup> + (64 ⊕ 74)x<sup>16</sup> + (236 ⊕ 5)x<sup>15</sup> + (17 ⊕ 0)x<sup>14</sup> + (236 ⊕ 0)x<sup>13</sup> + (17 ⊕ 0)x<sup>12</sup> + (236 ⊕ 0)x<sup>11</sup> + (17 ⊕ 0)x<sup>10</sup></p>
+<p>得到：</p>
+<p>0x<sup>25</sup> + 89x<sup>24</sup> + 110x<sup>23</sup> + 114x<sup>22</sup> + 176x<sup>21</sup> + 183x<sup>20</sup> + 211x<sup>19</sup> + 98x<sup>18</sup> + 197x<sup>17</sup> + 10x<sup>16</sup> + 233x<sup>15</sup> + 17x<sup>14</sup> + 236x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>89x<sup>24</sup> + 110x<sup>23</sup> + 114x<sup>22</sup> + 176x<sup>21</sup> + 183x<sup>20</sup> + 211x<sup>19</sup> + 98x<sup>18</sup> + 197x<sup>17</sup> + 10x<sup>16</sup> + 233x<sup>15</sup> + 17x<sup>14</sup> + 236x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<h2 id="9-2-第二次运算"><a href="#9-2-第二次运算" class="headerlink" title="9.2 第二次运算"></a>9.2 第二次运算</h2><h3 id="9-2-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-2-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.2.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.2.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是89x<sup>24</sup>。将89x<sup>24</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值89，alpha指数为210。因此89 = α<sup>210</sup>。</p>
+<p>将生成多项式乘以α<sup>210</sup>：</p>
+<p>(α<sup>210</sup> × α<sup>0</sup>)x<sup>24</sup> + (α<sup>210</sup> × α<sup>251</sup>)x<sup>23</sup> + (α<sup>210</sup> × α<sup>67</sup>)x<sup>22</sup> + (α<sup>210</sup> × α<sup>46</sup>)x<sup>21</sup> + (α<sup>210</sup> × α<sup>61</sup>)x<sup>20</sup> + (α<sup>210</sup> × α<sup>118</sup>)x<sup>19</sup> + (α<sup>210</sup> × α<sup>70</sup>)x<sup>18</sup> + (α<sup>210</sup> × α<sup>64</sup>)x<sup>17</sup> + (α<sup>210</sup> × α<sup>94</sup>)x<sup>16</sup> + (α<sup>210</sup> × α<sup>32</sup>)x<sup>15</sup> + (α<sup>210</sup> × α<sup>45</sup>)x<sup>14</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>210</sup>x<sup>24</sup> + α<sup>(461 % 255)</sup>x<sup>23</sup> + α<sup>(277 % 255)</sup>x<sup>22</sup> + α<sup>(256 % 255)</sup>x<sup>21</sup> + α<sup>(271 % 255)</sup>x<sup>20</sup> + α<sup>(328 % 255)</sup>x<sup>19</sup> + α<sup>(280 % 255)</sup>x<sup>18</sup> + α<sup>(274 % 255)</sup>x<sup>17</sup> + α<sup>(304 % 255)</sup>x<sup>16</sup> + α<sup>242</sup>x<sup>15</sup> + α<sup>255</sup>x<sup>14</sup></p>
+<p>结果得到：</p>
+<p>α<sup>210</sup>x<sup>24</sup> + α<sup>206</sup>x<sup>23</sup> + α<sup>22</sup>x<sup>22</sup> + α<sup>1</sup>x<sup>21</sup> + α<sup>16</sup>x<sup>20</sup> + α<sup>73</sup>x<sup>19</sup> + α<sup>25</sup>x<sup>18</sup> + α<sup>19</sup>x<sup>17</sup> + α<sup>49</sup>x<sup>16</sup> + α<sup>242</sup>x<sup>15</sup> + α<sup>0</sup>x<sup>14</sup></p>
+<p>将其转换为整数系数：</p>
+<p>89x<sup>24</sup> + 83x<sup>23</sup> + 234x<sup>22</sup> + 2x<sup>21</sup> + 76x<sup>20</sup> + 202x<sup>19</sup> + 3x<sup>18</sup> + 90x<sup>17</sup> + 140x<sup>16</sup> + 176x<sup>15</sup> + 1x<sup>14</sup></p>
+<h3 id="9-2-2-将结果与消息多项式进行异或运算"><a href="#9-2-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.2.2 将结果与消息多项式进行异或运算"></a>9.2.2 将结果与消息多项式进行异或运算</h3><p>将9.1.2的结果与消息多项式进行异或运算。</p>
+<p>(89 ⊕ 89)x<sup>24</sup> + (110 ⊕ 83)x<sup>23</sup> + (114 ⊕ 234)x<sup>22</sup> + (176 ⊕ 2)x<sup>21</sup> + (183 ⊕ 76)x<sup>20</sup> + (211 ⊕ 202)x<sup>19</sup> + (98 ⊕ 3)x<sup>18</sup> + (197 ⊕ 90)x<sup>17</sup> + (10 ⊕ 140)x<sup>16</sup> + (233 ⊕ 176)x<sup>15</sup> + (17 ⊕ 1)x<sup>14</sup> + (236 ⊕ 0)x<sup>13</sup> + (17 ⊕ 0)x<sup>12</sup> + (236 ⊕ 0)x<sup>11</sup> + (17 ⊕ 0)x<sup>10</sup></p>
+<p>得到：</p>
+<p>0x<sup>24</sup> + 61x<sup>23</sup> + 152x<sup>22</sup> + 178x<sup>21</sup> + 251x<sup>20</sup> + 25x<sup>19</sup> + 97x<sup>18</sup> + 159x<sup>17</sup> + 134x<sup>16</sup> + 89x<sup>15</sup> + 16x<sup>14</sup> + 236x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>61x<sup>23</sup> + 152x<sup>22</sup> + 178x<sup>21</sup> + 251x<sup>20</sup> + 25x<sup>19</sup> + 97x<sup>18</sup> + 159x<sup>17</sup> + 134x<sup>16</sup> + 89x<sup>15</sup> + 16x<sup>14</sup> + 236x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<h2 id="9-3-第三次运算"><a href="#9-3-第三次运算" class="headerlink" title="9.3 第三次运算"></a>9.3 第三次运算</h2><h3 id="9-3-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-3-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.3.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.3.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是61x<sup>23</sup>。将61x<sup>23</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值61，alpha指数为228。因此61 = α<sup>228</sup>。</p>
+<p>将生成多项式乘以α<sup>228</sup>：</p>
+<p>(α<sup>228</sup> × α<sup>0</sup>)x<sup>23</sup> + (α<sup>228</sup> × α<sup>251</sup>)x<sup>22</sup> + (α<sup>228</sup> × α<sup>67</sup>)x<sup>21</sup> + (α<sup>228</sup> × α<sup>46</sup>)x<sup>20</sup> + (α<sup>228</sup> × α<sup>61</sup>)x<sup>19</sup> + (α<sup>228</sup> × α<sup>118</sup>)x<sup>18</sup> + (α<sup>228</sup> × α<sup>70</sup>)x<sup>17</sup> + (α<sup>228</sup> × α<sup>64</sup>)x<sup>16</sup> + (α<sup>228</sup> × α<sup>94</sup>)x<sup>15</sup> + (α<sup>228</sup> × α<sup>32</sup>)x<sup>14</sup> + (α<sup>228</sup> × α<sup>45</sup>)x<sup>13</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>228</sup>x<sup>23</sup> + α<sup>(479 % 255)</sup>x<sup>22</sup> + α<sup>(295 % 255)</sup>x<sup>21</sup> + α<sup>(274 % 255)</sup>x<sup>20</sup> + α<sup>(289 % 255)</sup>x<sup>19</sup> + α<sup>(346 % 255)</sup>x<sup>18</sup> + α<sup>(298 % 255)</sup>x<sup>17</sup> + α<sup>(292 % 255)</sup>x<sup>16</sup> + α<sup>(322 % 255)</sup>x<sup>15</sup> + α<sup>(260 % 255)</sup>x<sup>14</sup> + α<sup>(273 % 255)</sup>x<sup>13</sup></p>
+<p>结果得到：</p>
+<p>α<sup>228</sup>x<sup>23</sup> + α<sup>224</sup>x<sup>22</sup> + α<sup>40</sup>x<sup>21</sup> + α<sup>19</sup>x<sup>20</sup> + α<sup>34</sup>x<sup>19</sup> + α<sup>91</sup>x<sup>18</sup> + α<sup>43</sup>x<sup>17</sup> + α<sup>37</sup>x<sup>16</sup> + α<sup>67</sup>x<sup>15</sup> + α<sup>5</sup>x<sup>14</sup> + α<sup>18</sup>x<sup>13</sup></p>
+<p>将其转换为整数系数：</p>
+<p>61x<sup>23</sup> + 18x<sup>22</sup> + 106x<sup>21</sup> + 90x<sup>20</sup> + 78x<sup>19</sup> + 163x<sup>18</sup> + 119x<sup>17</sup> + 74x<sup>16</sup> + 194x<sup>15</sup> + 32x<sup>14</sup> + 45x<sup>13</sup></p>
+<h3 id="9-3-2-将结果与消息多项式进行异或运算"><a href="#9-3-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.3.2 将结果与消息多项式进行异或运算"></a>9.3.2 将结果与消息多项式进行异或运算</h3><p>将9.2.2的结果与消息多项式进行异或运算。</p>
+<p>(61 ⊕ 61)x<sup>23</sup> + (152 ⊕ 18)x<sup>22</sup> + (178 ⊕ 106)x<sup>21</sup> + (251 ⊕ 90)x<sup>20</sup> + (25 ⊕ 78)x<sup>19</sup> + (97 ⊕ 163)x<sup>18</sup> + (159 ⊕ 119)x<sup>17</sup> + (134 ⊕ 74)x<sup>16</sup> + (89 ⊕ 194)x<sup>15</sup> + (16 ⊕ 32)x<sup>14</sup> + (236 ⊕ 45)x<sup>13</sup> + (17 ⊕ 0)x<sup>12</sup> + (236 ⊕ 0)x<sup>11</sup> + (17 ⊕ 0)x<sup>10</sup></p>
+<p>得到：</p>
+<p>0x<sup>23</sup> + 138x<sup>22</sup> + 216x<sup>21</sup> + 161x<sup>20</sup> + 87x<sup>19</sup> + 194x<sup>18</sup> + 232x<sup>17</sup> + 204x<sup>16</sup> + 155x<sup>15</sup> + 48x<sup>14</sup> + 193x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>138x<sup>22</sup> + 216x<sup>21</sup> + 161x<sup>20</sup> + 87x<sup>19</sup> + 194x<sup>18</sup> + 232x<sup>17</sup> + 204x<sup>16</sup> + 155x<sup>15</sup> + 48x<sup>14</sup> + 193x<sup>13</sup> + 17x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<h2 id="9-4-第四次运算"><a href="#9-4-第四次运算" class="headerlink" title="9.4 第四次运算"></a>9.4 第四次运算</h2><h3 id="9-4-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-4-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.4.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.4.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是138x<sup>22</sup>。将138x<sup>22</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值138，alpha指数为222。因此138 = α<sup>222</sup>。</p>
+<p>将生成多项式乘以α<sup>222</sup>：</p>
+<p>(α<sup>222</sup> × α<sup>0</sup>)x<sup>22</sup> + (α<sup>222</sup> × α<sup>251</sup>)x<sup>21</sup> + (α<sup>222</sup> × α<sup>67</sup>)x<sup>20</sup> + (α<sup>222</sup> × α<sup>46</sup>)x<sup>19</sup> + (α<sup>222</sup> × α<sup>61</sup>)x<sup>18</sup> + (α<sup>222</sup> × α<sup>118</sup>)x<sup>17</sup> + (α<sup>222</sup> × α<sup>70</sup>)x<sup>16</sup> + (α<sup>222</sup> × α<sup>64</sup>)x<sup>15</sup> + (α<sup>222</sup> × α<sup>94</sup>)x<sup>14</sup> + (α<sup>222</sup> × α<sup>32</sup>)x<sup>13</sup> + (α<sup>222</sup> × α<sup>45</sup>)x<sup>12</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>222</sup>x<sup>22</sup> + α<sup>(473 % 255)</sup>x<sup>21</sup> + α<sup>(289 % 255)</sup>x<sup>20</sup> + α<sup>(268 % 255)</sup>x<sup>19</sup> + α<sup>(283 % 255)</sup>x<sup>18</sup> + α<sup>(340 % 255)</sup>x<sup>17</sup> + α<sup>(292 % 255)</sup>x<sup>16</sup> + α<sup>(286 % 255)</sup>x<sup>15</sup> + α<sup>(316 % 255)</sup>x<sup>14</sup> + α<sup>254</sup>x<sup>13</sup> + α<sup>(267 % 255)</sup>x<sup>12</sup></p>
+<p>结果得到：</p>
+<p>α<sup>222</sup>x<sup>22</sup> + α<sup>218</sup>x<sup>21</sup> + α<sup>34</sup>x<sup>20</sup> + α<sup>13</sup>x<sup>19</sup> + α<sup>28</sup>x<sup>18</sup> + α<sup>85</sup>x<sup>17</sup> + α<sup>37</sup>x<sup>16</sup> + α<sup>31</sup>x<sup>15</sup> + α<sup>61</sup>x<sup>14</sup> + α<sup>254</sup>x<sup>13</sup> + α<sup>12</sup>x<sup>12</sup></p>
+<p>将其转换为整数系数：</p>
+<p>138x<sup>22</sup> + 43x<sup>21</sup> + 78x<sup>20</sup> + 135x<sup>19</sup> + 24x<sup>18</sup> + 214x<sup>17</sup> + 74x<sup>16</sup> + 192x<sup>15</sup> + 111x<sup>14</sup> + 142x<sup>13</sup> + 205x<sup>12</sup></p>
+<h3 id="9-4-2-将结果与消息多项式进行异或运算"><a href="#9-4-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.4.2 将结果与消息多项式进行异或运算"></a>9.4.2 将结果与消息多项式进行异或运算</h3><p>将9.3.2的结果与消息多项式进行异或运算。</p>
+<p>(138 ⊕ 138)x<sup>22</sup> + (216 ⊕ 43)x<sup>21</sup> + (161 ⊕ 78)x<sup>20</sup> + (87 ⊕ 135)x<sup>19</sup> + (194 ⊕ 24)x<sup>18</sup> + (232 ⊕ 214)x<sup>17</sup> + (204 ⊕ 74)x<sup>16</sup> + (155 ⊕ 192)x<sup>15</sup> + (48 ⊕ 111)x<sup>14</sup> + (193 ⊕ 142)x<sup>13</sup> + (17 ⊕ 205)x<sup>12</sup> + (236 ⊕ 0)x<sup>11</sup> + (17 ⊕ 0)x<sup>10</sup></p>
+<p>得到：</p>
+<p>0x<sup>22</sup> + 243x<sup>21</sup> + 239x<sup>20</sup> + 208x<sup>19</sup> + 218x<sup>18</sup> + 62x<sup>17</sup> + 134x<sup>16</sup> + 91x<sup>15</sup> + 95x<sup>14</sup> + 79x<sup>13</sup> + 220x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>243x<sup>21</sup> + 239x<sup>20</sup> + 208x<sup>19</sup> + 218x<sup>18</sup> + 62x<sup>17</sup> + 134x<sup>16</sup> + 91x<sup>15</sup> + 95x<sup>14</sup> + 79x<sup>13</sup> + 220x<sup>12</sup> + 236x<sup>11</sup> + 17x<sup>10</sup></p>
+<h2 id="9-5-第五次运算"><a href="#9-5-第五次运算" class="headerlink" title="9.5 第五次运算"></a>9.5 第五次运算</h2><h3 id="9-5-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-5-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.5.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.5.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是243x<sup>21</sup>。将243x<sup>21</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值243，alpha指数为233。因此243 = α<sup>233</sup>。</p>
+<p>将生成多项式乘以α<sup>233</sup>：</p>
+<p>(α<sup>233</sup> × α<sup>0</sup>)x<sup>21</sup> + (α<sup>233</sup> × α<sup>251</sup>)x<sup>20</sup> + (α<sup>233</sup> × α<sup>67</sup>)x<sup>19</sup> + (α<sup>233</sup> × α<sup>46</sup>)x<sup>18</sup> + (α<sup>233</sup> × α<sup>61</sup>)x<sup>17</sup> + (α<sup>233</sup> × α<sup>118</sup>)x<sup>16</sup> + (α<sup>233</sup> × α<sup>70</sup>)x<sup>15</sup> + (α<sup>233</sup> × α<sup>64</sup>)x<sup>14</sup> + (α<sup>233</sup> × α<sup>94</sup>)x<sup>13</sup> + (α<sup>233</sup> × α<sup>32</sup>)x<sup>12</sup> + (α<sup>233</sup> × α<sup>45</sup>)x<sup>11</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>233</sup>x<sup>21</sup> + α<sup>(484 % 255)</sup>x<sup>20</sup> + α<sup>(300 % 255)</sup>x<sup>19</sup> + α<sup>(279 % 255)</sup>x<sup>18</sup> + α<sup>(294 % 255)</sup>x<sup>17</sup> + α<sup>(351 % 255)</sup>x<sup>16</sup> + α<sup>(303 % 255)</sup>x<sup>15</sup> + α<sup>(297 % 255)</sup>x<sup>14</sup> + α<sup>(327 % 255)</sup>x<sup>13</sup> + α<sup>(265 % 255)</sup>x<sup>12</sup> + α<sup>(278 % 255)</sup>x<sup>11</sup></p>
+<p>结果得到：</p>
+<p>α<sup>233</sup>x<sup>21</sup> + α<sup>229</sup>x<sup>20</sup> + α<sup>45</sup>x<sup>19</sup> + α<sup>24</sup>x<sup>18</sup> + α<sup>39</sup>x<sup>17</sup> + α<sup>96</sup>x<sup>16</sup> + α<sup>48</sup>x<sup>15</sup> + α<sup>42</sup>x<sup>14</sup> + α<sup>72</sup>x<sup>13</sup> + α<sup>10</sup>x<sup>12</sup> + α<sup>23</sup>x<sup>11</sup></p>
+<p>将其转换为整数系数：</p>
+<p>243x<sup>21</sup> + 122x<sup>20</sup> + 193x<sup>19</sup> + 143x<sup>18</sup> + 53x<sup>17</sup> + 217x<sup>16</sup> + 70x<sup>15</sup> + 181x<sup>14</sup> + 101x<sup>13</sup> + 116x<sup>12</sup> + 201x<sup>11</sup></p>
+<h3 id="9-5-2-将结果与消息多项式进行异或运算"><a href="#9-5-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.5.2 将结果与消息多项式进行异或运算"></a>9.5.2 将结果与消息多项式进行异或运算</h3><p>将9.4.2的结果与消息多项式进行异或运算。</p>
+<p>(243 ⊕ 243)x<sup>21</sup> + (239 ⊕ 122)x<sup>20</sup> + (208 ⊕ 193)x<sup>19</sup> + (218 ⊕ 143)x<sup>18</sup> + (62 ⊕ 53)x<sup>17</sup> + (134 ⊕ 217)x<sup>16</sup> + (91 ⊕ 70)x<sup>15</sup> + (95 ⊕ 181)x<sup>14</sup> + (79 ⊕ 101)x<sup>13</sup> + (220 ⊕ 116)x<sup>12</sup> + (236 ⊕ 201)x<sup>11</sup> + (17 ⊕ 0)x<sup>10</sup></p>
+<p>得到：</p>
+<p>0x<sup>21</sup> + 149x<sup>20</sup> + 17x<sup>19</sup> + 85x<sup>18</sup> + 11x<sup>17</sup> + 95x<sup>16</sup> + 29x<sup>15</sup> + 234x<sup>14</sup> + 42x<sup>13</sup> + 168x<sup>12</sup> + 37x<sup>11</sup> + 17x<sup>10</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>149x<sup>20</sup> + 17x<sup>19</sup> + 85x<sup>18</sup> + 11x<sup>17</sup> + 95x<sup>16</sup> + 29x<sup>15</sup> + 234x<sup>14</sup> + 42x<sup>13</sup> + 168x<sup>12</sup> + 37x<sup>11</sup> + 17x<sup>10</sup></p>
+<h2 id="9-6-第六次运算"><a href="#9-6-第六次运算" class="headerlink" title="9.6 第六次运算"></a>9.6 第六次运算</h2><h3 id="9-6-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-6-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.6.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.6.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是149x<sup>20</sup>。将149x<sup>20</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值149，alpha指数为184。因此 149 = α<sup>184</sup>。</p>
+<p>将生成多项式乘以α<sup>184</sup>：</p>
+<p>(α<sup>184</sup> × α<sup>0</sup>)x<sup>20</sup> + (α<sup>184</sup> × α<sup>251</sup>)x<sup>19</sup> + (α<sup>184</sup> × α<sup>67</sup>)x<sup>18</sup> + (α<sup>184</sup> × α<sup>46</sup>)x<sup>17</sup> + (α<sup>184</sup> × α<sup>61</sup>)x<sup>16</sup> + (α<sup>184</sup> × α<sup>118</sup>)x<sup>15</sup> + (α<sup>184</sup> × α<sup>70</sup>)x<sup>14</sup> + (α<sup>184</sup> × α<sup>64</sup>)x<sup>13</sup> + (α<sup>184</sup> × α<sup>94</sup>)x<sup>12</sup> + (α<sup>184</sup> × α<sup>32</sup>)x<sup>11</sup> + (α<sup>184</sup> × α<sup>45</sup>)x<sup>10</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>184</sup>x<sup>20</sup> + α<sup>(435 % 255)</sup>x<sup>19</sup> + α<sup>251</sup>x<sup>18</sup> + α<sup>230</sup>x<sup>17</sup> + α<sup>245</sup>x<sup>16</sup> + α<sup>(302 % 255)</sup>x<sup>15</sup> + α<sup>254</sup>x<sup>14</sup> + α<sup>248</sup>x<sup>13</sup> + α<sup>(278 % 255)</sup>x<sup>12</sup> + α<sup>216</sup>x<sup>11</sup> + α<sup>229</sup>x<sup>10</sup></p>
+<p>结果得到：</p>
+<p>α<sup>184</sup>x<sup>20</sup> + α<sup>180</sup>x<sup>19</sup> + α<sup>251</sup>x<sup>18</sup> + α<sup>230</sup>x<sup>17</sup> + α<sup>245</sup>x<sup>16</sup> + α<sup>47</sup>x<sup>15</sup> + α<sup>254</sup>x<sup>14</sup> + α<sup>248</sup>x<sup>13</sup> + α<sup>23</sup>x<sup>12</sup> + α<sup>216</sup>x<sup>11</sup> + α<sup>229</sup>x<sup>10</sup></p>
+<p>将其转换为整数系数：</p>
+<p>149x<sup>20</sup> + 150x<sup>19</sup> + 216x<sup>18</sup> + 244x<sup>17</sup> + 233x<sup>16</sup> + 35x<sup>15</sup> + 142x<sup>14</sup> + 27x<sup>13</sup> + 201x<sup>12</sup> + 195x<sup>11</sup> + 122x<sup>10</sup></p>
+<h3 id="9-6-2-将结果与消息多项式进行异或运算"><a href="#9-6-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.6.2 将结果与消息多项式进行异或运算"></a>9.6.2 将结果与消息多项式进行异或运算</h3><p>将9.5.2的结果与消息多项式进行异或运算。</p>
+<p>(149 ⊕ 149)x<sup>20</sup> + (17 ⊕ 150)x<sup>19</sup> + (85 ⊕ 216)x<sup>18</sup> + (11 ⊕ 244)x<sup>17</sup> + (95 ⊕ 233)x<sup>16</sup> + (29 ⊕ 35)x<sup>15</sup> + (234 ⊕ 142)x<sup>14</sup> + (42 ⊕ 27)x<sup>13</sup> + (168 ⊕ 201)x<sup>12</sup> + (37 ⊕ 195)x<sup>11</sup> + (17 ⊕ 122)x<sup>10</sup></p>
+<p>得到：</p>
+<p>0x<sup>20</sup> + 135x<sup>19</sup> + 141x<sup>18</sup> + 255x<sup>17</sup> + 182x<sup>16</sup> + 62x<sup>15</sup> + 100x<sup>14</sup> + 49x<sup>13</sup> + 97x<sup>12</sup> + 230x<sup>11</sup> + 107x<sup>10</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>135x<sup>19</sup> + 141x<sup>18</sup> + 255x<sup>17</sup> + 182x<sup>16</sup> + 62x<sup>15</sup> + 100x<sup>14</sup> + 49x<sup>13</sup> + 97x<sup>12</sup> + 230x<sup>11</sup> + 107x<sup>10</sup></p>
+<h2 id="9-7-第七次运算"><a href="#9-7-第七次运算" class="headerlink" title="9.7 第七次运算"></a>9.7 第七次运算</h2><h3 id="9-7-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-7-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.7.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.7.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是135x<sup>19</sup>。将135x<sup>19</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值135，alpha指数为13。因此89 = α<sup>13</sup>。</p>
+<p>将生成多项式乘以α<sup>13</sup>：</p>
+<p>(α<sup>13</sup> × α<sup>0</sup>)x<sup>19</sup> + (α<sup>13</sup> × α<sup>251</sup>)x<sup>18</sup> + (α<sup>13</sup> × α<sup>67</sup>)x<sup>17</sup> + (α<sup>13</sup> × α<sup>46</sup>)x<sup>16</sup> + (α<sup>13</sup> × α<sup>61</sup>)x<sup>15</sup> + (α<sup>13</sup> × α<sup>118</sup>)x<sup>14</sup> + (α<sup>13</sup> × α<sup>70</sup>)x<sup>13</sup> + (α<sup>13</sup> × α<sup>64</sup>)x<sup>12</sup> + (α<sup>13</sup> × α<sup>94</sup>)x<sup>11</sup> + (α<sup>13</sup> × α<sup>32</sup>)x<sup>10</sup> + (α<sup>13</sup> × α<sup>45</sup>)x<sup>9</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>13</sup>x<sup>19</sup> + α<sup>(264 % 255)</sup>x<sup>18</sup> + α<sup>80</sup>x<sup>17</sup> + α<sup>59</sup>x<sup>16</sup> + α<sup>74</sup>x<sup>15</sup> + α<sup>131</sup>x<sup>14</sup> + α<sup>83</sup>x<sup>13</sup> + α<sup>77</sup>x<sup>12</sup> + α<sup>107</sup>x<sup>11</sup> + α<sup>45</sup>x<sup>10</sup> + α<sup>58</sup>x<sup>9</sup></p>
+<p>结果得到：</p>
+<p>α<sup>13</sup>x<sup>19</sup> + α<sup>9</sup>x<sup>18</sup> + α<sup>80</sup>x<sup>17</sup> + α<sup>59</sup>x<sup>16</sup> + α<sup>74</sup>x<sup>15</sup> + α<sup>131</sup>x<sup>14</sup> + α<sup>83</sup>x<sup>13</sup> + α<sup>77</sup>x<sup>12</sup> + α<sup>107</sup>x<sup>11</sup> + α<sup>45</sup>x<sup>10</sup> + α<sup>58</sup>x<sup>9</sup></p>
+<p>将其转换为整数系数：</p>
+<p>135x<sup>19</sup> + 58x<sup>18</sup> + 253x<sup>17</sup> + 210x<sup>16</sup> + 137x<sup>15</sup> + 92x<sup>14</sup> + 187x<sup>13</sup> + 60x<sup>12</sup> + 104x<sup>11</sup> + 193x<sup>10</sup> + 105x<sup>9</sup></p>
+<h3 id="9-7-2-将结果与消息多项式进行异或运算"><a href="#9-7-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.7.2 将结果与消息多项式进行异或运算"></a>9.7.2 将结果与消息多项式进行异或运算</h3><p>将9.6.2的结果与消息多项式进行异或运算。</p>
+<p>(135 ⊕ 135)x<sup>19</sup> + (141 ⊕ 58)x<sup>18</sup> + (255 ⊕ 253)x<sup>17</sup> + (182 ⊕ 210)x<sup>16</sup> + (62 ⊕ 137)x<sup>15</sup> + (100 ⊕ 92)x<sup>14</sup> + (49 ⊕ 187)x<sup>13</sup> + (97 ⊕ 60)x<sup>12</sup> + (230 ⊕ 104)x<sup>11</sup> + (107 ⊕ 193)x<sup>10</sup> + (0 ⊕ 105)x<sup>9</sup></p>
+<p>得到：</p>
+<p>0x<sup>19</sup> + 183x<sup>18</sup> + 2x<sup>17</sup> + 100x<sup>16</sup> + 183x<sup>15</sup> + 56x<sup>14</sup> + 138x<sup>13</sup> + 93x<sup>12</sup> + 142x<sup>11</sup> + 170x<sup>10</sup> + 105x<sup>9</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>183x<sup>18</sup> + 2x<sup>17</sup> + 100x<sup>16</sup> + 183x<sup>15</sup> + 56x<sup>14</sup> + 138x<sup>13</sup> + 93x<sup>12</sup> + 142x<sup>11</sup> + 170x<sup>10</sup> + 105x<sup>9</sup></p>
+<h2 id="9-8-第八次运算"><a href="#9-8-第八次运算" class="headerlink" title="9.8 第八次运算"></a>9.8 第八次运算</h2><h3 id="9-8-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-8-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.8.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.8.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是183x<sup>18</sup>。将183x<sup>18</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值183，alpha指数为158。因此183 = α<sup>158</sup>。</p>
+<p>将生成多项式乘以α<sup>158</sup>：</p>
+<p>(α<sup>158</sup> × α<sup>0</sup>)x<sup>18</sup> + (α<sup>158</sup> × α<sup>251</sup>)x<sup>17</sup> + (α<sup>158</sup> × α<sup>67</sup>)x<sup>16</sup> + (α<sup>158</sup> × α<sup>46</sup>)x<sup>15</sup> + (α<sup>158</sup> × α<sup>61</sup>)x<sup>14</sup> + (α<sup>158</sup> × α<sup>118</sup>)x<sup>13</sup> + (α<sup>158</sup> × α<sup>70</sup>)x<sup>12</sup> + (α<sup>158</sup> × α<sup>64</sup>)x<sup>11</sup> + (α<sup>158</sup> × α<sup>94</sup>)x<sup>10</sup> + (α<sup>158</sup> × α<sup>32</sup>)x<sup>9</sup> + (α<sup>158</sup> × α<sup>45</sup>)x<sup>8</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>158</sup>x<sup>18</sup> + α<sup>(409 % 255)</sup>x<sup>17</sup> + α<sup>225</sup>x<sup>16</sup> + α<sup>204</sup>x<sup>15</sup> + α<sup>219</sup>x<sup>14</sup> + α<sup>(276 % 255)</sup>x<sup>13</sup> + α<sup>228</sup>x<sup>12</sup> + α<sup>222</sup>x<sup>11</sup> + α<sup>252</sup>x<sup>10</sup> + α<sup>190</sup>x<sup>9</sup> + α<sup>203</sup>x<sup>8</sup></p>
+<p>结果得到：</p>
+<p>α<sup>158</sup>x<sup>18</sup> + α<sup>154</sup>x<sup>17</sup> + α<sup>225</sup>x<sup>16</sup> + α<sup>204</sup>x<sup>15</sup> + α<sup>219</sup>x<sup>14</sup> + α<sup>21</sup>x<sup>13</sup> + α<sup>228</sup>x<sup>12</sup> + α<sup>222</sup>x<sup>11</sup> + α<sup>252</sup>x<sup>10</sup> + α<sup>190</sup>x<sup>9</sup> + α<sup>203</sup>x<sup>8</sup></p>
+<p>将其转换为整数系数：</p>
+<p>183x<sup>18</sup> + 57x<sup>17</sup> + 36x<sup>16</sup> + 221x<sup>15</sup> + 86x<sup>14</sup> + 117x<sup>13</sup> + 61x<sup>12</sup> + 138x<sup>11</sup> + 173x<sup>10</sup> + 174x<sup>9</sup> + 224x<sup>8</sup></p>
+<h3 id="9-8-2-将结果与消息多项式进行异或运算"><a href="#9-8-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.8.2 将结果与消息多项式进行异或运算"></a>9.8.2 将结果与消息多项式进行异或运算</h3><p>将9.7.2的结果与消息多项式进行异或运算。</p>
+<p>(183 ⊕ 183)x<sup>18</sup> + (2 ⊕ 57)x<sup>17</sup> + (100 ⊕ 36)x<sup>16</sup> + (183 ⊕ 221)x<sup>15</sup> + (56 ⊕ 86)x<sup>14</sup> + (138 ⊕ 117)x<sup>13</sup> + (93 ⊕ 61)x<sup>12</sup> + (142 ⊕ 138)x<sup>11</sup> + (170 ⊕ 173)x<sup>10</sup> + (105 ⊕ 174)x<sup>9</sup> + (0 ⊕ 224)x<sup>8</sup></p>
+<p>得到：</p>
+<p>0x<sup>18</sup> + 59x<sup>17</sup> + 64x<sup>16</sup> + 106x<sup>15</sup> + 110x<sup>14</sup> + 255x<sup>13</sup> + 96x<sup>12</sup> + 4x<sup>11</sup> + 7x<sup>10</sup> + 199x<sup>9</sup> + 224x<sup>8</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>59x<sup>17</sup> + 64x<sup>16</sup> + 106x<sup>15</sup> + 110x<sup>14</sup> + 255x<sup>13</sup> + 96x<sup>12</sup> + 4x<sup>11</sup> + 7x<sup>10</sup> + 199x<sup>9</sup> + 224x<sup>8</sup></p>
+<h2 id="9-9-第九次运算"><a href="#9-9-第九次运算" class="headerlink" title="9.9 第九次运算"></a>9.9 第九次运算</h2><h3 id="9-9-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-9-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.9.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.9.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是59x<sup>17</sup>。将59x<sup>17</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值59，alpha指数为120。因此 59 = α<sup>120</sup>。</p>
+<p>将生成多项式乘以α<sup>120</sup>：</p>
+<p>(α<sup>120</sup> × α<sup>0</sup>)x<sup>17</sup> + (α<sup>120</sup> × α<sup>251</sup>)x<sup>16</sup> + (α<sup>120</sup> × α<sup>67</sup>)x<sup>15</sup> + (α<sup>120</sup> × α<sup>46</sup>)x<sup>14</sup> + (α<sup>120</sup> × α<sup>61</sup>)x<sup>13</sup> + (α<sup>120</sup> × α<sup>118</sup>)x<sup>12</sup> + (α<sup>120</sup> × α<sup>70</sup>)x<sup>11</sup> + (α<sup>120</sup> × α<sup>64</sup>)x<sup>10</sup> + (α<sup>120</sup> × α<sup>94</sup>)x<sup>9</sup> + (α<sup>120</sup> × α<sup>32</sup>)x<sup>8</sup> + (α<sup>120</sup> × α<sup>45</sup>)x<sup>7</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>120</sup>x<sup>17</sup> + α<sup>(371 % 255)</sup>x<sup>16</sup> + α<sup>187</sup>x<sup>15</sup> + α<sup>166</sup>x<sup>14</sup> + α<sup>181</sup>x<sup>13</sup> + α<sup>238</sup>x<sup>12</sup> + α<sup>190</sup>x<sup>11</sup> + α<sup>184</sup>x<sup>10</sup> + α<sup>214</sup>x<sup>9</sup> + α<sup>152</sup>x<sup>8</sup> + α<sup>165</sup>x<sup>7</sup></p>
+<p>结果得到：</p>
+<p>α<sup>120</sup>x<sup>17</sup> + α<sup>116</sup>x<sup>16</sup> + α<sup>187</sup>x<sup>15</sup> + α<sup>166</sup>x<sup>14</sup> + α<sup>181</sup>x<sup>13</sup> + α<sup>238</sup>x<sup>12</sup> + α<sup>190</sup>x<sup>11</sup> + α<sup>184</sup>x<sup>10</sup> + α<sup>214</sup>x<sup>9</sup> + α<sup>152</sup>x<sup>8</sup> + α<sup>165</sup>x<sup>7</sup></p>
+<p>将其转换为整数系数：</p>
+<p>59x<sup>17</sup> + 248x<sup>16</sup> + 220x<sup>15</sup> + 63x<sup>14</sup> + 49x<sup>13</sup> + 11x<sup>12</sup> + 174x<sup>11</sup> + 149x<sup>10</sup> + 249x<sup>9</sup> + 73x<sup>8</sup> + 145x<sup>7</sup></p>
+<h3 id="9-9-2-将结果与消息多项式进行异或运算"><a href="#9-9-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.9.2 将结果与消息多项式进行异或运算"></a>9.9.2 将结果与消息多项式进行异或运算</h3><p>将9.8.2的结果与消息多项式进行异或运算。</p>
+<p>(59 ⊕ 59)x<sup>17</sup> + (64 ⊕ 248)x<sup>16</sup> + (106 ⊕ 220)x<sup>15</sup> + (110 ⊕ 63)x<sup>14</sup> + (255 ⊕ 49)x<sup>13</sup> + (96 ⊕ 11)x<sup>12</sup> + (4 ⊕ 174)x<sup>11</sup> + (7 ⊕ 149)x<sup>10</sup> + (199 ⊕ 249)x<sup>9</sup> + (224 ⊕ 73)x<sup>8</sup> + (0 ⊕ 145)x<sup>7</sup><br></p>
+<p>得到：</p>
+<p>0x<sup>17</sup> + 184x<sup>16</sup> + 182x<sup>15</sup> + 81x<sup>14</sup> + 206x<sup>13</sup> + 107x<sup>12</sup> + 170x<sup>11</sup> + 146x<sup>10</sup> + 62x<sup>9</sup> + 169x<sup>8</sup> + 145x<sup>7</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>184x<sup>16</sup> + 182x<sup>15</sup> + 81x<sup>14</sup> + 206x<sup>13</sup> + 107x<sup>12</sup> + 170x<sup>11</sup> + 146x<sup>10</sup> + 62x<sup>9</sup> + 169x<sup>8</sup> + 145x<sup>7</sup></p>
+<h2 id="9-10-第十次运算"><a href="#9-10-第十次运算" class="headerlink" title="9.10 第十次运算"></a>9.10 第十次运算</h2><h3 id="9-10-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-10-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.10.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.10.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是184x<sup>16</sup>。将184x<sup>16</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值184，alpha指数为132。因此 184 = α<sup>132</sup>。</p>
+<p>将生成多项式乘以α<sup>132</sup>：</p>
+<p>(α<sup>132</sup> × α<sup>0</sup>)x<sup>16</sup> + (α<sup>132</sup> × α<sup>251</sup>)x<sup>15</sup> + (α<sup>132</sup> × α<sup>67</sup>)x<sup>14</sup> + (α<sup>132</sup> × α<sup>46</sup>)x<sup>13</sup> + (α<sup>132</sup> × α<sup>61</sup>)x<sup>12</sup> + (α<sup>132</sup> × α<sup>118</sup>)x<sup>11</sup> + (α<sup>132</sup> × α<sup>70</sup>)x<sup>10</sup> + (α<sup>132</sup> × α<sup>64</sup>)x<sup>9</sup> + (α<sup>132</sup> × α<sup>94</sup>)x<sup>8</sup> + (α<sup>132</sup> × α<sup>32</sup>)x<sup>7</sup> + (α<sup>132</sup> × α<sup>45</sup>)x<sup>6</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>132</sup>x<sup>16</sup> + α<sup>(383 % 255)</sup>x<sup>15</sup> + α<sup>199</sup>x<sup>14</sup> + α<sup>178</sup>x<sup>13</sup> + α<sup>193</sup>x<sup>12</sup> + α<sup>250</sup>x<sup>11</sup> + α<sup>202</sup>x<sup>10</sup> + α<sup>196</sup>x<sup>9</sup> + α<sup>226</sup>x<sup>8</sup> + α<sup>164</sup>x<sup>7</sup> + α<sup>177</sup>x<sup>6</sup></p>
+<p>结果得到：</p>
+<p>α<sup>132</sup>x<sup>16</sup> + α<sup>128</sup>x<sup>15</sup> + α<sup>199</sup>x<sup>14</sup> + α<sup>178</sup>x<sup>13</sup> + α<sup>193</sup>x<sup>12</sup> + α<sup>250</sup>x<sup>11</sup> + α<sup>202</sup>x<sup>10</sup> + α<sup>196</sup>x<sup>9</sup> + α<sup>226</sup>x<sup>8</sup> + α<sup>164</sup>x<sup>7</sup> + α<sup>177</sup>x<sup>6</sup></p>
+<p>将其转换为整数系数：</p>
+<p>184x<sup>16</sup> + 133x<sup>15</sup> + 14x<sup>14</sup> + 171x<sup>13</sup> + 25x<sup>12</sup> + 108x<sup>11</sup> + 112x<sup>10</sup> + 200x<sup>9</sup> + 72x<sup>8</sup> + 198x<sup>7</sup> + 219x<sup>6</sup></p>
+<h3 id="9-10-2-将结果与消息多项式进行异或运算"><a href="#9-10-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.10.2 将结果与消息多项式进行异或运算"></a>9.10.2 将结果与消息多项式进行异或运算</h3><p>将9.9.2的结果与消息多项式进行异或运算。</p>
+<p>(184 ⊕ 184)x<sup>16</sup> + (182 ⊕ 133)x<sup>15</sup> + (81 ⊕ 14)x<sup>14</sup> + (206 ⊕ 171)x<sup>13</sup> + (107 ⊕ 25)x<sup>12</sup> + (170 ⊕ 108)x<sup>11</sup> + (146 ⊕ 112)x<sup>10</sup> + (62 ⊕ 200)x<sup>9</sup> + (169 ⊕ 72)x<sup>8</sup> + (145 ⊕ 198)x<sup>7</sup> + (0 ⊕ 219)x<sup>6</sup></p>
+<p>得到：</p>
+<p>0x<sup>16</sup> + 51x<sup>15</sup> + 95x<sup>14</sup> + 101x<sup>13</sup> + 114x<sup>12</sup> + 198x<sup>11</sup> + 226x<sup>10</sup> + 246x<sup>9</sup> + 225x<sup>8</sup> + 87x<sup>7</sup> + 219x<sup>6</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>51x<sup>15</sup> + 95x<sup>14</sup> + 101x<sup>13</sup> + 114x<sup>12</sup> + 198x<sup>11</sup> + 226x<sup>10</sup> + 246x<sup>9</sup> + 225x<sup>8</sup> + 87x<sup>7</sup> + 219x<sup>6</sup></p>
+<h2 id="9-11-第十一次运算"><a href="#9-11-第十一次运算" class="headerlink" title="9.11 第十一次运算"></a>9.11 第十一次运算</h2><h3 id="9-11-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-11-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.11.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.11.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是51x<sup>15</sup>。将51x<sup>15</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值51，alpha指数为125。因此 51 = α<sup>125</sup>。</p>
+<p>将生成多项式乘以α<sup>125</sup>：</p>
+<p>(α<sup>125</sup> × α<sup>0</sup>)x<sup>15</sup> + (α<sup>125</sup> × α<sup>251</sup>)x<sup>14</sup> + (α<sup>125</sup> × α<sup>67</sup>)x<sup>13</sup> + (α<sup>125</sup> × α<sup>46</sup>)x<sup>12</sup> + (α<sup>125</sup> × α<sup>61</sup>)x<sup>11</sup> + (α<sup>125</sup> × α<sup>118</sup>)x<sup>10</sup> + (α<sup>125</sup> × α<sup>70</sup>)x<sup>9</sup> + (α<sup>125</sup> × α<sup>64</sup>)x<sup>8</sup> + (α<sup>125</sup> × α<sup>94</sup>)x<sup>7</sup> + (α<sup>125</sup> × α<sup>32</sup>)x<sup>6</sup> + (α<sup>125</sup> × α<sup>45</sup>)x<sup>5</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>125</sup>x<sup>15</sup> + α<sup>(376 % 255)</sup>x<sup>14</sup> + α<sup>192</sup>x<sup>13</sup> + α<sup>171</sup>x<sup>12</sup> + α<sup>186</sup>x<sup>11</sup> + α<sup>243</sup>x<sup>10</sup> + α<sup>195</sup>x<sup>9</sup> + α<sup>189</sup>x<sup>8</sup> + α<sup>219</sup>x<sup>7</sup> + α<sup>157</sup>x<sup>6</sup> + α<sup>170</sup>x<sup>5</sup></p>
+<p>结果得到：</p>
+<p>α<sup>125</sup>x<sup>15</sup> + α<sup>121</sup>x<sup>14</sup> + α<sup>192</sup>x<sup>13</sup> + α<sup>171</sup>x<sup>12</sup> + α<sup>186</sup>x<sup>11</sup> + α<sup>243</sup>x<sup>10</sup> + α<sup>195</sup>x<sup>9</sup> + α<sup>189</sup>x<sup>8</sup> + α<sup>219</sup>x<sup>7</sup> + α<sup>157</sup>x<sup>6</sup> + α<sup>170</sup>x<sup>5</sup></p>
+<p>将其转换为整数系数：</p>
+<p>51x<sup>15</sup> + 118x<sup>14</sup> + 130x<sup>13</sup> + 179x<sup>12</sup> + 110x<sup>11</sup> + 125x<sup>10</sup> + 100x<sup>9</sup> + 87x<sup>8</sup> + 86x<sup>7</sup> + 213x<sup>6</sup> + 215x<sup>5</sup></p>
+<h3 id="9-11-2-将结果与消息多项式进行异或运算"><a href="#9-11-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.11.2 将结果与消息多项式进行异或运算"></a>9.11.2 将结果与消息多项式进行异或运算</h3><p>将9.10.2的结果与消息多项式进行异或运算。</p>
+<p>(51 ⊕ 51)x<sup>15</sup> + (95 ⊕ 118)x<sup>14</sup> + (101 ⊕ 130)x<sup>13</sup> + (114 ⊕ 179)x<sup>12</sup> + (198 ⊕ 110)x<sup>11</sup> + (226 ⊕ 125)x<sup>10</sup> + (246 ⊕ 100)x<sup>9</sup> + (225 ⊕ 87)x<sup>8</sup> + (87 ⊕ 86)x<sup>7</sup> + (219 ⊕ 213)x<sup>6</sup> + (0 ⊕ 215)x<sup>5</sup></p>
+<p>得到：</p>
+<p>0x<sup>15</sup> + 41x<sup>14</sup> + 231x<sup>13</sup> + 193x<sup>12</sup> + 168x<sup>11</sup> + 159x<sup>10</sup> + 146x<sup>9</sup> + 182x<sup>8</sup> + 1x<sup>7</sup> + 14x<sup>6</sup> + 215x<sup>5</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>41x<sup>14</sup> + 231x<sup>13</sup> + 193x<sup>12</sup> + 168x<sup>11</sup> + 159x<sup>10</sup> + 146x<sup>9</sup> + 182x<sup>8</sup> + 1x<sup>7</sup> + 14x<sup>6</sup> + 215x<sup>5</sup></p>
+<h2 id="9-12-第十二次运算"><a href="#9-12-第十二次运算" class="headerlink" title="9.12 第十二次运算"></a>9.12 第十二次运算</h2><h3 id="9-12-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-12-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.12.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.12.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是41x<sup>14</sup>。将41x<sup>14</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值41，alpha指数为147。因此 41 = α<sup>147</sup>。</p>
+<p>将生成多项式乘以α<sup>147</sup>：</p>
+<p>α<sup>147</sup> × α<sup>0</sup>)x<sup>14</sup> + (α<sup>147</sup> × α<sup>251</sup>)x<sup>13</sup> + (α<sup>147</sup> × α<sup>67</sup>)x<sup>12</sup> + (α<sup>147</sup> × α<sup>46</sup>)x<sup>11</sup> + (α<sup>147</sup> × α<sup>61</sup>)x<sup>10</sup> + (α<sup>147</sup> × α<sup>118</sup>)x<sup>9</sup> + (α<sup>147</sup> × α<sup>70</sup>)x<sup>8</sup> + (α<sup>147</sup> × α<sup>64</sup>)x<sup>7</sup> + (α<sup>147</sup> × α<sup>94</sup>)x<sup>6</sup> + (α<sup>147</sup> × α<sup>32</sup>)x<sup>5</sup> + (α<sup>147</sup> × α<sup>45</sup>)x<sup>4</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>147</sup>x<sup>14</sup> + α<sup>(398 % 255)</sup>x<sup>13</sup> + α<sup>214</sup>x<sup>12</sup> + α<sup>193</sup>x<sup>11</sup> + α<sup>208</sup>x<sup>10</sup> + α<sup>(265 % 255)</sup>x<sup>9</sup> + α<sup>217</sup>x<sup>8</sup> + α<sup>211</sup>x<sup>7</sup> + α<sup>241</sup>x<sup>6</sup> + α<sup>179</sup>x<sup>5</sup> + α<sup>192</sup>x<sup>4</sup></p>
+<p>结果得到：</p>
+<p>α<sup>147</sup>x<sup>14</sup> + α<sup>143</sup>x<sup>13</sup> + α<sup>214</sup>x<sup>12</sup> + α<sup>193</sup>x<sup>11</sup> + α<sup>208</sup>x<sup>10</sup> + α<sup>10</sup>x<sup>9</sup> + α<sup>217</sup>x<sup>8</sup> + α<sup>211</sup>x<sup>7</sup> + α<sup>241</sup>x<sup>6</sup> + α<sup>179</sup>x<sup>5</sup> + α<sup>192</sup>x<sup>4</sup></p>
+<p>将其转换为整数系数：</p>
+<p>41x<sup>14</sup> + 84x<sup>13</sup> + 249x<sup>12</sup> + 25x<sup>11</sup> + 81x<sup>10</sup> + 116x<sup>9</sup> + 155x<sup>8</sup> + 178x<sup>7</sup> + 88x<sup>6</sup> + 75x<sup>5</sup> + 130x<sup>4</sup></p>
+<h3 id="9-12-2-将结果与消息多项式进行异或运算"><a href="#9-12-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.12.2 将结果与消息多项式进行异或运算"></a>9.12.2 将结果与消息多项式进行异或运算</h3><p>将9.11.2的结果与消息多项式进行异或运算。</p>
+<p>(41 ⊕ 41)x<sup>14</sup> + (231 ⊕ 84)x<sup>13</sup> + (193 ⊕ 249)x<sup>12</sup> + (168 ⊕ 25)x<sup>11</sup> + (159 ⊕ 81)x<sup>10</sup> + (146 ⊕ 116)x<sup>9</sup> + (182 ⊕ 155)x<sup>8</sup> + (1 ⊕ 178)x<sup>7</sup> + (14 ⊕ 88)x<sup>6</sup> + (215 ⊕ 75)x<sup>5</sup> + (0 ⊕ 130)x<sup>4</sup></p>
+<p>得到：</p>
+<p>0x<sup>14</sup> + 179x<sup>13</sup> + 56x<sup>12</sup> + 177x<sup>11</sup> + 206x<sup>10</sup> + 230x<sup>9</sup> + 45x<sup>8</sup> + 179x<sup>7</sup> + 86x<sup>6</sup> + 156x<sup>5</sup> + 130x<sup>4</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>179x<sup>13</sup> + 56x<sup>12</sup> + 177x<sup>11</sup> + 206x<sup>10</sup> + 230x<sup>9</sup> + 45x<sup>8</sup> + 179x<sup>7</sup> + 86x<sup>6</sup> + 156x<sup>5</sup> + 130x<sup>4</sup></p>
+<h2 id="9-13-第十三次运算"><a href="#9-13-第十三次运算" class="headerlink" title="9.13 第十三次运算"></a>9.13 第十三次运算</h2><h3 id="9-13-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-13-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.13.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.13.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是179x<sup>13</sup>。将179x<sup>13</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值179，alpha指数为171。因此 179 = α<sup>171</sup>。</p>
+<p>将生成多项式乘以α<sup>171</sup>：</p>
+<p>(α<sup>171</sup> × α<sup>0</sup>)x<sup>13</sup> + (α<sup>171</sup> × α<sup>251</sup>)x<sup>12</sup> + (α<sup>171</sup> × α<sup>67</sup>)x<sup>11</sup> + (α<sup>171</sup> × α<sup>46</sup>)x<sup>10</sup> + (α<sup>171</sup> × α<sup>61</sup>)x<sup>9</sup> + (α<sup>171</sup> × α<sup>118</sup>)x<sup>8</sup> + (α<sup>171</sup> × α<sup>70</sup>)x<sup>7</sup> + (α<sup>171</sup> × α<sup>64</sup>)x<sup>6</sup> + (α<sup>171</sup> × α<sup>94</sup>)x<sup>5</sup> + (α<sup>171</sup> × α<sup>32</sup>)x<sup>4</sup> + (α<sup>171</sup> × α<sup>45</sup>)x<sup>3</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>171</sup>x<sup>13</sup> + α<sup>(422 % 255)</sup>x<sup>12</sup> + α<sup>238</sup>x<sup>11</sup> + α<sup>217</sup>x<sup>10</sup> + α<sup>232</sup>x<sup>9</sup> + α<sup>(289 % 255)</sup>x<sup>8</sup> + α<sup>241</sup>x<sup>7</sup> + α<sup>235</sup>x<sup>6</sup> + α<sup>(265 % 255)</sup>x<sup>5</sup> + α<sup>203</sup>x<sup>4</sup> + α<sup>216</sup>x<sup>3</sup></p>
+<p>结果得到：</p>
+<p>α<sup>171</sup>x<sup>13</sup> + α<sup>167</sup>x<sup>12</sup> + α<sup>238</sup>x<sup>11</sup> + α<sup>217</sup>x<sup>10</sup> + α<sup>232</sup>x<sup>9</sup> + α<sup>34</sup>x<sup>8</sup> + α<sup>241</sup>x<sup>7</sup> + α<sup>235</sup>x<sup>6</sup> + α<sup>10</sup>x<sup>5</sup> + α<sup>203</sup>x<sup>4</sup> + α<sup>216</sup>x<sup>3</sup></p>
+<p>将其转换为整数系数：</p>
+<p>179x<sup>13</sup> + 126x<sup>12</sup> + 11x<sup>11</sup> + 155x<sup>10</sup> + 247x<sup>9</sup> + 78x<sup>8</sup> + 88x<sup>7</sup> + 235x<sup>6</sup> + 116x<sup>5</sup> + 224x<sup>4</sup> + 195x<sup>3</sup></p>
+<h3 id="9-13-2-将结果与消息多项式进行异或运算"><a href="#9-13-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.13.2 将结果与消息多项式进行异或运算"></a>9.13.2 将结果与消息多项式进行异或运算</h3><p>将9.12.2的结果与消息多项式进行异或运算。</p>
+<p>(179 ⊕ 179)x<sup>13</sup> + (56 ⊕ 126)x<sup>12</sup> + (177 ⊕ 11)x<sup>11</sup> + (206 ⊕ 155)x<sup>10</sup> + (230 ⊕ 247)x<sup>9</sup> + (45 ⊕ 78)x<sup>8</sup> + (179 ⊕ 88)x<sup>7</sup> + (86 ⊕ 235)x<sup>6</sup> + (156 ⊕ 116)x<sup>5</sup> + (130 ⊕ 224)x<sup>4</sup> + (0 ⊕ 195)x<sup>3</sup></p>
+<p>得到：</p>
+<p>0x<sup>13</sup> + 70x<sup>12</sup> + 186x<sup>11</sup> + 85x<sup>10</sup> + 17x<sup>9</sup> + 99x<sup>8</sup> + 235x<sup>7</sup> + 189x<sup>6</sup> + 232x<sup>5</sup> + 98x<sup>4</sup> + 195x<sup>3</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>70x<sup>12</sup> + 186x<sup>11</sup> + 85x<sup>10</sup> + 17x<sup>9</sup> + 99x<sup>8</sup> + 235x<sup>7</sup> + 189x<sup>6</sup> + 232x<sup>5</sup> + 98x<sup>4</sup> + 195x<sup>3</sup></p>
+<h2 id="9-14-第十四次运算"><a href="#9-14-第十四次运算" class="headerlink" title="9.14 第十四次运算"></a>9.14 第十四次运算</h2><h3 id="9-14-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-14-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.14.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.14.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是70x<sup>12</sup>。将70x<sup>12</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值70，alpha指数为48。因此 70 = α<sup>48</sup>。</p>
+<p>将生成多项式乘以α<sup>48</sup>：</p>
+<p>(α<sup>48</sup> × α<sup>0</sup>)x<sup>12</sup> + (α<sup>48</sup> × α<sup>251</sup>)x<sup>11</sup> + (α<sup>48</sup> × α<sup>67</sup>)x<sup>10</sup> + (α<sup>48</sup> × α<sup>46</sup>)x<sup>9</sup> + (α<sup>48</sup> × α<sup>61</sup>)x<sup>8</sup> + (α<sup>48</sup> × α<sup>118</sup>)x<sup>7</sup> + (α<sup>48</sup> × α<sup>70</sup>)x<sup>6</sup> + (α<sup>48</sup> × α<sup>64</sup>)x<sup>5</sup> + (α<sup>48</sup> × α<sup>94</sup>)x<sup>4</sup> + (α<sup>48</sup> × α<sup>32</sup>)x<sup>3</sup> + (α<sup>48</sup> × α<sup>45</sup>)x<sup>2</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>48</sup>x<sup>12</sup> + α<sup>(299 % 255)</sup>x<sup>11</sup> + α<sup>115</sup>x<sup>10</sup> + α<sup>94</sup>x<sup>9</sup> + α<sup>109</sup>x<sup>8</sup> + α<sup>166</sup>x<sup>7</sup> + α<sup>118</sup>x<sup>6</sup> + α<sup>112</sup>x<sup>5</sup> + α<sup>142</sup>x<sup>4</sup> + α<sup>80</sup>x<sup>3</sup> + α<sup>93</sup>x<sup>2</sup></p>
+<p>结果得到：</p>
+<p>α<sup>48</sup>x<sup>12</sup> + α<sup>44</sup>x<sup>11</sup> + α<sup>115</sup>x<sup>10</sup> + α<sup>94</sup>x<sup>9</sup> + α<sup>109</sup>x<sup>8</sup> + α<sup>166</sup>x<sup>7</sup> + α<sup>118</sup>x<sup>6</sup> + α<sup>112</sup>x<sup>5</sup> + α<sup>142</sup>x<sup>4</sup> + α<sup>80</sup>x<sup>3</sup> + α<sup>93</sup>x<sup>2</sup></p>
+<p>将其转换为整数系数：</p>
+<p>70x<sup>12</sup> + 238x<sup>11</sup> + 124x<sup>10</sup> + 113x<sup>9</sup> + 189x<sup>8</sup> + 63x<sup>7</sup> + 199x<sup>6</sup> + 129x<sup>5</sup> + 42x<sup>4</sup> + 253x<sup>3</sup> + 182x<sup>2</sup></p>
+<h3 id="9-14-2-将结果与消息多项式进行异或运算"><a href="#9-14-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.14.2 将结果与消息多项式进行异或运算"></a>9.14.2 将结果与消息多项式进行异或运算</h3><p>将9.13.2的结果与消息多项式进行异或运算。</p>
+<p>(70 ⊕ 70)x<sup>12</sup> + (186 ⊕ 238)x<sup>11</sup> + (85 ⊕ 124)x<sup>10</sup> + (17 ⊕ 113)x<sup>9</sup> + (99 ⊕ 189)x<sup>8</sup> + (235 ⊕ 63)x<sup>7</sup> + (189 ⊕ 199)x<sup>6</sup> + (232 ⊕ 129)x<sup>5</sup> + (98 ⊕ 42)x<sup>4</sup> + (195 ⊕ 253)x<sup>3</sup> + (0 ⊕ 182)x<sup>2</sup></p>
+<p>得到：</p>
+<p>0x<sup>12</sup> + 84x<sup>11</sup> + 41x<sup>10</sup> + 96x<sup>9</sup> + 222x<sup>8</sup> + 212x<sup>7</sup> + 122x<sup>6</sup> + 105x<sup>5</sup> + 72x<sup>4</sup> + 62x<sup>3</sup> + 182x<sup>2</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>84x<sup>11</sup> + 41x<sup>10</sup> + 96x<sup>9</sup> + 222x<sup>8</sup> + 212x<sup>7</sup> + 122x<sup>6</sup> + 105x<sup>5</sup> + 72x<sup>4</sup> + 62x<sup>3</sup> + 182x<sup>2</sup></p>
+<h2 id="9-15-第十五次运算"><a href="#9-15-第十五次运算" class="headerlink" title="9.15 第十五次运算"></a>9.15 第十五次运算</h2><h3 id="9-15-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-15-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.15.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.15.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是84x<sup>11</sup>。将84x<sup>11</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值84，alpha指数为143。因此 84 = α<sup>143</sup>。</p>
+<p>将生成多项式乘以α<sup>143</sup>：</p>
+<p>(α<sup>143</sup> × α<sup>0</sup>)x<sup>11</sup> + (α<sup>143</sup> × α<sup>251</sup>)x<sup>10</sup> + (α<sup>143</sup> × α<sup>67</sup>)x<sup>9</sup> + (α<sup>143</sup> × α<sup>46</sup>)x<sup>8</sup> + (α<sup>143</sup> × α<sup>61</sup>)x<sup>7</sup> + (α<sup>143</sup> × α<sup>118</sup>)x<sup>6</sup> + (α<sup>143</sup> × α<sup>70</sup>)x<sup>5</sup> + (α<sup>143</sup> × α<sup>64</sup>)x<sup>4</sup> + (α<sup>143</sup> × α<sup>94</sup>)x<sup>3</sup> + (α<sup>143</sup> × α<sup>32</sup>)x<sup>2</sup> + (α<sup>143</sup> × α<sup>45</sup>)x<sup>1</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>143</sup>x<sup>11</sup> + α<sup>(394 % 255)</sup>x<sup>10</sup> + α<sup>210</sup>x<sup>9</sup> + α<sup>189</sup>x<sup>8</sup> + α<sup>204</sup>x<sup>7</sup> + α<sup>(261 % 255)</sup>x<sup>6</sup> + α<sup>213</sup>x<sup>5</sup> + α<sup>207</sup>x<sup>4</sup> + α<sup>237</sup>x<sup>3</sup> + α<sup>175</sup>x<sup>2</sup> + α<sup>188</sup>x<sup>1</sup></p>
+<p>结果得到：</p>
+<p>α<sup>143</sup>x<sup>11</sup> + α<sup>139</sup>x<sup>10</sup> + α<sup>210</sup>x<sup>9</sup> + α<sup>189</sup>x<sup>8</sup> + α<sup>204</sup>x<sup>7</sup> + α<sup>6</sup>x<sup>6</sup> + α<sup>213</sup>x<sup>5</sup> + α<sup>207</sup>x<sup>4</sup> + α<sup>237</sup>x<sup>3</sup> + α<sup>175</sup>x<sup>2</sup> + α<sup>188</sup>x<sup>1</sup></p>
+<p>将其转换为整数系数：</p>
+<p>84x<sup>11</sup> + 66x<sup>10</sup> + 89x<sup>9</sup> + 87x<sup>8</sup> + 221x<sup>7</sup> + 64x<sup>6</sup> + 242x<sup>5</sup> + 166x<sup>4</sup> + 139x<sup>3</sup> + 255x<sup>2</sup> + 165x<sup>1</sup></p>
+<h3 id="9-15-2-将结果与消息多项式进行异或运算"><a href="#9-15-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.15.2 将结果与消息多项式进行异或运算"></a>9.15.2 将结果与消息多项式进行异或运算</h3><p>将9.14.2的结果与消息多项式进行异或运算。</p>
+<p>(84 ⊕ 84)x<sup>11</sup> + (41 ⊕ 66)x<sup>10</sup> + (96 ⊕ 89)x<sup>9</sup> + (222 ⊕ 87)x<sup>8</sup> + (212 ⊕ 221)x<sup>7</sup> + (122 ⊕ 64)x<sup>6</sup> + (105 ⊕ 242)x<sup>5</sup> + (72 ⊕ 166)x<sup>4</sup> + (62 ⊕ 139)x<sup>3</sup> + (182 ⊕ 255)x<sup>2</sup> + (0 ⊕ 165)x<sup>1</sup></p>
+<p>得到：</p>
+<p>0x<sup>11</sup> + 107x<sup>10</sup> + 57x<sup>9</sup> + 137x<sup>8</sup> + 9x<sup>7</sup> + 58x<sup>6</sup> + 155x<sup>5</sup> + 238x<sup>4</sup> + 181x<sup>3</sup> + 73x<sup>2</sup> + 165x<sup>1</sup></p>
+<p>丢弃系数为0的项：</p>
+<p>107x<sup>10</sup> + 57x<sup>9</sup> + 137x<sup>8</sup> + 9x<sup>7</sup> + 58x<sup>6</sup> + 155x<sup>5</sup> + 238x<sup>4</sup> + 181x<sup>3</sup> + 73x<sup>2</sup> + 165x<sup>1</sup></p>
+<h2 id="9-16-第十六次运算"><a href="#9-16-第十六次运算" class="headerlink" title="9.16 第十六次运算"></a>9.16 第十六次运算</h2><h3 id="9-16-1-将生成多项式与前一步骤的异或结果的首项相乘"><a href="#9-16-1-将生成多项式与前一步骤的异或结果的首项相乘" class="headerlink" title="9.16.1 将生成多项式与前一步骤的异或结果的首项相乘"></a>9.16.1 将生成多项式与前一步骤的异或结果的首项相乘</h3><p>接下来，将生成多项式与前一步骤的异或结果的首项相乘。在本例中，首项是是107x<sup>10</sup>。将107x<sup>10</sup>转换为α表示法。</p>
+<p>根据对数-反对数表，对于整数值，alpha指数为84。因此 107 = α<sup>84</sup>。</p>
+<p>将生成多项式乘以α<sup>84</sup>：</p>
+<p>(α<sup>84</sup> × α<sup>0</sup>)x<sup>10</sup> + (α<sup>84</sup> × α<sup>251</sup>)x<sup>9</sup> + (α<sup>84</sup> × α<sup>67</sup>)x<sup>8</sup> + (α<sup>84</sup> × α<sup>46</sup>)x<sup>7</sup> + (α<sup>84</sup> × α<sup>61</sup>)x<sup>6</sup> + (α<sup>84</sup> × α<sup>118</sup>)x<sup>5</sup> + (α<sup>84</sup> × α<sup>70</sup>)x<sup>4</sup> + (α<sup>84</sup> × α<sup>64</sup>)x<sup>3</sup> + (α<sup>84</sup> × α<sup>94</sup>)x<sup>2</sup> + (α<sup>84</sup> × α<sup>32</sup>)x<sup>1</sup> + (α<sup>84</sup> × α<sup>45</sup>)x<sup>0</sup></p>
+<p>将α的指数相加在一起。在本例中，指数中至少有一个大于255，因此执行模255：</p>
+<p>α<sup>84</sup>x<sup>10</sup> + α<sup>(335 % 255)</sup>x<sup>9</sup> + α<sup>151</sup>x<sup>8</sup> + α<sup>130</sup>x<sup>7</sup> + α<sup>145</sup>x<sup>6</sup> + α<sup>202</sup>x<sup>5</sup> + α<sup>154</sup>x<sup>4</sup> + α<sup>148</sup>x<sup>3</sup> + α<sup>178</sup>x<sup>2</sup> + α<sup>116</sup>x<sup>1</sup> + α<sup>129</sup>x<sup>0</sup></p>
+<p>结果得到：</p>
+<p>α<sup>84</sup>x<sup>10</sup> + α<sup>80</sup>x<sup>9</sup> + α<sup>151</sup>x<sup>8</sup> + α<sup>130</sup>x<sup>7</sup> + α<sup>145</sup>x<sup>6</sup> + α<sup>202</sup>x<sup>5</sup> + α<sup>154</sup>x<sup>4</sup> + α<sup>148</sup>x<sup>3</sup> + α<sup>178</sup>x<sup>2</sup> + α<sup>116</sup>x<sup>1</sup> + α<sup>129</sup>x<sup>0</sup></p>
+<p>将其转换为整数系数：</p>
+<p>107x<sup>10</sup> + 253x<sup>9</sup> + 170x<sup>8</sup> + 46x<sup>7</sup> + 77x<sup>6</sup> + 112x<sup>5</sup> + 57x<sup>4</sup> + 82x<sup>3</sup> + 171x<sup>2</sup> + 248x<sup>1</sup> + 23</p>
+<h3 id="9-16-2-将结果与消息多项式进行异或运算"><a href="#9-16-2-将结果与消息多项式进行异或运算" class="headerlink" title="9.16.2 将结果与消息多项式进行异或运算"></a>9.16.2 将结果与消息多项式进行异或运算</h3><p>将9.15.2的结果与消息多项式进行异或运算。</p>
+<p>(107 ⊕ 107)x<sup>10</sup> + (57 ⊕ 253)x<sup>9</sup> + (137 ⊕ 170)x<sup>8</sup> + (9 ⊕ 46)x<sup>7</sup> + (58 ⊕ 77)x<sup>6</sup> + (155 ⊕ 112)x<sup>5</sup> + (238 ⊕ 57)x<sup>4</sup> + (181 ⊕ 82)x<sup>3</sup> + (73 ⊕ 171)x<sup>2</sup> + (165 ⊕ 248)x<sup>1</sup> + (0 ⊕ 23)x<sup>0</sup></p>
+<p>得到：</p>
+<p>0x<sup>10</sup> + 196x<sup>9</sup> + 35x<sup>8</sup> + 39x<sup>7</sup> + 119x<sup>6</sup> + 235x<sup>5</sup> + 215x<sup>4</sup> + 231x<sup>3</sup> + 226x<sup>2</sup> + 93x<sup>1</sup> + 23</p>
+<p>丢弃系数为0的项：</p>
+<p>196x<sup>9</sup> + 35x<sup>8</sup> + 39x<sup>7</sup> + 119x<sup>6</sup> + 235x<sup>5</sup> + 215x<sup>4</sup> + 231x<sup>3</sup> + 226x<sup>2</sup> + 93x<sup>1</sup> + 23</p>
+<h2 id="9-17-多项式系数作为纠错码"><a href="#9-17-多项式系数作为纠错码" class="headerlink" title="9.17 多项式系数作为纠错码"></a>9.17 多项式系数作为纠错码</h2><p>除法已执行完16次，即消息多项式中项的数量。上述多项式的系数即是用于原始消息多项式的纠错码字：</p>
+<p><strong>196  35  39  119  235  215  231  226  93  23</strong></p>
+<p>下一节: <a href="http://tiierr.xyz/2017/02/27/%E4%BA%8C%E7%BB%B4%E7%A0%81-%E6%9C%80%E7%BB%88%E7%BC%96%E7%A0%81/">&gt;&gt; 最终编码</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二维码/" rel="tag">#二维码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/二维码-日文编码/" rel="next" title="二维码 - 日文编码">
+                <i class="fa fa-chevron-left"></i> 二维码 - 日文编码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/二维码-对数与反对数表/" rel="prev" title="二维码 - 对数与反对数表">
+                二维码 - 对数与反对数表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="二维码-生成纠错码/"
+           data-title="二维码 - 生成纠错码" data-url="http://tiierr.xyz/二维码-生成纠错码/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-将数据码分组"><span class="nav-number">1.</span> <span class="nav-text">1 将数据码分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-多项式长除法"><span class="nav-number">2.</span> <span class="nav-text">2 多项式长除法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-伽罗瓦域"><span class="nav-number">3.</span> <span class="nav-text">3 伽罗瓦域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-伽罗瓦域算法"><span class="nav-number">4.</span> <span class="nav-text">4 伽罗瓦域算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-使用逐字节模100011101生成2的幂"><span class="nav-number">5.</span> <span class="nav-text">5 使用逐字节模100011101生成2的幂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-对数与反对数乘法"><span class="nav-number">6.</span> <span class="nav-text">6 对数与反对数乘法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-生成多项式"><span class="nav-number">7.</span> <span class="nav-text">7 生成多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-2个纠错码字的生成多项式"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 2个纠错码字的生成多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-3个纠错码字的生成多项式"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 3个纠错码字的生成多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-当指数大于或等于256时"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 当指数大于或等于256时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-其他生成多项式"><span class="nav-number">7.4.</span> <span class="nav-text">7.4 其他生成多项式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-生成纠错码"><span class="nav-number">8.</span> <span class="nav-text">8 生成纠错码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-消息多项式"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 消息多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-生成多项式"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 生成多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-除法步骤"><span class="nav-number">8.3.</span> <span class="nav-text">8.3 除法步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-用生成多项式除消息多项式"><span class="nav-number">9.</span> <span class="nav-text">9 用生成多项式除消息多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-第一次运算"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 第一次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-1-用消息多项式的首项乘以发生多项式"><span class="nav-number">9.1.1.</span> <span class="nav-text">9.1.1 用消息多项式的首项乘以发生多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.1.2.</span> <span class="nav-text">9.1.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-第二次运算"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 第二次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.2.1.</span> <span class="nav-text">9.2.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.2.2.</span> <span class="nav-text">9.2.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-第三次运算"><span class="nav-number">9.3.</span> <span class="nav-text">9.3 第三次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.3.1.</span> <span class="nav-text">9.3.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.3.2.</span> <span class="nav-text">9.3.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-第四次运算"><span class="nav-number">9.4.</span> <span class="nav-text">9.4 第四次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.4.1.</span> <span class="nav-text">9.4.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.4.2.</span> <span class="nav-text">9.4.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-第五次运算"><span class="nav-number">9.5.</span> <span class="nav-text">9.5 第五次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.5.1.</span> <span class="nav-text">9.5.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.5.2.</span> <span class="nav-text">9.5.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-第六次运算"><span class="nav-number">9.6.</span> <span class="nav-text">9.6 第六次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-6-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.6.1.</span> <span class="nav-text">9.6.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-6-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.6.2.</span> <span class="nav-text">9.6.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7-第七次运算"><span class="nav-number">9.7.</span> <span class="nav-text">9.7 第七次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.7.1.</span> <span class="nav-text">9.7.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.7.2.</span> <span class="nav-text">9.7.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-8-第八次运算"><span class="nav-number">9.8.</span> <span class="nav-text">9.8 第八次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-8-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.8.1.</span> <span class="nav-text">9.8.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-8-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.8.2.</span> <span class="nav-text">9.8.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-9-第九次运算"><span class="nav-number">9.9.</span> <span class="nav-text">9.9 第九次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-9-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.9.1.</span> <span class="nav-text">9.9.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-9-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.9.2.</span> <span class="nav-text">9.9.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-10-第十次运算"><span class="nav-number">9.10.</span> <span class="nav-text">9.10 第十次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-10-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.10.1.</span> <span class="nav-text">9.10.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-10-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.10.2.</span> <span class="nav-text">9.10.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-11-第十一次运算"><span class="nav-number">9.11.</span> <span class="nav-text">9.11 第十一次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-11-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.11.1.</span> <span class="nav-text">9.11.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-11-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.11.2.</span> <span class="nav-text">9.11.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-12-第十二次运算"><span class="nav-number">9.12.</span> <span class="nav-text">9.12 第十二次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-12-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.12.1.</span> <span class="nav-text">9.12.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-12-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.12.2.</span> <span class="nav-text">9.12.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-13-第十三次运算"><span class="nav-number">9.13.</span> <span class="nav-text">9.13 第十三次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-13-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.13.1.</span> <span class="nav-text">9.13.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-13-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.13.2.</span> <span class="nav-text">9.13.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-14-第十四次运算"><span class="nav-number">9.14.</span> <span class="nav-text">9.14 第十四次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-14-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.14.1.</span> <span class="nav-text">9.14.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-14-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.14.2.</span> <span class="nav-text">9.14.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-15-第十五次运算"><span class="nav-number">9.15.</span> <span class="nav-text">9.15 第十五次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-15-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.15.1.</span> <span class="nav-text">9.15.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-15-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.15.2.</span> <span class="nav-text">9.15.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-16-第十六次运算"><span class="nav-number">9.16.</span> <span class="nav-text">9.16 第十六次运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-16-1-将生成多项式与前一步骤的异或结果的首项相乘"><span class="nav-number">9.16.1.</span> <span class="nav-text">9.16.1 将生成多项式与前一步骤的异或结果的首项相乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-16-2-将结果与消息多项式进行异或运算"><span class="nav-number">9.16.2.</span> <span class="nav-text">9.16.2 将结果与消息多项式进行异或运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-17-多项式系数作为纠错码"><span class="nav-number">9.17.</span> <span class="nav-text">9.17 多项式系数作为纠错码</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

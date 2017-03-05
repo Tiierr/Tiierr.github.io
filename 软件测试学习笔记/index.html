@@ -1,0 +1,955 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="软件测试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1.什么是软件测试软件测试是由验证(verification)和有效性确认(validation)活动构成的整体:
+
+验证是检验软件是否已正确地实现了产品规格说明书所定义的系统功能和特性
+有效性确认是确认所开发的软件是否满足用户真正需求的活动
+
+为什么要软件测试?
+
+为了保证软件的质量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件测试学习笔记">
+<meta property="og:url" content="http://tiierr.xyz/软件测试学习笔记/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="1.什么是软件测试软件测试是由验证(verification)和有效性确认(validation)活动构成的整体:
+
+验证是检验软件是否已正确地实现了产品规格说明书所定义的系统功能和特性
+有效性确认是确认所开发的软件是否满足用户真正需求的活动
+
+为什么要软件测试?
+
+为了保证软件的质量">
+<meta property="og:updated_time" content="2017-01-12T10:55:58.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件测试学习笔记">
+<meta name="twitter:description" content="1.什么是软件测试软件测试是由验证(verification)和有效性确认(validation)活动构成的整体:
+
+验证是检验软件是否已正确地实现了产品规格说明书所定义的系统功能和特性
+有效性确认是确认所开发的软件是否满足用户真正需求的活动
+
+为什么要软件测试?
+
+为了保证软件的质量">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 软件测试学习笔记 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                软件测试学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-20T16:08:04+08:00" content="2016-11-20">
+              2016-11-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/软件测试学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="软件测试学习笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-什么是软件测试"><a href="#1-什么是软件测试" class="headerlink" title="1.什么是软件测试"></a>1.什么是软件测试</h4><p>软件测试是由<code>验证(verification)</code>和<code>有效性确认(validation)</code>活动构成的整体:</p>
+<ul>
+<li><code>验证</code>是检验软件是否已正确地实现了产品规格说明书所定义的系统功能和特性</li>
+<li><code>有效性确认</code>是确认所开发的软件是否满足用户真正需求的活动</li>
+</ul>
+<p>为什么要软件测试?</p>
+<ul>
+<li>为了保证软件的质量<a id="more"></a>
+</li>
+</ul>
+<p><code>软件测试和软件开发的关系</code>:</p>
+<ul>
+<li>需求分析与定义<code>&lt;=====&gt;</code>验收测试</li>
+<li>系统设计  <code>&lt;=====&gt;</code>系统测试</li>
+<li>详细功能设计  <code>&lt;=====&gt;</code>功能测试</li>
+<li>编码  <code>&lt;=====&gt;</code>单元测试</li>
+</ul>
+<p><code>软件测试阶段</code>:<br>单元测试 -&gt; 集成测试 -&gt; 功能测试 -&gt; 系统测试 -&gt; 安装测试 -&gt; 验收测试</p>
+<h4 id="2-软件缺陷的构成-在哪阶段最多以及原因"><a href="#2-软件缺陷的构成-在哪阶段最多以及原因" class="headerlink" title="2.软件缺陷的构成? 在哪阶段最多以及原因"></a>2.软件缺陷的构成? 在哪阶段最多以及原因</h4><p><strong>软件缺陷:</strong></p>
+<ul>
+<li>从产品内部看, 软件缺陷是软件产品开发或维护过程中所存在的错误、毛病等各种问题</li>
+<li>从外部看, 软件缺陷是系统所需要实现的某种功能的失效或违背</li>
+<li>PPT定义: 任何程序、系统中的问题和产品设计书的不一致性,不能满足用户的需求</li>
+</ul>
+<p><strong>构成:</strong></p>
+<ul>
+<li>规格说明书: <code>54%</code></li>
+<li>设计: <code>25%</code></li>
+<li>代码: <code>15%</code></li>
+<li>其他: <code>6%</code></li>
+</ul>
+<p><strong>分布:</strong></p>
+<ul>
+<li>1 设计&gt; 0 需求&gt; 2 编码&gt; 4 测试&gt; 3 单元测试&gt; 5 发布</li>
+</ul>
+<h4 id="3-软件测试的分类"><a href="#3-软件测试的分类" class="headerlink" title="3.软件测试的分类"></a>3.软件测试的分类</h4><p>按测试的<code>对象</code>或<code>范围</code>分类</p>
+<ul>
+<li>单元测试, 文档测试, 系统测试</li>
+</ul>
+<p>按<code>测试目的</code>分类</p>
+<ul>
+<li>功能测试, 回归测试,性能测试, 可靠性测试, 安全性测试和兼容性测试</li>
+</ul>
+<p>根据<code>测试过程中被测软件是否被执行</code></p>
+<ul>
+<li>静态测试和动态测试</li>
+</ul>
+<p>按<code>测试方法</code>分类</p>
+<ul>
+<li><code>白盒测试</code>和<code>黑盒测试</code></li>
+</ul>
+<h4 id="4-静态测试和动态测试"><a href="#4-静态测试和动态测试" class="headerlink" title="4.静态测试和动态测试"></a>4.静态测试和动态测试</h4><ul>
+<li><code>静态测试</code>包括对软件产品的需求和设计规格说明书的评审, 对程序代码的复审等。<ul>
+<li>1 走查(采用讲解、讨论和模拟运行的方式进行的查找错误的活动).</li>
+<li>2 审查(采用讲解、提问方式进行,一般有正式的计划、流程和结果。主要方法采用缺陷检查表)</li>
+<li>3.评审(通常在审查会后进行,审查小组根据记录和报告进行评估)</li>
+</ul>
+</li>
+<li><code>动态测试</code>是通过真正运行程序发现错误,通过观察代码运行过程,来获取系统信息,对系统行为进行验证</li>
+</ul>
+<h4 id="5-黑盒测试"><a href="#5-黑盒测试" class="headerlink" title="5.黑盒测试"></a>5.黑盒测试</h4><p>黑盒测试,又叫<code>功能测试</code>,是<code>数据驱动测试</code></p>
+<ul>
+<li><p>检查系统功能是否按照需求规格说明书的规定正常使用,是否能够接收输入数据而输出正确的结果,检查相应的文档是否采用了正确的模板,是否满足规范要求</p>
+</li>
+<li><p>1 等价类划分法</p>
+<ul>
+<li>每个等价类规定一个唯一的编号</li>
+<li>输入, 合理等价类,不合理等价类</li>
+</ul>
+</li>
+<li>2 边界值分析法<ul>
+<li>在某个输入输出变量范围的边界上,验证系统功能是否正常运行的测试方法</li>
+</ul>
+</li>
+<li>3 因果图法<ul>
+<li>从用自然语言书写的程序规格说明的描述中找出因（输入条件）和果（输出或程序状态的改变），可以通过因果图转换为判定表。</li>
+</ul>
+</li>
+<li>4 判定表方法</li>
+<li>5 正交试验法</li>
+<li>6 功能图法</li>
+<li>7 错误推测法</li>
+</ul>
+<h4 id="6-白盒测试"><a href="#6-白盒测试" class="headerlink" title="6.白盒测试"></a>6.白盒测试</h4><p>白盒测试, 又叫<code>结构测试</code>,是<code>逻辑驱动测试</code></p>
+<ul>
+<li><code>语句覆盖</code>:使程序中的每个可执行语句至少被执行一次</li>
+<li><code>判定(分支)覆盖</code>:使得程序中每个判断的取真分支和取假分支至少经历一次(真和假各至少一次)</li>
+<li><code>条件覆盖</code>:要使每个判断中每个条件的可能取值至少满足一次。(每个判断中的子条件例如 x&amp;&amp;y 中 x 值)</li>
+<li><code>判定条件覆盖</code>: 设计足够的测试用例,使得判断条件中的所有条件的可能取值至少执行一次,所有判断的可能结果至少执行一次</li>
+<li><code>条件组合覆盖</code>:使得判断中每个条件的所有可能至少出现一次,并且每个判断本身的判定结果也至少出现一次。(它与条件覆盖的差别是它不是简单地要求每个条件都出现“真”与“假”两种结果,而是要求让这些结果的所有可能组合都至少出现一次)</li>
+<li><code>路径覆盖</code>:覆盖程序中的所有可能的执行路径</li>
+<li><code>基本路径测试法</code>:<ul>
+<li>1.依据代码绘制流程图</li>
+<li>2.确定流程图的圈复杂度</li>
+<li>3.确定线性独立路径的基本集合</li>
+<li>4.设计测试用例覆盖每条基本路径<ul>
+<li>V(G) = 区域数量(由节点、连线包围的区域,包括图形外部区域)</li>
+<li>V(G) = 连线数量 - 节点数量 + 2</li>
+</ul>
+</li>
+<li>基本路径测试并不是测试所有路径的组合,仅仅保证每条基本路径被执行一次</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-单元测试"><a href="#7-单元测试" class="headerlink" title="7.单元测试"></a>7.单元测试</h4><p><code>WHAT</code>: 单元测试又称为<code>模块测试</code>, 是针对软件基本组成单元来进行正确性检验的测试工作。软件基本组成单元是应用的最小可测试部件。<br><code>HOW</code>:</p>
+<ul>
+<li>在详细设计阶段完成单元测试计划</li>
+<li>建立单元测试环境,完成测试设计与开发</li>
+<li>执行单元测试用例, 并且详细记录测试结果</li>
+<li>判定测试用例是否通过</li>
+<li>提交<code>《单元测试报告》</code></li>
+</ul>
+<p><code>WHY</code>:<br>单元测试的目标和任务:</p>
+<ul>
+<li>目标: 单元模块被正确编码</li>
+<li>任务:<ul>
+<li>1 模块独立执行通路测试</li>
+<li>2 模块局部数据结构测试</li>
+<li>3 模块接口测试</li>
+<li>4 模块边界条件测试</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-集成测试"><a href="#8-集成测试" class="headerlink" title="8.集成测试"></a>8.集成测试</h4><p>集成测试简单来说就是单元测试的集成</p>
+<ul>
+<li><code>渐增式测试模式</code>:把下一个要测试的模块同已经测试好的模块结合起来进行测试,测试完以后再把下一个应该测试的模块结合进来测试。</li>
+<li><code>非渐增式测试模式</code>:先分别测试每个模块,再把所有模块按设计要求放在一起结合成所要的程序,如大棒模式。</li>
+</ul>
+<p><code>自顶向下法(需要桩程序/桩模块)</code><br>从主控模块开始,沿着软件的控制层次向下移动,从而逐渐把各个模块结合起来(在组装过程中,可选择<code>BFS</code>或<code>DFS</code>)</p>
+<ul>
+<li>1 测主控模块,用桩代替所有主控模块的直接依附模块</li>
+<li>2 根据结合策略(<code>深度</code>或<code>广度</code>)每次用一个实际模块代替一个桩(测新结合的模块又需要新的桩)</li>
+<li>3 在结合下一个模块的同时进行测试</li>
+<li>4 为保证没有引进新错误而做可能要<code>回归测试</code></li>
+<li>从 <code>2</code> 开始不断重复进行上述过程, 直至完成</li>
+<li><code>优点</code>:不需要测试驱动程序,能够在测试阶段的早期实现并验证系统的主要功能,却能在早期发现上层模块的接口错误</li>
+<li><code>缺点</code>: 需要桩程序,可能遇到与此相联系的测试困难,低层关键模块中的错误发现时间晚,早期不能展开人力</li>
+</ul>
+<p><code>自底向上法(需要驱动程序)</code><br>自底向上测试是从<code>原子</code>模块(即在软件结构的最底层的模块)开始集成以进行测试</p>
+<ul>
+<li>1 把低层模块组合成某特定的软件子功能的族</li>
+<li>2 写一驱动程序协调测试数据的输入和输出</li>
+<li>3 对由模块组成的子功能族进行测试</li>
+<li>4 去掉驱动,把子功能族组合起来形成更强大的子功能族</li>
+<li>从 <code>2</code> 开始不断重复进行上述过程,直至完成</li>
+<li>优缺点与<code>自底向下</code>刚好相反</li>
+</ul>
+<p><code>混合法(改进的自顶向下但早期使用自底向上)</code>:</p>
+<ul>
+<li>对软件结构中较上层,使用的是<code>自顶向下</code>法</li>
+<li>对软件结构中较下层,使用的是<code>自底向上</code>法</li>
+</ul>
+<p><code>大棒集成法</code>:<br>先是对每一个子模块进行测试(单元测试阶段),然后将所有模块一次性的全部集成起来进行集成测试.</p>
+<ul>
+<li><code>缺点</code>: 因为所有的模块一次集成的,所以很难确定出错的真正位置、所在的模块、错误的原因</li>
+</ul>
+<h4 id="9-系统测试"><a href="#9-系统测试" class="headerlink" title="9.系统测试"></a>9.系统测试</h4><p><code>系统测试</code>是将需测试的软件，作为整个基于计算机系统的一个元素，与计算机硬件、外设、某些支持软件、数据和人员等其他系统元素及环境结合在一起测试。<br><code>功能测试</code>是按照测试软件的各个功能划分进行有条理的测试，在功能测试部分要保证测试项覆盖所有功能和各种功能条件组合。<br><code>回归测试</code>指在软件维护阶段，为了检测代码修改而引入的错误所进行的测试活动。</p>
+<ul>
+<li>所做的修改达到了预定的目的,如错误得到了改正,新功能得到了实现,能够适应新的运行环境等;</li>
+<li>不影响软件原有功能的正确性。</li>
+</ul>
+<p><code>压力测试</code>也称为强度测试、负载测试。压力测试是模拟实际应用的软硬件环境及用户使用过程的系统负荷，长时间或超大负荷地运行测试软件，来测试被测系统的性能、可靠性、稳定性等。要求进行超过规定性能指标的测试。<br><code>性能测试</code>是为了发现系统性能问题或获取系统性能相关指标而进行的测试。</p>
+<ul>
+<li>服务器的各项指标(<code>CPU</code>、<code>内存占用率</code>等)</li>
+<li>后台数据库的各项指标、<code>网络流量</code>、<code>响应时间</code></li>
+</ul>
+<h4 id="10-验收测试"><a href="#10-验收测试" class="headerlink" title="10.验收测试"></a>10.验收测试</h4><p><code>验收测试</code>: 在软件产品完成了系统功能和非功能测试之后、产品发布之前所进行的软件测试活动,它是技术测试的最后一个阶段,也称为    <code>交付测试</code>。</p>
+<h4 id="11-用户测试-α-β"><a href="#11-用户测试-α-β" class="headerlink" title="11.用户测试(α, β):"></a>11.用户测试(α, β):</h4><p><code>α测试</code>:通常是阶段性的开发完成后所开始进行，一直持续到进入<code>Beta测试</code>阶段前的阶段。<code>α测试</code>是一种验证测试，在模拟的环境中以模拟的数据来运行。在这个阶段中，通常是在开发单位由开发人员与测试的测试人员，以模拟或实际操作性的方式进行验证测试。</p>
+<p><code>β测试</code>在系统测试中通常先进行<code>α测试</code>以验证信息系统匹配用户以及设计需求所期望的功能。当<code>α阶段</code>完成后，开发过程进入到<code>β阶段</code>，由公众参与的测试的阶段。<code>β测试</code>可称为确认测试，在一个真实的环境中以实际的数据来运行测试，以确认性能，系统运行有效率，系统撤消与备份作业正常，通过测试让信息系统日后可以更趋完善。</p>
+<h4 id="12-本地化测试"><a href="#12-本地化测试" class="headerlink" title="12.本地化测试"></a>12.本地化测试</h4><p><code>软件本地化</code>是将一个软件产品按特定国家/地区或语言市场的需要进行加工,使之满足特定市场上的用户对语言和文化的特殊要求的软件生产活动。</p>
+<ul>
+<li>字符集, 翻译, 地区文化、宗教, 度量衡和时区等, 软件用户界面, 联机文档, 热键设置</li>
+<li>功能性测试, 翻译测试, 可用性测试, 兼容性测试</li>
+</ul>
+<h4 id="13-测试自动化与自动化测试"><a href="#13-测试自动化与自动化测试" class="headerlink" title="13.测试自动化与自动化测试"></a>13.测试自动化与自动化测试</h4><p>-<code>自动化测试</code>是相对手工测试而存在的一个概念,由手工逐个地运行测试用例的操作过程被测试工具自动执行的过程所代替。</p>
+<ul>
+<li><code>自动化测试</code>焦点集中在测试执行,主要是由测试工具自动地完成测试。</li>
+<li><code>测试自动化</code>指“一切可以由计算机系统自动完成的测试任务都已经由计算机系统或软件工具、程序来承担并自动执行”。</li>
+</ul>
+<p><code>手工测试</code>:</p>
+<ul>
+<li>优点: 发现缺陷率高, 容易实施, 创造性、灵活性</li>
+<li>缺点: 覆盖率量化困难, 重复测试效率低, 不一致性、可靠性低, 依赖人力资源</li>
+</ul>
+<p><code>自动测试</code>:</p>
+<ul>
+<li>优点: 高效率(速度), 高复用性, 覆盖率容易度量, 准确、可靠 不知疲劳, 激励团队士气</li>
+<li>缺点: 机械、难以发现缺陷, 一次性投入大</li>
+</ul>
+<p><code>测试自动化实现的原理</code>:</p>
+<ul>
+<li>代码分析, 对象识别, 脚本技术, 自动比较技术, 测试自动化系统的构成</li>
+</ul>
+<p><code>自动化测试</code>:</p>
+<ul>
+<li>1.界面测试(QTP,selenium) GUI 测试(黑盒):<ul>
+<li>1.生成原始脚本(用户辅助): 对象识别: 识别和定位用户界面 对象捕获和回放: 计算机辅助生成脚本</li>
+<li>2 修改编写脚本:来操作、控制、验证对象:包括对象识别、脚本技术、对运行结果进行比较</li>
+</ul>
+</li>
+<li>2.代码分析(类似高级编译系统,找出不符合编码规范的地方)</li>
+<li>3.性能测试拟用户实际操作,记录事物流程;针对脚本进行修改,增加逻辑控制、完成参数化和数据关联等</li>
+</ul>
+<p><code>自动化测试的流程举例</code>:<br>1 启动应用 -&gt; 2 创建脚本 -&gt; 3 录制对象及其操作 -&gt; 4 插入验证点 -&gt; 5 调试脚本 -&gt; 6 保存脚本 -&gt; 7 调用脚本 -&gt; 8 验证测试结果 -&gt; 9 记录并输出测试报告</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软件测试/" rel="tag">#软件测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/埃拉托斯特尼筛法/" rel="next" title="埃拉托斯特尼筛法">
+                <i class="fa fa-chevron-left"></i> 埃拉托斯特尼筛法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/在Ubuntu-16-04上部署Django/" rel="prev" title="在Ubuntu 16.04上部署Django">
+                在Ubuntu 16.04上部署Django <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="软件测试学习笔记/"
+           data-title="软件测试学习笔记" data-url="http://tiierr.xyz/软件测试学习笔记/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是软件测试"><span class="nav-number">1.</span> <span class="nav-text">1.什么是软件测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-软件缺陷的构成-在哪阶段最多以及原因"><span class="nav-number">2.</span> <span class="nav-text">2.软件缺陷的构成? 在哪阶段最多以及原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-软件测试的分类"><span class="nav-number">3.</span> <span class="nav-text">3.软件测试的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-静态测试和动态测试"><span class="nav-number">4.</span> <span class="nav-text">4.静态测试和动态测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-黑盒测试"><span class="nav-number">5.</span> <span class="nav-text">5.黑盒测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-白盒测试"><span class="nav-number">6.</span> <span class="nav-text">6.白盒测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-单元测试"><span class="nav-number">7.</span> <span class="nav-text">7.单元测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-集成测试"><span class="nav-number">8.</span> <span class="nav-text">8.集成测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-系统测试"><span class="nav-number">9.</span> <span class="nav-text">9.系统测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-验收测试"><span class="nav-number">10.</span> <span class="nav-text">10.验收测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-用户测试-α-β"><span class="nav-number">11.</span> <span class="nav-text">11.用户测试(α, β):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-本地化测试"><span class="nav-number">12.</span> <span class="nav-text">12.本地化测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-测试自动化与自动化测试"><span class="nav-number">13.</span> <span class="nav-text">13.测试自动化与自动化测试</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

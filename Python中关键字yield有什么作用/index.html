@@ -1,0 +1,771 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="yield有什么用?例如下面这段代码:
+12345def node._get_child_candidates(self, distance, min_dist, max_dist):    if self._leftchild and distance - max_dist &amp;lt; self._median:        yield self._leftchild    if self._r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中关键字yield有什么作用?">
+<meta property="og:url" content="http://tiierr.xyz/Python中关键字yield有什么作用/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="yield有什么用?例如下面这段代码:
+12345def node._get_child_candidates(self, distance, min_dist, max_dist):    if self._leftchild and distance - max_dist &amp;lt; self._median:        yield self._leftchild    if self._r">
+<meta property="og:updated_time" content="2017-01-12T10:55:58.355Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中关键字yield有什么作用?">
+<meta name="twitter:description" content="yield有什么用?例如下面这段代码:
+12345def node._get_child_candidates(self, distance, min_dist, max_dist):    if self._leftchild and distance - max_dist &amp;lt; self._median:        yield self._leftchild    if self._r">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Python中关键字yield有什么作用? | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python中关键字yield有什么作用?
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-22T22:38:10+08:00" content="2016-09-22">
+              2016-09-22
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Python中关键字yield有什么作用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python中关键字yield有什么作用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="yield有什么用"><a href="#yield有什么用" class="headerlink" title="yield有什么用?"></a>yield有什么用?</h3><p>例如下面这段代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">node</span>.<span class="title">_get_child_candidates</span><span class="params">(self, distance, min_dist, max_dist)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self._leftchild <span class="keyword">and</span> distance - max_dist &lt; self._median:</span><br><span class="line">        <span class="keyword">yield</span> self._leftchild</span><br><span class="line">    <span class="keyword">if</span> self._rightchild <span class="keyword">and</span> distance + max_dist &gt;= self._median:</span><br><span class="line">        <span class="keyword">yield</span> self._rightchild</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>下面是调用它:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">result, candidates = list(), [self]</span><br><span class="line"><span class="keyword">while</span> candidates:</span><br><span class="line">    node = candidates.pop()</span><br><span class="line">    distance = node._get_dist(obj)</span><br><span class="line">    <span class="keyword">if</span> distance &lt;= max_dist <span class="keyword">and</span> distance &gt;= min_dist:</span><br><span class="line">        result.extend(node._values)</span><br><span class="line">    candidates.extend(node._get_child_candidates(distance, min_dist, max_dist))</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<p>当<code>_get_child_candidates</code>方法被调用的时候发生了什么?是返回一个列表?还是一个元祖?它还能第二次调用吗?后面的调用什么时候结束?</p>
+<p>为了理解yield有什么用,首先得理解<code>generators</code>,而理解<code>generators</code>前还要理解<code>iterables</code>.</p>
+<h3 id="Iterables"><a href="#Iterables" class="headerlink" title="Iterables"></a><code>Iterables</code></h3><p>当你创建了一个列表,你可以一个一个的读取它的每一项,这叫做<code>iteration</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>mylist = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> mylist:</span><br><span class="line"><span class="meta">... </span>   print(i)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>Mylist是可迭代的.当你用列表推导式的时候,你就创建了一个列表,而这个列表也是可迭代的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>mylist = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> mylist:</span><br><span class="line"><span class="meta">... </span>   print(i)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>所有你可以用在<code>for...in...</code>语句中的都是可迭代的:比如<code>lists,strings,files</code>…因为这些可迭代的对象你可以随意的读取所以非常方便易用,但是你必须把它们的值放到内存里,当它们有很多值时就会消耗太多的内存.</p>
+<h3 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a><code>Generators</code></h3><p>生成器也是迭代器的一种,但是你只能迭代它们一次.原因很简单,因为它们不是全部存在内存里,它们只在要调用的时候在内存里生成:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>mygenerator = (x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> mygenerator:</span><br><span class="line"><span class="meta">... </span>   print(i)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>生成器和迭代器的区别就是用()代替[],还有你不能用for i in mygenerator第二次调用生成器:首先计算0,然后会在内存里丢掉0去计算1,直到计算完4.</p>
+<h3 id="Yield"><a href="#Yield" class="headerlink" title="Yield"></a><code>Yield</code></h3><p>Yield的用法和关键字return差不多,下面的函数将会返回一个生成器:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">createGenerator</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>   mylist = range(<span class="number">3</span>)</span><br><span class="line"><span class="meta">... </span>   <span class="keyword">for</span> i <span class="keyword">in</span> mylist:</span><br><span class="line"><span class="meta">... </span>       <span class="keyword">yield</span> i*i</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mygenerator = createGenerator() <span class="comment"># 创建生成器</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(mygenerator) <span class="comment"># mygenerator is an object!</span></span><br><span class="line">&lt;generator object createGenerator at <span class="number">0xb7555c34</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> mygenerator:</span><br><span class="line"><span class="meta">... </span>    print(i)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>在这里这个例子好像没什么用,不过当你的函数要返回一个非常大的集合并且你希望只读一次的话,那么它就非常的方便了.</p>
+<p>要理解<code>Yield</code>你必须先理解当你调用函数的时候,函数里的代码并没有运行.函数仅仅返回生成器对象,这就是它最微妙的地方:-)</p>
+<p>然后呢,每当for语句迭代生成器的时候你的代码才会运转.</p>
+<p>现在,到了最难的部分:</p>
+<p>当for语句第一次调用函数里返回的生成器对象,函数里的代码就开始运作,直到碰到yield,然后会返回本次循环的第一个返回值.所以下一次调用也将运行一次循环然后返回下一个值,直到没有值可以返回.</p>
+<p>一旦函数运行并没有碰到yeild语句就认为生成器已经为空了.原因有可能是循环结束或者没有满足if/else之类的.</p>
+<p>对于你的代码的解释</p>
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器:"></a>生成器:</h3><p>这里你创建node方法的对象将会返回一个生成器<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">node</span>.<span class="title">_get_child_candidates</span><span class="params">(self, distance, min_dist, max_dist)</span>:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 这里的代码你每次使用生成器对象的时候将会调用</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> self._leftchild <span class="keyword">and</span> distance - max_dist &lt; self._median:</span><br><span class="line">      <span class="keyword">yield</span> self._leftchild</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> self._rightchild <span class="keyword">and</span> distance + max_dist &gt;= self._median:</span><br><span class="line">      <span class="keyword">yield</span> self._rightchild</span><br><span class="line">      </span><br><span class="line">  <span class="comment"># 如果代码运行到这里,生成器就被认为变成了空的</span></span><br></pre></td></tr></table></figure></p>
+<p>调用:</p>
+<p>创建空列表和一个当前对象索引的列表<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result, candidates = list(), [self]</span><br></pre></td></tr></table></figure></p>
+<p>在candidates上进行循环(在开始只保含一个元素)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line"><span class="keyword">while</span> candidates:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获得最后一个condidate然后从列表里删除</span></span><br><span class="line">    node = candidates.pop()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取obj和candidate的distance</span></span><br><span class="line">    distance = node._get_dist(obj)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果distance何时将会填入result</span></span><br><span class="line">    <span class="keyword">if</span> distance &lt;= max_dist <span class="keyword">and</span> distance &gt;= min_dist:</span><br><span class="line">        result.extend(node._values)</span><br><span class="line"></span><br><span class="line">    candidates.extend(node._get_child_candidates(distance, min_dist, max_dist))</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p>
+<p>这段代码有几个有意思的地方:</p>
+<p>一般的时候我们会在循环迭代一个列表的同时在列表中添加元素:-)尽管在有限循环里结束多少有一些危险,但也不失为一个简单的方法去遍历嵌套的数据.在这里candidates.extend(node._get_child_candidates(distance, min_dist, max_dist))将遍历生成器的每一个值,但是while循环中的condidates将不再保存已经遍历过的生成器对象，也就是说添加进condidates的生成器对象只会遍历一遍。</p>
+<p>extend()是一个列表对象的方法,它可以把一个迭代对象添加进列表.</p>
+<p>我们经常这么用:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.extend(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure></p>
+<p>但是在你给的代码里得到的是生成器,这样做的好处:</p>
+<p>你不需要读这个值两次<br>你能得到许多孩子节点但是你不希望他们全部存入内存.<br>这种方法之所以能很好的运行是因为Python不关心方法的参数是不是一个列表.它只希望接受一个迭代器,所以不管是strings,lists,tuples或者generators都可以!这种方法叫做duck typing,这也是Python看起来特别cool的原因之一.但是这又是另外一个传说了,另一个问题~~</p>
+<p>好了,看到这里可以打住了,下面让我们看看生成器的高级用法:</p>
+<h3 id="控制迭代器的穷尽"><a href="#控制迭代器的穷尽" class="headerlink" title="控制迭代器的穷尽"></a>控制迭代器的穷尽</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Bank</span><span class="params">()</span>:</span> <span class="comment"># 让我们建个银行,生产许多ATM</span></span><br><span class="line"><span class="meta">... </span>   crisis = <span class="keyword">False</span></span><br><span class="line"><span class="meta">... </span>   <span class="function"><span class="keyword">def</span> <span class="title">create_atm</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>       <span class="keyword">while</span> <span class="keyword">not</span> self.crisis:</span><br><span class="line"><span class="meta">... </span>           <span class="keyword">yield</span> <span class="string">"$100"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hsbc = Bank() <span class="comment"># 当一切就绪了你想要多少ATM就给你多少</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>corner_street_atm = hsbc.create_atm()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(corner_street_atm.next())</span><br><span class="line">$<span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(corner_street_atm.next())</span><br><span class="line">$<span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print([corner_street_atm.next() <span class="keyword">for</span> cash <span class="keyword">in</span> range(<span class="number">5</span>)])</span><br><span class="line">[<span class="string">'$100'</span>, <span class="string">'$100'</span>, <span class="string">'$100'</span>, <span class="string">'$100'</span>, <span class="string">'$100'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hsbc.crisis = <span class="keyword">True</span> <span class="comment"># cao,经济危机来了没有钱了!</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(corner_street_atm.next())</span><br><span class="line">&lt;type <span class="string">'exceptions.StopIteration'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wall_street_atm = hsbc.create_atm() <span class="comment"># 对于其他ATM,它还是True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(wall_street_atm.next())</span><br><span class="line">&lt;type <span class="string">'exceptions.StopIteration'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hsbc.crisis = <span class="keyword">False</span> <span class="comment"># 麻烦的是,尽管危机过去了,ATM还是空的</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(corner_street_atm.next())</span><br><span class="line">&lt;type <span class="string">'exceptions.StopIteration'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>brand_new_atm = hsbc.create_atm() <span class="comment"># 只能重新新建一个bank了</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> cash <span class="keyword">in</span> brand_new_atm:</span><br><span class="line"><span class="meta">... </span>   <span class="keyword">print</span> cash</span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">$<span class="number">100</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>它对于一些不断变化的值很有用,像控制你资源的访问.</p>
+<p><code>Itertools</code>,你的好基友</p>
+<p>itertools模块包含了一些特殊的函数可以操作可迭代对象.有没有想过复制一个生成器?链接两个生成器?把嵌套列表里的值组织成一个列表?Map/Zip还不用创建另一个列表?</p>
+<p>来吧<code>import itertools</code></p>
+<p>来一个例子?让我们看看4匹马比赛有多少个排名结果:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>horses = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>races = itertools.permutations(horses)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(races)</span><br><span class="line">&lt;itertools.permutations object at <span class="number">0xb754f1dc</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(list(itertools.permutations(horses)))</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>),</span><br><span class="line"> (<span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>),</span><br><span class="line"> (<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>),</span><br><span class="line"> (<span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>),</span><br><span class="line"> (<span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>),</span><br><span class="line"> (<span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure></p>
+<h3 id="理解迭代的内部机制"><a href="#理解迭代的内部机制" class="headerlink" title="理解迭代的内部机制"></a>理解迭代的内部机制</h3><p>迭代是可迭代对象(对应<code>__iter__()</code>方法)和迭代器(对应<code>__next__()</code>方法)的一个过程.可迭代对象就是任何你可以迭代的对象(废话啊).迭代器就是可以让你迭代可迭代对象的对象(有点绕口,意思就是这个意思)</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/在Python中有三元运算符吗/" rel="next" title="在Python中有三元运算符吗?">
+                <i class="fa fa-chevron-left"></i> 在Python中有三元运算符吗?
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/理解OAuth-2-0-阮一峰/" rel="prev" title="理解OAuth 2.0 --阮一峰">
+                理解OAuth 2.0 --阮一峰 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="Python中关键字yield有什么作用/"
+           data-title="Python中关键字yield有什么作用?" data-url="http://tiierr.xyz/Python中关键字yield有什么作用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#yield有什么用"><span class="nav-number">1.</span> <span class="nav-text">yield有什么用?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterables"><span class="nav-number">2.</span> <span class="nav-text">Iterables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generators"><span class="nav-number">3.</span> <span class="nav-text">Generators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yield"><span class="nav-number">4.</span> <span class="nav-text">Yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器"><span class="nav-number">5.</span> <span class="nav-text">生成器:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制迭代器的穷尽"><span class="nav-number">6.</span> <span class="nav-text">控制迭代器的穷尽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解迭代的内部机制"><span class="nav-number">7.</span> <span class="nav-text">理解迭代的内部机制</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

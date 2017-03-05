@@ -1,0 +1,1060 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二维码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。
+为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码 - 格式和版本信息字符串表">
+<meta property="og:url" content="http://tiierr.xyz/二维码-格式和版本信息字符串表/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。
+为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。">
+<meta property="og:updated_time" content="2017-03-01T01:43:54.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码 - 格式和版本信息字符串表">
+<meta name="twitter:description" content="二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。
+为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 二维码 - 格式和版本信息字符串表 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                二维码 - 格式和版本信息字符串表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T12:42:30+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/二维码-格式和版本信息字符串表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="二维码-格式和版本信息字符串表/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>二维码使用纠错码和掩码模式。二维码的大小由一个数字表示，称为版本号。</p>
+<p>为了确保二维码扫描器准确地解码它扫描的内容，二维码标准要求每个二维码包括格式信息字符串，其告诉扫描器此二维码正在使用的纠错级别和掩码模式。</p>
+<a id="more"></a>
+<p>此页面列出了所有可能的格式和版本字符串。</p>
+<h1 id="1-格式信息字符串"><a href="#1-格式信息字符串" class="headerlink" title="1 格式信息字符串"></a>1 格式信息字符串</h1><p>二维码使用纠错编码。这是一种生成冗余数据的方式，二维码扫描器可以用来检测和修复扫描的代码中的错误。</p>
+<p>二维码也使用掩码模式。掩模图案是用于改变代码中的像素的特定图案的颜色（暗到亮或者从亮到暗）的算法，以便于扫描仪更容易准确地读取。</p>
+<p>二维码必须包括格式字符串，该格式字符串包含关于在代码中使用哪个级别的纠错编码和哪个掩码模式的信息。</p>
+<p>此页面列出所有28种可能的格式字符串。有关如何生成这些字符串的详细说明，请访问格式和版本信息文章阅读。</p>
+<h2 id="1-1-所有格式信息字符串的列表"><a href="#1-1-所有格式信息字符串的列表" class="headerlink" title="1.1 所有格式信息字符串的列表"></a>1.1 所有格式信息字符串的列表</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">纠错级别</th>
+<th style="text-align:center">掩码格式</th>
+<th style="text-align:center">格式信息字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">111011111000100</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">111001011110011</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">111110110101010</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">111100010011101</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">110011000101111</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">110001100011000</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">110110001000001</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">110100101110110</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">101010000010010</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">101000100100101</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">101111001111100</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">101101101001011</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">100010111111001</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">100000011001110</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">100111110010111</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">100101010100000</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">011010101011111</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">011000001101000</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">011111100110001</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">011101000000110</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">010010010110100</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">010000110000011</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">010111011011010</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">010101111101101</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">001011010001001</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">001001110111110</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">001110011100111</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">001100111010000</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">000011101100010</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">000001001010101</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">000110100001100</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">000100000111011</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-版本信息字符串"><a href="#2-版本信息字符串" class="headerlink" title="2 版本信息字符串"></a>2 版本信息字符串</h1><p>二维码的大小由称为版本号的数字表示。</p>
+<p>此外，对于版本7及其以上版本，二维码标准要求二维码包括两个版本信息字符串(6x3矩形块)，其告诉二维码扫描器该代码是哪个版本。<br>有关如何生成这些字符串的详细说明，请访问格式和版本信息文章阅读。</p>
+<h2 id="2-1-所有版本信息字符串的列表"><a href="#2-1-所有版本信息字符串的列表" class="headerlink" title="2.1 所有版本信息字符串的列表"></a>2.1 所有版本信息字符串的列表</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">版本号</th>
+<th style="text-align:center">版本信息字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">000111110010010100</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">001000010110111100</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">001001101010011001</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">001010010011010011</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">001011101111110110</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">001100011101100010</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">001101100001000111</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">001110011000001101</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">001111100100101000</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">010000101101111000</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">010001010001011101</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center">010010101000010111</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center">010011010100110010</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">010100100110100110</td>
+</tr>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center">010101011010000011</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center">010110100011001001</td>
+</tr>
+<tr>
+<td style="text-align:center">23</td>
+<td style="text-align:center">010111011111101100</td>
+</tr>
+<tr>
+<td style="text-align:center">24</td>
+<td style="text-align:center">011000111011000100</td>
+</tr>
+<tr>
+<td style="text-align:center">25</td>
+<td style="text-align:center">011001000111100001</td>
+</tr>
+<tr>
+<td style="text-align:center">26</td>
+<td style="text-align:center">011010111110101011</td>
+</tr>
+<tr>
+<td style="text-align:center">27</td>
+<td style="text-align:center">011011000010001110</td>
+</tr>
+<tr>
+<td style="text-align:center">28</td>
+<td style="text-align:center">011100110000011010</td>
+</tr>
+<tr>
+<td style="text-align:center">29</td>
+<td style="text-align:center">011101001100111111</td>
+</tr>
+<tr>
+<td style="text-align:center">30</td>
+<td style="text-align:center">011110110101110101</td>
+</tr>
+<tr>
+<td style="text-align:center">31</td>
+<td style="text-align:center">011111001001010000</td>
+</tr>
+<tr>
+<td style="text-align:center">32</td>
+<td style="text-align:center">100000100111010101</td>
+</tr>
+<tr>
+<td style="text-align:center">33</td>
+<td style="text-align:center">100001011011110000</td>
+</tr>
+<tr>
+<td style="text-align:center">34</td>
+<td style="text-align:center">100010100010111010</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center">100011011110011111</td>
+</tr>
+<tr>
+<td style="text-align:center">36</td>
+<td style="text-align:center">100100101100001011</td>
+</tr>
+<tr>
+<td style="text-align:center">37</td>
+<td style="text-align:center">100101010000101110</td>
+</tr>
+<tr>
+<td style="text-align:center">38</td>
+<td style="text-align:center">100110101001100100</td>
+</tr>
+<tr>
+<td style="text-align:center">39</td>
+<td style="text-align:center">100111010101000001</td>
+</tr>
+<tr>
+<td style="text-align:center">40</td>
+<td style="text-align:center">101000110001101001</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二维码/" rel="tag">#二维码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/二维码-掩码图案/" rel="next" title="二维码 - 掩码图案">
+                <i class="fa fa-chevron-left"></i> 二维码 - 掩码图案
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/二维码-格式和版本信息/" rel="prev" title="二维码 - 格式和版本信息">
+                二维码 - 格式和版本信息 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="二维码-格式和版本信息字符串表/"
+           data-title="二维码 - 格式和版本信息字符串表" data-url="http://tiierr.xyz/二维码-格式和版本信息字符串表/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-格式信息字符串"><span class="nav-number">1.</span> <span class="nav-text">1 格式信息字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-所有格式信息字符串的列表"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 所有格式信息字符串的列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-版本信息字符串"><span class="nav-number">2.</span> <span class="nav-text">2 版本信息字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-所有版本信息字符串的列表"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 所有版本信息字符串的列表</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

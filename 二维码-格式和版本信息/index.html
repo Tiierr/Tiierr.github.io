@@ -1,0 +1,1063 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二维码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="创建二维码的最后一步是生成格式和版本信息字符串，然后将它们放在二维码中的正确位置。本文主要说明如何生成格式和版本信息字符串，然后将它们放在二维码中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码 - 格式和版本信息">
+<meta property="og:url" content="http://tiierr.xyz/二维码-格式和版本信息/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="创建二维码的最后一步是生成格式和版本信息字符串，然后将它们放在二维码中的正确位置。本文主要说明如何生成格式和版本信息字符串，然后将它们放在二维码中。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd636rhh2yj20av065web">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd637gck5bj20a30alq34">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66cgsg1aj20lr0lr752">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66d5ubxvj20ah0ahmx2">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66j9wqnpj20e40e1760">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66l2it35j20ah0ahaa0">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66lav9pij20a00a0748">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66plvnb9j20ab0abt8o">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd66psoyksj209f09fglg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd69uu27uvj20ab0abt8o">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd69yby5fqj2084084743">
+<meta property="og:updated_time" content="2017-02-28T08:52:06.498Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码 - 格式和版本信息">
+<meta name="twitter:description" content="创建二维码的最后一步是生成格式和版本信息字符串，然后将它们放在二维码中的正确位置。本文主要说明如何生成格式和版本信息字符串，然后将它们放在二维码中。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/647dc635ly1fd636rhh2yj20av065web">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 二维码 - 格式和版本信息 | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                二维码 - 格式和版本信息
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T13:08:57+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/二维码-格式和版本信息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="二维码-格式和版本信息/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>创建二维码的最后一步是生成格式和版本信息字符串，然后将它们放在二维码中的正确位置。本文主要说明如何生成格式和版本信息字符串，然后将它们放在二维码中。</p>
+<a id="more"></a>
+<h1 id="1-格式字符串"><a href="#1-格式字符串" class="headerlink" title="1 格式字符串"></a>1 格式字符串</h1><p>格式信息字符串对当前二维码中使用的错误校正级别和掩码模式进行编码。由于存在四个可能的纠错级别（L，M，Q和H）和7个可能的掩码模式，因此存在 4×7 = 28 个可能的格式信息串。</p>
+<p>下一节将介绍如何生成这些格式字符串。有关28个格式字符串的完整列表，请参阅<a href="../二维码-格式和版本信息字符串表/">格式字符串表</a>。</p>
+<h2 id="1-1-生成格式信息字符串"><a href="#1-1-生成格式信息字符串" class="headerlink" title="1.1 生成格式信息字符串"></a>1.1 生成格式信息字符串</h2><p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd636rhh2yj20av065web" alt=""></p>
+<p>格式信息字符串是一个15个bits的信息，每一个bit的位置如下图所示：（注意图中的Dark Module，那是永远出现的）</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd637gck5bj20a30alq34" alt=""></p>
+<p>这15个bits中包括：</p>
+<ul>
+<li>5个数据bits：其中，2个bits用于表示使用什么样的纠错级别，3个bits表示使用什么样的掩码模式。</li>
+<li>10个纠错bits。主要通过BCH Code来计算。</li>
+</ul>
+<p>然后15个bits还要与101010000010010做XOR操作。这样就保证不会因为我们选用了00的纠错级别和000的掩码，从而造成全部为白色，这会增加我们的扫描器的图像识别的困难。</p>
+<h2 id="1-2-纠错-Bits"><a href="#1-2-纠错-Bits" class="headerlink" title="1.2 纠错 Bits"></a>1.2 纠错 Bits</h2><p>创建格式信息字符串的第一步是获取指定二维码中使用的错误校正级别的两个位。下表显示每个错误校正级别的位序列。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">纠错级别</th>
+<th style="text-align:center">位</th>
+<th style="text-align:center">整数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">01</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">00</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+<p>请注意，表中的数字不按0,1,2,3的顺序排列。</p>
+<h2 id="1-3-掩码-Bits"><a href="#1-3-掩码-Bits" class="headerlink" title="1.3 掩码 Bits"></a>1.3 掩码 Bits</h2><p>对于掩码图案，请参阅<a href="../二维码-掩码图案/">掩码图案</a>页面以找到每个图案对应的掩码编号。将数字转换为3位二进制字符串。</p>
+<h2 id="1-4-示例"><a href="#1-4-示例" class="headerlink" title="1.4 示例"></a>1.4 示例</h2><p>例如，如果我们使用纠错级别L和掩码模式4来生成二维码，则如下创建5位二进制序列：</p>
+<p>01 (纠错码指示符)</p>
+<p>100 (掩码模式4的二进制)</p>
+<p>结果: 01100</p>
+<h2 id="1-5-为格式字符串生成纠错-Bits"><a href="#1-5-为格式字符串生成纠错-Bits" class="headerlink" title="1.5 为格式字符串生成纠错 Bits"></a>1.5 为格式字符串生成纠错 Bits</h2><p>现在有了前5位的格式字符串，我们使用它来生成10个纠错Bits。</p>
+<h3 id="1-5-1-获取生成多项式"><a href="#1-5-1-获取生成多项式" class="headerlink" title="1.5.1 获取生成多项式"></a>1.5.1 获取生成多项式</h3><p>当生成格式字符串的纠错码字时，二维码标准使用以下公式生成多项式：</p>
+<p>x<sup>10</sup> + x<sup>8</sup> + x<sup>5</sup> + x<sup>4</sup> + x<sup>2</sup> + x + 1</p>
+<p>我们可以通过仅取每个项的系数将其转换为二进制字符串。</p>
+<p>x<sup>10</sup>的系数为1，x<sup>9</sup>的系数为0，因为x9不存在于多项式中。</p>
+<p>根据以上公式得出表示此步骤的生成多项式的二进制字符串是:<br><strong>10100110111</strong></p>
+<h3 id="1-5-2-计算纠错-Bits"><a href="#1-5-2-计算纠错-Bits" class="headerlink" title="1.5.2 计算纠错 Bits"></a>1.5.2 计算纠错 Bits</h3><p>下一步是将格式字符串位（上一步的01100）除以生成多项式（上一步的10100110111）。</p>
+<p>为此，首先通过将十个0放在格式字符串的右侧创建一个15位字符串，如下所示：</p>
+<p>01100 - &gt; 011000000000000</p>
+<p>现在从左边删除所有的0：</p>
+<p>011000000000000 - &gt; 11000000000000</p>
+<p>具体计算步骤：</p>
+<ol>
+<li>在生成多项式的右边填充0，使其与当前格式字符串的长度相同。</li>
+<li>使用当前格式字符串对填充的生成多项式字符串进行XOR。</li>
+<li>从结果的左侧删除0。</li>
+</ol>
+<p>循环以上步骤，直到得到的格式字符串为10位或更少位长。因此，在每次循环之前，检查以确保当前格式字符串是11位或更长（11位是生成多项式的长度）。我们当前的字符串为11000000000000，是14位长。</p>
+<h3 id="1-5-3-第一次计算"><a href="#1-5-3-第一次计算" class="headerlink" title="1.5.3 第一次计算"></a>1.5.3 第一次计算</h3><p>首先，用0填充右侧的生成多项式字符串，使其与当前格式字符串的长度相同：</p>
+<p>10100110111 &lt;- 没有填充的生成多项式<br>11000000000000 &lt;- 当前格式字符串，如上一节所示<br>10100110111000 &lt;- 填充生成多项式</p>
+<p>现在，用填充的生成多项式与格式字符串进行XOR：</p>
+<p>11000000000000 ^ 10100110111000 = 01100110111000</p>
+<p>并从结果的左侧删除0：</p>
+<p>01100110111000 -&gt; 1100110111000</p>
+<h3 id="1-5-4-第二次计算"><a href="#1-5-4-第二次计算" class="headerlink" title="1.5.4 第二次计算"></a>1.5.4 第二次计算</h3><p>结果字符串1100110111000是13位长 &gt;= 11位长，可以继续运算。</p>
+<p>10100110111 &lt;- 没有填充的生成多项式<br>1100110111000 &lt;- 当前格式字符串，如上一节所示<br>1010011011100 &lt;- 填充生成多项式</p>
+<p>用填充的生成多项式与当前格式字符串进行XOR：</p>
+<p>1100110111000 ^ 1010011011100 = 110101100100</p>
+<h3 id="1-5-5-第三次计算"><a href="#1-5-5-第三次计算" class="headerlink" title="1.5.5 第三次计算"></a>1.5.5 第三次计算</h3><p>结果字符串110101100100是12位长 &gt;= 11位长，可以继续运算。</p>
+<p>10100110111 &lt;- 没有填充的生成多项式<br>110101100100 &lt;- 当前格式字符串，如上一节所示<br>101001101110 &lt;- 填充生成多项式</p>
+<p>用填充的生成多项式与当前格式字符串进行XOR：</p>
+<p>110101100100 ^ 101001101110 = 011100001010</p>
+<p>并从结果的左侧删除0：</p>
+<p>011100001010 -&gt; 11100001010</p>
+<h3 id="1-5-6-第四次计算"><a href="#1-5-6-第四次计算" class="headerlink" title="1.5.6 第四次计算"></a>1.5.6 第四次计算</h3><p>结果字符串110101100100是11位长 &gt;= 11位长，可以继续运算。</p>
+<p>没有必要填充生成多项式，因为它与格式字符串现在是相同的长度。</p>
+<p>生成多项式与当前格式字符串进行XOR：</p>
+<p>11100001010 ^ 10100110111 = 1000111101</p>
+<p>结果是10位长，所以我们完成了计算步骤。</p>
+<blockquote>
+<p>如果结果小于10位，我们将在结果左侧用0填充，使其长10位。</p>
+</blockquote>
+<h3 id="1-5-7-将格式信息字符串和纠错位放在一起"><a href="#1-5-7-将格式信息字符串和纠错位放在一起" class="headerlink" title="1.5.7 将格式信息字符串和纠错位放在一起"></a>1.5.7 将格式信息字符串和纠错位放在一起</h3><p>使用格式信息的前5位（纠错级别指示符和掩码模式指示符）创建一个字符串，后面跟随刚才生成的纠错位。</p>
+<p>011001000111101</p>
+<h3 id="1-5-8-与掩码字符串XOR"><a href="#1-5-8-与掩码字符串XOR" class="headerlink" title="1.5.8 与掩码字符串XOR"></a>1.5.8 与掩码字符串XOR</h3><p>二维码标准规定，将结果与以下二进制字符串进行XOR：101010000010010。</p>
+<p>011001000111101 ^ 101010000010010 = 110011000101111</p>
+<p>纠错级别L和掩码模式4的二维码的最终格式字符串是：</p>
+<p><strong>110011000101111</strong></p>
+<h2 id="1-6-将格式字符串放入二维码"><a href="#1-6-将格式字符串放入二维码" class="headerlink" title="1.6 将格式字符串放入二维码"></a>1.6 将格式字符串放入二维码</h2><p>格式信息字符串放置在最上面的finder patterns的下方和最左侧的finder patterns的右侧，如下图所示。</p>
+<p>图像中的数字14指的是格式字符串的最高有效位，数字0指的是最低有效位。</p>
+<p>例如，使用上面例子中的格式字符串110011000101111，下面图像中的数字对应于格式字符串位如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">14</th>
+<th style="text-align:center">13</th>
+<th style="text-align:center">12</th>
+<th style="text-align:center">11</th>
+<th style="text-align:center">10</th>
+<th style="text-align:center">9</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">1</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66cgsg1aj20lr0lr752" alt=""></p>
+<p>下图是版本1的二维码中的示例格式字符串110011000101111。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66d5ubxvj20ah0ahmx2" alt=""></p>
+<h2 id="1-7-暗模块"><a href="#1-7-暗模块" class="headerlink" title="1.7 暗模块"></a>1.7 暗模块</h2><p>每个二维码在坐标（8, 4*V + 9）处都有暗像素，也称为暗模块。也就是说，暗模块的y坐标是</p>
+<p>版本1: 4<em>1 + 9 = 13<br>版本2: 4</em>2 + 9 = 17<br>版本3: 4*3 + 9 = 21</p>
+<p>…</p>
+<p>以此类推。</p>
+<p>即暗模块总是在左下finder patterns的右上角的右边。如下图所示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66j9wqnpj20e40e1760" alt=""></p>
+<h2 id="1-8-大版本的二维码"><a href="#1-8-大版本的二维码" class="headerlink" title="1.8 大版本的二维码"></a>1.8 大版本的二维码</h2><p>不管二维码是什么大小的版本，格式字符串位始终被放置在最上面的finder patterns下方和最左侧的finder patterns的右侧，如下所示。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66l2it35j20ah0ahaa0" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66lav9pij20a00a0748" alt=""></p>
+<h1 id="2-版本信息"><a href="#2-版本信息" class="headerlink" title="2 版本信息"></a>2 版本信息</h1><p>对于版本7及其以上版本，二维码标准要求二维码必须在二维码的左下角和右上角分别放置一个18位版本信息字符串。其告诉二维码扫描器该二维码的版本信息。有关版本信息字符串的完整列表，请参阅<a href="../二维码-格式和版本信息字符串表/">版本字符串表</a>。</p>
+<p>版本信息区是下图像显示的6x3蓝色矩形。无论二维码有多大，版本信息都放在finder patterns旁边。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66plvnb9j20ab0abt8o" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd66psoyksj209f09fglg" alt=""></p>
+<h2 id="2-1-生成版本信息字符串"><a href="#2-1-生成版本信息字符串" class="headerlink" title="2.1 生成版本信息字符串"></a>2.1 生成版本信息字符串</h2><p>二维码白标准规定了使用(18,6)的戈莱码(Golay code)作为版本信息字符串。</p>
+<p>因此，版本信息字符串是由对二维版本进行编码的6位二进制字符串，加一个12位的纠错码字符串组成。整个字符串是18位长。</p>
+<h2 id="2-2-获取生成多项式"><a href="#2-2-获取生成多项式" class="headerlink" title="2.2 获取生成多项式"></a>2.2 获取生成多项式</h2><p>二维码标准规定，此步骤使用以下公式生成多项式：</p>
+<p>x<sup>12</sup> + x<sup>11</sup> + x<sup>10</sup> + x<sup>9</sup> +<br>x<sup>8</sup> + x<sup>5</sup> + x<sup>2</sup> + 1</p>
+<p>如上所述，我们可以用下面的二进制字符串表示这个生成多项式：</p>
+<p><strong>1111100100101</strong></p>
+<h2 id="2-3-计算版本信息字符串"><a href="#2-3-计算版本信息字符串" class="headerlink" title="2.3 计算版本信息字符串"></a>2.3 计算版本信息字符串</h2><p>我们可以按照用于生成格式信息字符串的相同步骤来计算。除了我们将初始字符串填充为18位长而不是15位，并且当当前位串为12位或更少位长而不是10位或更少时停止。</p>
+<p>首先生成一个表示版本号的6位二进制字符串。</p>
+<p>例如，对于版本7，7的6位二进制是：</p>
+<p>000111</p>
+<p>在右边用0填充，把它变成一个18位的字符串：</p>
+<p>000111000000000000</p>
+<p>删除左侧的0：</p>
+<p>111000000000000</p>
+<p>用0填充生成多项式字符串，使其与当前版本字符串的长度相同：</p>
+<p>111000000000000 &lt;- 版本字符串<br>1111100100101   &lt;- 没有填充的生成多项式<br>111110010010100 &lt;- 填充生成多项式</p>
+<p>现在，用填充的生成多项式与版本字符串进行XOR：</p>
+<p>1110000000000 ^ 111110010010100 = 110010010100</p>
+<p>此时字符串已经是所需的长度12。</p>
+<p>与格式信息字符串一样，<strong>如果结果小于12，则必须在左侧上用0填充，使其长度为12位。</strong></p>
+<p>最后，将原来的6位版本字符串放在最后一步结果的左边。</p>
+<p>000111 110010010100</p>
+<h2 id="2-4-将版本字符串放置在二维码中"><a href="#2-4-将版本字符串放置在二维码中" class="headerlink" title="2.4 将版本字符串放置在二维码中"></a>2.4 将版本字符串放置在二维码中</h2><p>有两个矩形区域需要放置版本信息字符串：左下角一个，右上角一个。</p>
+<h2 id="2-5-左下角版本信息块"><a href="#2-5-左下角版本信息块" class="headerlink" title="2.5 左下角版本信息块"></a>2.5 左下角版本信息块</h2><p>左下角版本信息块是3像素高和6像素宽。下表说明如何在左下方版本信息区域中排列版本信息字符串的位。</p>
+<p>0表示版本信息串的最低有效位，17表示版本信息串的最高有效位。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">00</td>
+<td style="text-align:center">03</td>
+<td style="text-align:center">06</td>
+<td style="text-align:center">09</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">15</td>
+</tr>
+<tr>
+<td style="text-align:center">01</td>
+<td style="text-align:center">04</td>
+<td style="text-align:center">07</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">16</td>
+</tr>
+<tr>
+<td style="text-align:center">02</td>
+<td style="text-align:center">05</td>
+<td style="text-align:center">08</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">17</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-6-右上角版本信息块"><a href="#2-6-右上角版本信息块" class="headerlink" title="2.6 右上角版本信息块"></a>2.6 右上角版本信息块</h2><p>右上方版本信息块是3像素宽和6像素高。下表说明如何在右上方版本信息区域中排列版本信息字符串的位。</p>
+<p>0表示版本信息串的最低有效位，17表示版本信息串的最高有效位。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">00</td>
+<td style="text-align:center">01</td>
+<td style="text-align:center">02</td>
+</tr>
+<tr>
+<td style="text-align:center">03</td>
+<td style="text-align:center">04</td>
+<td style="text-align:center">05</td>
+</tr>
+<tr>
+<td style="text-align:center">06</td>
+<td style="text-align:center">07</td>
+<td style="text-align:center">08</td>
+</tr>
+<tr>
+<td style="text-align:center">09</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">11</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">14</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">17</td>
+</tr>
+</tbody>
+</table>
+<p>使用版本7的版本信息字符串(000111110010010100)作为示例，上述表中的数字对应于如下的位：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">17</th>
+<th style="text-align:center">16</th>
+<th style="text-align:center">15</th>
+<th style="text-align:center">14</th>
+<th style="text-align:center">13</th>
+<th style="text-align:center">12</th>
+<th style="text-align:center">11</th>
+<th style="text-align:center">10</th>
+<th style="text-align:center">9</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-7-示例"><a href="#2-7-示例" class="headerlink" title="2.7 示例"></a>2.7 示例</h2><p>下图是版本7的二维码图像，其使用版本信息字符串000111110010010100。注意，版本信息区域根据上表中描述的模式填充。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd69uu27uvj20ab0abt8o" alt=""></p>
+<h1 id="3-输出最终矩阵"><a href="#3-输出最终矩阵" class="headerlink" title="3 输出最终矩阵"></a>3 输出最终矩阵</h1><p>在将格式和版本信息添加到二维矩阵之后，最后一步是使用被确定为具有最低分的掩码模式来输出最终矩阵。</p>
+<h2 id="3-1-添加静默域"><a href="#3-1-添加静默域" class="headerlink" title="3.1 添加静默域"></a>3.1 添加静默域</h2><p>请注意，二维码标准规定二维矩阵被一个静默域包围：一个4模块宽的亮模块区域。</p>
+<h2 id="3-2-最终输出"><a href="#3-2-最终输出" class="headerlink" title="3.2 最终输出"></a>3.2 最终输出</h2><p>下图是HELLO WORLD的1-Q二维码，以字符模式编码。</p>
+<p><img src="http://ww1.sinaimg.cn/large/647dc635ly1fd69yby5fqj2084084743" alt=""></p>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h1><p>二维码教程到此结束。</p>
+<p>最后总结一下生成二维码的主要步骤：</p>
+<p><strong>1. 确定要使用的编码模式</strong><br><strong>2. 编码数据，得到数据码</strong><br><strong>3. 生成纠错码</strong><br><strong>4. 交替排列数据码和纠错码</strong><br><strong>5. 将数据码和纠错码放置在矩阵中</strong><br><strong>6. 确定掩码模式</strong><br><strong>7. 添加格式和版本信息</strong></p>
+<p>如果您有任何更正，问题或意见，请与<strong><a href="mailto:shiliuhuasheng@gmail.com" target="_blank" rel="external">我</a></strong>联系。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二维码/" rel="tag">#二维码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/二维码-格式和版本信息字符串表/" rel="next" title="二维码 - 格式和版本信息字符串表">
+                <i class="fa fa-chevron-left"></i> 二维码 - 格式和版本信息字符串表
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Argparse-Girls-Tutorial/" rel="prev" title="Argparse Girls Tutorial">
+                Argparse Girls Tutorial <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="二维码-格式和版本信息/"
+           data-title="二维码 - 格式和版本信息" data-url="http://tiierr.xyz/二维码-格式和版本信息/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-格式字符串"><span class="nav-number">1.</span> <span class="nav-text">1 格式字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-生成格式信息字符串"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 生成格式信息字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-纠错-Bits"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 纠错 Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-掩码-Bits"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 掩码 Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-示例"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-为格式字符串生成纠错-Bits"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 为格式字符串生成纠错 Bits</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-获取生成多项式"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 获取生成多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-计算纠错-Bits"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2 计算纠错 Bits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-第一次计算"><span class="nav-number">1.5.3.</span> <span class="nav-text">1.5.3 第一次计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-4-第二次计算"><span class="nav-number">1.5.4.</span> <span class="nav-text">1.5.4 第二次计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-5-第三次计算"><span class="nav-number">1.5.5.</span> <span class="nav-text">1.5.5 第三次计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-6-第四次计算"><span class="nav-number">1.5.6.</span> <span class="nav-text">1.5.6 第四次计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-7-将格式信息字符串和纠错位放在一起"><span class="nav-number">1.5.7.</span> <span class="nav-text">1.5.7 将格式信息字符串和纠错位放在一起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-8-与掩码字符串XOR"><span class="nav-number">1.5.8.</span> <span class="nav-text">1.5.8 与掩码字符串XOR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-将格式字符串放入二维码"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 将格式字符串放入二维码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-暗模块"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 暗模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-大版本的二维码"><span class="nav-number">1.8.</span> <span class="nav-text">1.8 大版本的二维码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-版本信息"><span class="nav-number">2.</span> <span class="nav-text">2 版本信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-生成版本信息字符串"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 生成版本信息字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-获取生成多项式"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 获取生成多项式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-计算版本信息字符串"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 计算版本信息字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-将版本字符串放置在二维码中"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 将版本字符串放置在二维码中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-左下角版本信息块"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 左下角版本信息块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-右上角版本信息块"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 右上角版本信息块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-示例"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-输出最终矩阵"><span class="nav-number">3.</span> <span class="nav-text">3 输出最终矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-添加静默域"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 添加静默域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-最终输出"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 最终输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-总结"><span class="nav-number">4.</span> <span class="nav-text">4 总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="interview," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1 台阶问题/斐波纳挈一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+1fib = lambda n: n if n &amp;lt;= 2 else fib(n - 1) + fib(n - 2)
+第二种记忆方法
+1234567891011121314def memo(func):    cache = &amp;#123;&amp;#125;    def wrap(*ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程题(interview)">
+<meta property="og:url" content="http://tiierr.xyz/编程题-interview/index.html">
+<meta property="og:site_name" content="你今天真好看">
+<meta property="og:description" content="1 台阶问题/斐波纳挈一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+1fib = lambda n: n if n &amp;lt;= 2 else fib(n - 1) + fib(n - 2)
+第二种记忆方法
+1234567891011121314def memo(func):    cache = &amp;#123;&amp;#125;    def wrap(*ar">
+<meta property="og:updated_time" content="2017-01-12T10:55:58.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编程题(interview)">
+<meta name="twitter:description" content="1 台阶问题/斐波纳挈一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
+1fib = lambda n: n if n &amp;lt;= 2 else fib(n - 1) + fib(n - 2)
+第二种记忆方法
+1234567891011121314def memo(func):    cache = &amp;#123;&amp;#125;    def wrap(*ar">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 编程题(interview) | 你今天真好看 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">你今天真好看</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                编程题(interview)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-13T22:39:23+08:00" content="2016-10-13">
+              2016-10-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/编程题-interview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="编程题-interview/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-台阶问题-斐波纳挈"><a href="#1-台阶问题-斐波纳挈" class="headerlink" title="1 台阶问题/斐波纳挈"></a>1 台阶问题/斐波纳挈</h2><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fib = <span class="keyword">lambda</span> n: n <span class="keyword">if</span> n &lt;= <span class="number">2</span> <span class="keyword">else</span> fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>第二种记忆方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">memo</span><span class="params">(func)</span>:</span></span><br><span class="line">    cache = &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrap</span><span class="params">(*args)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> args <span class="keyword">not</span> <span class="keyword">in</span> cache:</span><br><span class="line">            cache[args] = func(*args)</span><br><span class="line">        <span class="keyword">return</span> cache[args]</span><br><span class="line">    <span class="keyword">return</span> wrap</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@memo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> fib(i<span class="number">-1</span>) + fib(i<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
+<p>第三种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(n):</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">    <span class="keyword">return</span> b</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="2-变态台阶问题"><a href="#2-变态台阶问题" class="headerlink" title="2 变态台阶问题"></a>2 变态台阶问题</h2><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fib = <span class="keyword">lambda</span> n: n <span class="keyword">if</span> n &lt; <span class="number">2</span> <span class="keyword">else</span> <span class="number">2</span> * fib(n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-矩形覆盖"><a href="#3-矩形覆盖" class="headerlink" title="3 矩形覆盖"></a>3 矩形覆盖</h2><p>我们可以用<code>2*1</code>的小矩形横着或者竖着去覆盖更大的矩形。请问用n个<code>2*1</code>的小矩形无重叠地覆盖一个<code>2*n</code>的大矩形，总共有多少种方法？</p>
+<blockquote>
+<p>第<code>2*n</code>个矩形的覆盖方法等于第<code>2*(n-1)</code>加上第<code>2*(n-2)</code>的方法。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> n: <span class="number">1</span> <span class="keyword">if</span> n &lt; <span class="number">2</span> <span class="keyword">else</span> f(n - <span class="number">1</span>) + f(n - <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="4-杨氏矩阵查找"><a href="#4-杨氏矩阵查找" class="headerlink" title="4 杨氏矩阵查找"></a>4 杨氏矩阵查找</h2><p>在一个m行n列二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<p>使用Step-wise线性搜索。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_value</span><span class="params">(l, r, c)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> l[r][c]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(l, x)</span>:</span></span><br><span class="line">    m = len(l) - <span class="number">1</span></span><br><span class="line">    n = len(l[<span class="number">0</span>]) - <span class="number">1</span></span><br><span class="line">    r = <span class="number">0</span></span><br><span class="line">    c = n</span><br><span class="line">    <span class="keyword">while</span> c &gt;= <span class="number">0</span> <span class="keyword">and</span> r &lt;= m:</span><br><span class="line">        value = get_value(l, r, c)</span><br><span class="line">        <span class="keyword">if</span> value == x:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">elif</span> value &gt; x:</span><br><span class="line">            c = c - <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> value &lt; x:</span><br><span class="line">            r = r + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-去除列表中的重复元素"><a href="#5-去除列表中的重复元素" class="headerlink" title="5 去除列表中的重复元素"></a>5 去除列表中的重复元素</h2><p>用集合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(set(l))</span><br></pre></td></tr></table></figure>
+<p>用字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l1 = [<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'a'</span>,<span class="string">'a'</span>]</span><br><span class="line">l2 = &#123;&#125;.fromkeys(l1).keys()</span><br><span class="line"><span class="keyword">print</span> l2</span><br></pre></td></tr></table></figure>
+<p>用字典并保持顺序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">l1 = [<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'a'</span>,<span class="string">'a'</span>]</span><br><span class="line">l2 = list(set(l1))</span><br><span class="line">l2.sort(key=l1.index)</span><br><span class="line"><span class="keyword">print</span> l2</span><br></pre></td></tr></table></figure>
+<p>列表推导式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l1 = [<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'a'</span>,<span class="string">'a'</span>]</span><br><span class="line">l2 = []</span><br><span class="line">[l2.append(i) <span class="keyword">for</span> i <span class="keyword">in</span> l1 <span class="keyword">if</span> <span class="keyword">not</span> i <span class="keyword">in</span> l2]</span><br></pre></td></tr></table></figure>
+<p>面试官提到的,先排序然后删除.</p>
+<h2 id="6-链表成对调换"><a href="#6-链表成对调换" class="headerlink" title="6 链表成对调换"></a>6 链表成对调换</h2><p><code>1-&gt;2-&gt;3-&gt;4</code>转换成<code>2-&gt;1-&gt;4-&gt;3</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.next = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># @param a ListNode</span></span><br><span class="line">    <span class="comment"># @return a ListNode</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span><span class="params">(self, head)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> head != <span class="keyword">None</span> <span class="keyword">and</span> head.next != <span class="keyword">None</span>:</span><br><span class="line">            next = head.next</span><br><span class="line">            head.next = self.swapPairs(next.next)</span><br><span class="line">            next.next = head</span><br><span class="line">            <span class="keyword">return</span> next</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
+<h2 id="7-创建字典的方法"><a href="#7-创建字典的方法" class="headerlink" title="7 创建字典的方法"></a>7 创建字典的方法</h2><h3 id="1-直接创建"><a href="#1-直接创建" class="headerlink" title="1 直接创建"></a>1 直接创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict = &#123;<span class="string">'name'</span>:<span class="string">'earth'</span>, <span class="string">'port'</span>:<span class="string">'80'</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-工厂方法"><a href="#2-工厂方法" class="headerlink" title="2 工厂方法"></a>2 工厂方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">items=[(<span class="string">'name'</span>,<span class="string">'earth'</span>),(<span class="string">'port'</span>,<span class="string">'80'</span>)]</span><br><span class="line">dict2=dict(items)</span><br><span class="line">dict1=dict(([<span class="string">'name'</span>,<span class="string">'earth'</span>],[<span class="string">'port'</span>,<span class="string">'80'</span>]))</span><br></pre></td></tr></table></figure>
+<h3 id="3-fromkeys-方法"><a href="#3-fromkeys-方法" class="headerlink" title="3 fromkeys()方法"></a>3 fromkeys()方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dict1=&#123;&#125;.fromkeys((<span class="string">'x'</span>,<span class="string">'y'</span>),<span class="number">-1</span>)</span><br><span class="line">dict=&#123;<span class="string">'x'</span>:<span class="number">-1</span>,<span class="string">'y'</span>:<span class="number">-1</span>&#125;</span><br><span class="line">dict2=&#123;&#125;.fromkeys((<span class="string">'x'</span>,<span class="string">'y'</span>))</span><br><span class="line">dict2=&#123;<span class="string">'x'</span>:<span class="keyword">None</span>, <span class="string">'y'</span>:<span class="keyword">None</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="8-合并两个有序列表"><a href="#8-合并两个有序列表" class="headerlink" title="8 合并两个有序列表"></a>8 合并两个有序列表</h2><p>知乎远程面试要求编程</p>
+<p>尾递归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_recursion_merge_sort2</span><span class="params">(l1, l2, tmp)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(l1) == <span class="number">0</span> <span class="keyword">or</span> len(l2) == <span class="number">0</span>:</span><br><span class="line">        tmp.extend(l1)</span><br><span class="line">        tmp.extend(l2)</span><br><span class="line">        <span class="keyword">return</span> tmp</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> l1[<span class="number">0</span>] &lt; l2[<span class="number">0</span>]:</span><br><span class="line">            tmp.append(l1[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">del</span> l1[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            tmp.append(l2[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">del</span> l2[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> _recursion_merge_sort2(l1, l2, tmp)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recursion_merge_sort2</span><span class="params">(l1, l2)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> _recursion_merge_sort2(l1, l2, [])</span><br></pre></td></tr></table></figure>
+<p>循环算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def loop_merge_sort(l1, l2):</span><br><span class="line">    tmp = []</span><br><span class="line">    while len(l1) &gt; 0 and len(l2) &gt; 0:</span><br><span class="line">        if l1[0] &lt; l2[0]:</span><br><span class="line">            tmp.append(l1[0])</span><br><span class="line">            del l1[0]</span><br><span class="line">        else:</span><br><span class="line">            tmp.append(l2[0])</span><br><span class="line">            del l2[0]</span><br><span class="line">    tmp.extend(l1)</span><br><span class="line">    tmp.extend(l2)</span><br><span class="line">    return tmp</span><br></pre></td></tr></table></figure>
+<h2 id="9-交叉链表求交点"><a href="#9-交叉链表求交点" class="headerlink" title="9 交叉链表求交点"></a>9 交叉链表求交点</h2><p>去哪儿的面试,没做出来.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.next = <span class="keyword">None</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">node</span><span class="params">(l1, l2)</span>:</span></span><br><span class="line">    length1, lenth2 = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="comment"># 求两个链表长度</span></span><br><span class="line">    <span class="keyword">while</span> l1.next:</span><br><span class="line">        l1 = l1.next</span><br><span class="line">        length1 += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> l2.next:</span><br><span class="line">        l2 = l2.next</span><br><span class="line">        length2 += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 长的链表先走</span></span><br><span class="line">    <span class="keyword">if</span> length1 &gt; lenth2:</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(length1 - length2):</span><br><span class="line">            l1 = l1.next</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(length2 - length1):</span><br><span class="line">            l2 = l2.next</span><br><span class="line">    <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">        <span class="keyword">if</span> l1.next == l2.next:</span><br><span class="line">            <span class="keyword">return</span> l1.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            l1 = l1.next</span><br><span class="line">            l2 = l2.next</span><br></pre></td></tr></table></figure>
+<h2 id="10-二分查找"><a href="#10-二分查找" class="headerlink" title="10 二分查找"></a>10 二分查找</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span><span class="params">(l, t)</span>:</span></span><br><span class="line">    low, high = <span class="number">0</span>, len(l) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> low &lt; high:</span><br><span class="line">        <span class="keyword">print</span> low, high</span><br><span class="line">        mid = (low + high) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> l[mid] &gt; t:</span><br><span class="line">            high = mid</span><br><span class="line">        <span class="keyword">elif</span> l[mid] &lt; t:</span><br><span class="line">            low = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">    <span class="keyword">return</span> low <span class="keyword">if</span> l[low] == t <span class="keyword">else</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    l = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">12</span>, <span class="number">45</span>, <span class="number">66</span>, <span class="number">99</span>, <span class="number">120</span>, <span class="number">444</span>]</span><br><span class="line">    <span class="keyword">print</span> binarySearch(l, <span class="number">12</span>)</span><br><span class="line">    <span class="keyword">print</span> binarySearch(l, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">print</span> binarySearch(l, <span class="number">13</span>)</span><br><span class="line">    <span class="keyword">print</span> binarySearch(l, <span class="number">444</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="11-快排"><a href="#11-快排" class="headerlink" title="11 快排"></a>11 快排</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">qsort</span><span class="params">(seq)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> seq==[]:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        pivot=seq[<span class="number">0</span>]</span><br><span class="line">        lesser=qsort([x <span class="keyword">for</span> x <span class="keyword">in</span> seq[<span class="number">1</span>:] <span class="keyword">if</span> x&lt;pivot])</span><br><span class="line">        greater=qsort([x <span class="keyword">for</span> x <span class="keyword">in</span> seq[<span class="number">1</span>:] <span class="keyword">if</span> x&gt;=pivot])</span><br><span class="line">        <span class="keyword">return</span> lesser+[pivot]+greater</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    seq=[<span class="number">5</span>,<span class="number">6</span>,<span class="number">78</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">-65</span>,<span class="number">12</span>]</span><br><span class="line">    print(qsort(seq))</span><br></pre></td></tr></table></figure>
+<h2 id="12-找零问题"><a href="#12-找零问题" class="headerlink" title="12 找零问题"></a>12 找零问题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">coinChange</span><span class="params">(values, money, coinsUsed)</span>:</span></span><br><span class="line">    <span class="comment">#values    T[1:n]数组</span></span><br><span class="line">    <span class="comment">#valuesCounts   钱币对应的种类数</span></span><br><span class="line">    <span class="comment">#money  找出来的总钱数</span></span><br><span class="line">    <span class="comment">#coinsUsed   对应于目前钱币总数i所使用的硬币数目</span></span><br><span class="line">    <span class="keyword">for</span> cents <span class="keyword">in</span> range(<span class="number">1</span>, money+<span class="number">1</span>):</span><br><span class="line">        minCoins = cents     <span class="comment">#从第一个开始到money的所有情况初始</span></span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> values:</span><br><span class="line">            <span class="keyword">if</span> value &lt;= cents:</span><br><span class="line">                temp = coinsUsed[cents - value] + <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> temp &lt; minCoins:</span><br><span class="line">                    minCoins = temp</span><br><span class="line">        coinsUsed[cents] = minCoins</span><br><span class="line">        print(<span class="string">'面值为：&#123;0&#125; 的最小硬币数目为：&#123;1&#125; '</span>.format(cents, coinsUsed[cents]) )</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    values = [ <span class="number">25</span>, <span class="number">21</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">1</span>]</span><br><span class="line">    money = <span class="number">63</span></span><br><span class="line">    coinsUsed = &#123;i:<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(money+<span class="number">1</span>)&#125;</span><br><span class="line">    coinChange(values, money, coinsUsed)</span><br></pre></td></tr></table></figure>
+<h2 id="13-广度遍历和深度遍历二叉树"><a href="#13-广度遍历和深度遍历二叉树" class="headerlink" title="13 广度遍历和深度遍历二叉树"></a>13 广度遍历和深度遍历二叉树</h2><p>给定一个数组，构建二叉树，并且按层次打印这个二叉树</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 14 二叉树节点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data, left=None, right=None)</span>:</span></span><br><span class="line">        self.data = data</span><br><span class="line">        self.left = left</span><br><span class="line">        self.right = right</span><br><span class="line"></span><br><span class="line">tree = Node(<span class="number">1</span>, Node(<span class="number">3</span>, Node(<span class="number">7</span>, Node(<span class="number">0</span>)), Node(<span class="number">6</span>)), Node(<span class="number">2</span>, Node(<span class="number">5</span>), Node(<span class="number">4</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment">## 15 层次遍历</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lookup</span><span class="params">(root)</span>:</span></span><br><span class="line">    stack = [root]</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        current = stack.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">print</span> current.data</span><br><span class="line">        <span class="keyword">if</span> current.left:</span><br><span class="line">            stack.append(current.left)</span><br><span class="line">        <span class="keyword">if</span> current.right:</span><br><span class="line">            stack.append(current.right)</span><br><span class="line"><span class="comment">## 16 深度遍历</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deep</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">print</span> root.data</span><br><span class="line">    deep(root.left)</span><br><span class="line">    deep(root.right)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lookup(tree)</span><br><span class="line">    deep(tree)</span><br></pre></td></tr></table></figure>
+<h2 id="17-前中后序遍历"><a href="#17-前中后序遍历" class="headerlink" title="17 前中后序遍历"></a>17 前中后序遍历</h2><p>深度遍历改变顺序就OK了</p>
+<h2 id="18-求最大树深"><a href="#18-求最大树深" class="headerlink" title="18 求最大树深"></a>18 求最大树深</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span><span class="params">(root)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> max(maxDepth(root.left), maxDepth(root.right)) + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="19-求两棵树是否相同"><a href="#19-求两棵树是否相同" class="headerlink" title="19 求两棵树是否相同"></a>19 求两棵树是否相同</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isSameTree</span><span class="params">(p, q)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> p == <span class="keyword">None</span> <span class="keyword">and</span> q == <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">elif</span> p <span class="keyword">and</span> q :</span><br><span class="line">        <span class="keyword">return</span> p.val == q.val <span class="keyword">and</span> isSameTree(p.left,q.left) <span class="keyword">and</span> isSameTree(p.right,q.right)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<h2 id="20-前序中序求后序"><a href="#20-前序中序求后序" class="headerlink" title="20 前序中序求后序"></a>20 前序中序求后序</h2><p>推荐: <a href="http://blog.csdn.net/hinyunsin/article/details/6315502" target="_blank" rel="external">http://blog.csdn.net/hinyunsin/article/details/6315502</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rebuild</span><span class="params">(pre, center)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pre:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    cur = Node(pre[<span class="number">0</span>])</span><br><span class="line">    index = center.index(pre[<span class="number">0</span>])</span><br><span class="line">    cur.left = rebuild(pre[<span class="number">1</span>:index + <span class="number">1</span>], center[:index])</span><br><span class="line">    cur.right = rebuild(pre[index + <span class="number">1</span>:], center[index + <span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">return</span> cur</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deep</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    deep(root.left)</span><br><span class="line">    deep(root.right)</span><br><span class="line">    <span class="keyword">print</span> root.data</span><br></pre></td></tr></table></figure>
+<h2 id="21-单链表逆置"><a href="#21-单链表逆置" class="headerlink" title="21 单链表逆置"></a>21 单链表逆置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data=None, next=None)</span>:</span></span><br><span class="line">        self.data = data</span><br><span class="line">        self.next = next</span><br><span class="line"></span><br><span class="line">link = Node(<span class="number">1</span>, Node(<span class="number">2</span>, Node(<span class="number">3</span>, Node(<span class="number">4</span>, Node(<span class="number">5</span>, Node(<span class="number">6</span>, Node(<span class="number">7</span>, Node(<span class="number">8</span>, Node(<span class="number">9</span>)))))))))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rev</span><span class="params">(link)</span>:</span></span><br><span class="line">    pre = link</span><br><span class="line">    cur = link.next</span><br><span class="line">    pre.next = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        tmp = cur.next</span><br><span class="line">        cur.next = pre</span><br><span class="line">        pre = cur</span><br><span class="line">        cur = tmp</span><br><span class="line">    <span class="keyword">return</span> pre</span><br><span class="line"></span><br><span class="line">root = rev(link)</span><br><span class="line"><span class="keyword">while</span> root:</span><br><span class="line">    <span class="keyword">print</span> root.data</span><br><span class="line">    root = root.next</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/interview/" rel="tag">#interview</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/数据结构-interview/" rel="next" title="数据结构(interview)">
+                <i class="fa fa-chevron-left"></i> 数据结构(interview)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/在Python中调用外部命令/" rel="prev" title="在Python中调用外部命令?">
+                在Python中调用外部命令? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="编程题-interview/"
+           data-title="编程题(interview)" data-url="http://tiierr.xyz/编程题-interview/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/647dc635jw1f37ldgc9isj20ia0jn795.jpg"
+               alt="Ray Yu" />
+          <p class="site-author-name" itemprop="name">Ray Yu</p>
+          <p class="site-description motion-element" itemprop="description">You know nothing.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-台阶问题-斐波纳挈"><span class="nav-number">1.</span> <span class="nav-text">1 台阶问题/斐波纳挈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-变态台阶问题"><span class="nav-number">2.</span> <span class="nav-text">2 变态台阶问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-矩形覆盖"><span class="nav-number">3.</span> <span class="nav-text">3 矩形覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-杨氏矩阵查找"><span class="nav-number">4.</span> <span class="nav-text">4 杨氏矩阵查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-去除列表中的重复元素"><span class="nav-number">5.</span> <span class="nav-text">5 去除列表中的重复元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-链表成对调换"><span class="nav-number">6.</span> <span class="nav-text">6 链表成对调换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-创建字典的方法"><span class="nav-number">7.</span> <span class="nav-text">7 创建字典的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-直接创建"><span class="nav-number">7.1.</span> <span class="nav-text">1 直接创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-工厂方法"><span class="nav-number">7.2.</span> <span class="nav-text">2 工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-fromkeys-方法"><span class="nav-number">7.3.</span> <span class="nav-text">3 fromkeys()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-合并两个有序列表"><span class="nav-number">8.</span> <span class="nav-text">8 合并两个有序列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-交叉链表求交点"><span class="nav-number">9.</span> <span class="nav-text">9 交叉链表求交点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-二分查找"><span class="nav-number">10.</span> <span class="nav-text">10 二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-快排"><span class="nav-number">11.</span> <span class="nav-text">11 快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-找零问题"><span class="nav-number">12.</span> <span class="nav-text">12 找零问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-广度遍历和深度遍历二叉树"><span class="nav-number">13.</span> <span class="nav-text">13 广度遍历和深度遍历二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-前中后序遍历"><span class="nav-number">14.</span> <span class="nav-text">17 前中后序遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-求最大树深"><span class="nav-number">15.</span> <span class="nav-text">18 求最大树深</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-求两棵树是否相同"><span class="nav-number">16.</span> <span class="nav-text">19 求两棵树是否相同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-前序中序求后序"><span class="nav-number">17.</span> <span class="nav-text">20 前序中序求后序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-单链表逆置"><span class="nav-number">18.</span> <span class="nav-text">21 单链表逆置</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ray Yu</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liaoliangdexiaohao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>
