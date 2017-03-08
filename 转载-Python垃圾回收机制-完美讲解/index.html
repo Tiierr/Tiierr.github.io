@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/311496-ac65713f889cc463.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/311496-2ca40ab54e1db7a4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/311496-b356aa46dd4e4243.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-12T10:55:58.527Z">
+<meta property="og:updated_time" content="2017-03-08T13:11:04.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[转载]Python垃圾回收机制--完美讲解!">
 <meta name="twitter:description" content="Garbage collection(GC)现在的高级语言如java，c#等，都采用了垃圾收集机制，而不再是c，c++里用户自己管理维护内存的方式。自己管理内存极其自由，可以任意申请内存，但如同一把双刃剑，为大量内存泄露，悬空指针等bug埋下隐患。对于一个字符串、列表、类甚至数值都是对象，且定位简单易用的语言，自然不会让用户去处理如何分配回收内存的问题。python里也同java一样采用了垃圾收集">
@@ -334,7 +334,8 @@
       
 
       
-        <h1 id="Garbage-collection-GC"><a href="#Garbage-collection-GC" class="headerlink" title="Garbage collection(GC)"></a>Garbage collection(GC)</h1><p>现在的高级语言如java，c#等，都采用了垃圾收集机制，而不再是c，c++里用户自己管理维护内存的方式。自己管理内存极其自由，可以任意申请内存，但如同一把双刃剑，为大量内存泄露，悬空指针等bug埋下隐患。<br>对于一个字符串、列表、类甚至数值都是对象，且定位简单易用的语言，自然不会让用户去处理如何分配回收内存的问题。<br>python里也同java一样采用了垃圾收集机制，不过不一样的是:<br>python采用的是引用计数机制为主，标记-清除和分代收集两种机制为辅的策略<br><a id="more"></a></p>
+        <h1 id="Garbage-collection-GC"><a href="#Garbage-collection-GC" class="headerlink" title="Garbage collection(GC)"></a>Garbage collection(GC)</h1><p>现在的高级语言如java，c#等，都采用了垃圾收集机制，而不再是c，c++里用户自己管理维护内存的方式。自己管理内存极其自由，可以任意申请内存，但如同一把双刃剑，为大量内存泄露，悬空指针等bug埋下隐患。<br>对于一个字符串、列表、类甚至数值都是对象，且定位简单易用的语言，自然不会让用户去处理如何分配回收内存的问题。<br>python里也同java一样采用了垃圾收集机制，不过不一样的是:<br>python采用的是引用计数机制为主，标记-清除和分代收集两种机制为辅的策略。</p>
+<a id="more"></a>
 <h2 id="引用计数机制："><a href="#引用计数机制：" class="headerlink" title="引用计数机制："></a>引用计数机制：</h2><p>python里每一个东西都是对象，它们的核心就是一个结构体：PyObject<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">typedef</span> struct_object &#123;</span><br><span class="line"> <span class="keyword">int</span> ob_refcnt;</span><br><span class="line"> struct_typeobject *ob_type;</span><br><span class="line">&#125; PyObject;</span><br></pre></td></tr></table></figure></p>
 <p>PyObject是每个对象必有的内容，其中ob_refcnt就是做为引用计数。当一个对象有新的引用时，它的ob_refcnt就会增加，当引用它的对象被删除，它的ob_refcnt就会减少<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Py_INCREF(op)   ((op)-&gt;ob_refcnt++) <span class="comment">//增加计数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Py_DECREF(op) \ <span class="comment">//减少计数</span></span></span><br><span class="line">    <span class="keyword">if</span> (--(op)-&gt;ob_refcnt != <span class="number">0</span>) \</span><br><span class="line">        ; \</span><br><span class="line">    <span class="keyword">else</span> \</span><br><span class="line">        __Py_Dealloc((PyObject *)(op))</span><br></pre></td></tr></table></figure></p>
 <p>当引用计数为0时，该对象生命就结束了。</p>
@@ -594,7 +595,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

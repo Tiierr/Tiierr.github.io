@@ -65,7 +65,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="CRC,计算机网络," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -81,18 +81,16 @@
 
 
 
-<meta name="description" content="基本原理CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性">
+<meta name="description" content="这篇文章主要介绍了相比于python2.6，python3.0的新特性。更详细的介绍请参见python3.0的文档。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CRC循环冗余检测(Cyclic Redundancy Check)">
-<meta property="og:url" content="http://tiierr.xyz/CRC循环冗余检测-Cyclic-Redundancy-Check/index.html">
+<meta property="og:title" content="What's New in Python 3.0 (中文版)">
+<meta property="og:url" content="http://tiierr.xyz/What-s-New-in-Python-3-0-中文版/index.html">
 <meta property="og:site_name" content="你今天真好看">
-<meta property="og:description" content="基本原理CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f922keolo2j20jo0cpmyg.jpg">
-<meta property="og:updated_time" content="2017-01-12T10:55:58.299Z">
+<meta property="og:description" content="这篇文章主要介绍了相比于python2.6，python3.0的新特性。更详细的介绍请参见python3.0的文档。">
+<meta property="og:updated_time" content="2017-03-08T13:19:15.443Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CRC循环冗余检测(Cyclic Redundancy Check)">
-<meta name="twitter:description" content="基本原理CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/647dc635jw1f922keolo2j20jo0cpmyg.jpg">
+<meta name="twitter:title" content="What's New in Python 3.0 (中文版)">
+<meta name="twitter:description" content="这篇文章主要介绍了相比于python2.6，python3.0的新特性。更详细的介绍请参见python3.0的文档。">
 
 
 
@@ -110,7 +108,7 @@
   };
 </script>
 
-  <title> CRC循环冗余检测(Cyclic Redundancy Check) | 你今天真好看 </title>
+  <title> What's New in Python 3.0 (中文版) | 你今天真好看 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -253,7 +251,7 @@
             
             
               
-                CRC循环冗余检测(Cyclic Redundancy Check)
+                What's New in Python 3.0 (中文版)
               
             
           </h1>
@@ -265,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-23T11:57:17+08:00" content="2016-10-23">
-              2016-10-23
+            <time itemprop="dateCreated" datetime="2017-03-08T21:10:37+08:00" content="2017-03-08">
+              2017-03-08
             </time>
           </span>
 
@@ -276,8 +274,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/CRC循环冗余检测-Cyclic-Redundancy-Check/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="CRC循环冗余检测-Cyclic-Redundancy-Check/" itemprop="commentsCount"></span>
+                <a href="/What-s-New-in-Python-3-0-中文版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="What-s-New-in-Python-3-0-中文版/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -300,41 +298,94 @@
       
 
       
-        <h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>CRC检验（循环冗余校验码，Cyclic Redundancy Check）原理实际上就是在一个p位二进制数据序列之后附加一个r位二进制检验码(序列)，从而构成一个总长为n＝p＋r位的二进制序列；附加在数据序列之后的这个检验码与数据序列的内容之间存在着某种特定的关系。如果因干扰等原因使数据序列中的某一位或某些位发生错误，这种特定关系就会被破坏。因此，通过检查这一关系，就可以实现对数据正确性的检验。<br><a id="more"></a></p>
-<h1 id="几个基本概念"><a href="#几个基本概念" class="headerlink" title="几个基本概念"></a>几个基本概念</h1><ul>
-<li><p>帧检验序列FCS（Frame Check Sequence）：为了进行差错检验而添加的冗余码。</p>
+        <p>这篇文章主要介绍了相比于python2.6，python3.0的新特性。更详细的介绍请参见python3.0的文档。</p>
+<a id="more"></a>
+<h1 id="Common-Stumbling-Blocks"><a href="#Common-Stumbling-Blocks" class="headerlink" title="Common Stumbling Blocks"></a>Common Stumbling Blocks</h1><p>本段简单的列出容易使人出错的变动。</p>
+<p>print语句被print()函数取代了，可以使用关键字参数来替代老的print特殊语法。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Old: <span class="keyword">print</span> <span class="string">"The answer is"</span>, <span class="number">2</span>*<span class="number">2</span></span><br><span class="line">New: print(<span class="string">"The answer is"</span>, <span class="number">2</span>*<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">Old: <span class="keyword">print</span> x,   <span class="comment"># 使用逗号结尾禁止换行</span></span><br><span class="line">New: print(x, end=<span class="string">" "</span>)    <span class="comment"># 使用空格代替换行</span></span><br><span class="line"></span><br><span class="line">Old: <span class="keyword">print</span>    <span class="comment"># 输出新行</span></span><br><span class="line">New: print()    <span class="comment"># 输出新行</span></span><br><span class="line"></span><br><span class="line">Old: <span class="keyword">print</span> &gt;&gt;sys.stderr, <span class="string">"fatal error"</span></span><br><span class="line">New: print(<span class="string">"fatal error"</span>, file=sys.stderr)</span><br><span class="line"></span><br><span class="line">Old: <span class="keyword">print</span> (x, y)   <span class="comment"># 输出repr((x, y))</span></span><br><span class="line">New: print((x, y))    <span class="comment"># 不同于print(x, y)!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 你可以自定义输出项之间的分隔符：</span></span><br><span class="line">print(<span class="string">"There are &lt;"</span>, <span class="number">2</span>**<span class="number">32</span>, <span class="string">"&gt; possibilities!"</span>, sep=<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果是：</span></span><br><span class="line">There are &lt;<span class="number">4294967296</span>&gt; possibilities!</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li><p>print()函数不支持老print语句的”软空格”特性。</p>
+<ul>
+<li>例如，在python2.x中，print “A “, “B”会输出”A B “，而python3.0中，print(“A “, “B”)会输出”A B “。</li>
+</ul>
 </li>
-<li><p>多项式模2运行：实际上是按位异或(Exclusive OR)运算，即相同为0，相异为1，也就是不考虑进位、借位的二进制加减运算。如：10011011 + 11001010 = 01010001。</p>
+<li><p>使用2to3源码转换工具时，所有的print语句被自动转换成print()函数调用，对大项目，这是无需争论的。</p>
 </li>
-<li><p>生成多项式（generator polynomial）：当进行CRC检验时，发送方与接收方需要事先约定一个除数，即生成多项式，一般记作G（x）。生成多项式的最高位与最低位必须是1。常用的CRC码的生成多项式有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CRC8=X8+X5+X4+1</span><br><span class="line"></span><br><span class="line">CRC-CCITT=X16+X12+X5+1</span><br><span class="line"></span><br><span class="line">CRC16=X16+X15+X5+1</span><br><span class="line"></span><br><span class="line">CRC12=X12+X11+X3+X2+1</span><br><span class="line"></span><br><span class="line">CRC32=X32+X26+X23+X22+X16+X12+X11+X10+X8+X7+X5+X4+X2+X1+1</span><br></pre></td></tr></table></figure>
+<li><p>python3.0使用字符串(strings)和bytes代替Unicode字符串和8位字符串，这意味着几乎所有使用Unicode编码和二进制数据的代码都要改动。这个改动很不错，在2.x的世界里，无数的bug都是因为编码问题。</p>
+</li>
+<li><p>map()和filter()返回迭代器(iterators)</p>
+</li>
+<li><p>dict方法keys(),items(),values()返回视图(同样是迭代器)而不是列表(list)</p>
+</li>
+<li><p>内建的sorted()方法和list.sort()方法不再接受表示比较函数的cmp参数，使用key参数代替。</p>
+</li>
+<li><p>1/2返回浮点数，使用1//2能得到整数。</p>
+</li>
+<li><p>repr()函数对于long整数不再包含拖尾的L，所以不加判断的去除最后一个字符会导致去掉一个有用的数字。</p>
 </li>
 </ul>
-<p>每一个生成多项式都可以与一个代码相对应，如<code>CRC8</code>对应代码：<code>100110001</code>。</p>
-<h1 id="CRC检验码的计算"><a href="#CRC检验码的计算" class="headerlink" title="CRC检验码的计算"></a>CRC检验码的计算</h1><p>设信息字段为K位，校验字段为R位，则码字长度为N(N=K+R)。设双方事先约定了一个R次多项式g(x)，则CRC码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V(x)=A(x)g(x)=xRm(x)+r(x)</span><br></pre></td></tr></table></figure></p>
-<p>其中: m(x)为K次信息多项式， r(x)为R-1次校验多项式。</p>
-<p>这里r(x)对应的代码即为冗余码，加在原信息字段后即形成CRC码。</p>
-<p>r(x)的计算方法为：在K位信息字段的后面添加R个0，再除以g(x)对应的代码序列，得到的余数即为r(x)对应的代码(应为R－1位；若不足，而在高位补0)。</p>
-<p><strong>计算示例</strong></p>
-<p>设需要发送的信息为M = 1010001101，产生多项式对应的代码为P = 110101，R＝5。</p>
-<p>在M后加5个0，然后对P做模2除法运算，得余数r(x)对应的代码：<code>01110</code>。故实际需要发送的数据是<code>101000110101110</code>。</p>
-<p>计算过程:<br><img src="https://ws2.sinaimg.cn/large/647dc635jw1f922keolo2j20jo0cpmyg.jpg" alt=""></p>
-<h1 id="错误检测"><a href="#错误检测" class="headerlink" title="错误检测"></a>错误检测</h1><p>当接收方收到数据后，用收到的数据对P（事先约定的）进行模2除法，若余数为0，则认为数据传输无差错；若余数不为0，则认为数据传输出现了错误，由于不知道错误发生在什么地方，因而不能进行自动纠正，一般的做法是丢弃接收的数据。</p>
-<h1 id="Tips："><a href="#Tips：" class="headerlink" title="Tips："></a>Tips：</h1><ul>
-<li><p>CRC是一种常用的检错码，并不能用于自动纠错。</p>
-</li>
-<li><p>只要经过严格的挑选，并使用位数足够多的除数 P，那么出现检测不到的差错的概率就很小很小。</p>
-</li>
-<li><p>仅用循环冗余检验 CRC 差错检测技术只能做到无差错接受（只是非常近似的认为是无差错的），并不能保证可靠传输。</p>
-</li>
-</ul>
-<h1 id="补充：CRC在优化关系数据库的关联查询的用途。"><a href="#补充：CRC在优化关系数据库的关联查询的用途。" class="headerlink" title="补充：CRC在优化关系数据库的关联查询的用途。"></a>补充：CRC在优化关系数据库的关联查询的用途。</h1><p>在优化关系数据库的关联查询的时候，ON的字段选择为数值型，必须是会比字符型的数据快很多的，那么如何将一个字符型的数据，唯一性地转为数值型呢？</p>
-<p>一般我们会采用CRC32函数进行这个转换，CRC32会把字符串，生成一个long长整形的唯一性ID（虽然科学证明不绝对唯一，但是还是可用的）。</p>
-<p>下面提供Java、Python以及MySQL的转换方法：</p>
-<h2 id="在MySQL数据库中，可以使用CRC32直接对字符串进行编码："><a href="#在MySQL数据库中，可以使用CRC32直接对字符串进行编码：" class="headerlink" title="在MySQL数据库中，可以使用CRC32直接对字符串进行编码："></a>在MySQL数据库中，可以使用CRC32直接对字符串进行编码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; SELECT CRC32(&apos;hello-world&apos;)</span><br><span class="line">&gt;&gt;&gt; 2983461467</span><br></pre></td></tr></table></figure>
-<h2 id="在Java中，也是使用CRC32类，进行字符串编码："><a href="#在Java中，也是使用CRC32类，进行字符串编码：" class="headerlink" title="在Java中，也是使用CRC32类，进行字符串编码："></a>在Java中，也是使用CRC32类，进行字符串编码：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.zip.CRC32;;</span><br><span class="line"></span><br><span class="line">CRC32 crc32 = <span class="keyword">new</span> CRC32();</span><br><span class="line"></span><br><span class="line">crc32.update(<span class="string">"hello-world"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">System.out.println(crc32.getValue());</span><br><span class="line"></span><br><span class="line"><span class="number">2983461467</span></span><br></pre></td></tr></table></figure>
-<p>经过测试，和MySQL返回的值一致。</p>
-<h2 id="最后是Python，使用binascii包的crc32方法："><a href="#最后是Python，使用binascii包的crc32方法：" class="headerlink" title="最后是Python，使用binascii包的crc32方法："></a>最后是Python，使用binascii包的crc32方法：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> binascii</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(binascii.crc32(<span class="string">b"hello world"</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">222957957</span></span><br></pre></td></tr></table></figure>
+<h1 id="String-and-Bytes"><a href="#String-and-Bytes" class="headerlink" title="String and Bytes"></a>String and Bytes</h1><p>现在只有一种字符串:str,它的行为和实现都很像2.x的unicode串。</p>
+<p>basestring超类已经去掉了，2to3工具会把每个出现的basestring替换成str。<br>PEP3137:新类型bytes，用来表示二进制数据和编码文本，str和bytes不能混合，需要时，必须进行显示的转换，转换方法是str.encode()(str-&gt;bytes)和bytes.decode()(bytes-&gt;str).</p>
+<p>在原始字符串(raw strings)中所有反斜线都按字面量解释，不再特殊处理Unicode转义字符。</p>
+<p>PEP3112:bytes字面量，例如b”abc”，创建bytes实例。</p>
+<p>PEP3120:默认源文件编码为UTF-8</p>
+<p>PEP3131:可以使用非ASCII标识符(然而，除了注释中贡献者的名字之外，标准库仍然只包含ASCII)</p>
+<p>PEP3116:新的IO实现，API几乎100%向后兼容，二进制文件使用bytes代替strings<br>去除了StringIO和cStringIO模块，取而代之的是io.StringIO或者io.BytesIO</p>
+<p>PEP3101：字符串格式化的新方法</p>
+<p>str.format方法(原文提到替代了%操作符，实际上，format方法和%的用法差别很大，各有所长)</p>
+<p>PEP3106:修补了dict的keys(),items(),values()方法<br>删除了dict.iterkeys(),dict.itervalues()和dict.iteritems()<br>dict.keys(),dict.values()和dict.items()返回dict相关数据的引用</p>
+<p>PEP3107:函数注解(Function Annotations)<br>注解函数参数和返回值的标准化方法</p>
+<h1 id="Exception-Stuff"><a href="#Exception-Stuff" class="headerlink" title="Exception Stuff"></a>Exception Stuff</h1><p>PEP352:异常类必须继承自BaseException,它异常结构的基类。<br>移除了StandardError Dropping sequence behavior (slicing!) and message attribute of exception instances.</p>
+<p>PEP3109:抛出异常：现在必须使用raise Exception(args)而不是原来的raise Exception, args</p>
+<p>PEP3110:捕获异常，现在必须使用except Exception as identifier而不是原来的except Exception, identifier</p>
+<p>PEP3134:异常链(Exception chain)。<br>改良了一些windows不能加载模式时的异常信息，具有本地化处理。</p>
+<h1 id="New-Class-and-Metaclass-Stuff"><a href="#New-Class-and-Metaclass-Stuff" class="headerlink" title="New Class and Metaclass Stuff"></a>New Class and Metaclass Stuff</h1><p>移除了classic class</p>
+<p>PEP3115:新的metaclass语法</p>
+<p>PEP3119:抽象基类。</p>
+<p>PEP3129:类包装。</p>
+<p>PEP3141:数字抽象基类</p>
+<h1 id="其他的语言变化"><a href="#其他的语言变化" class="headerlink" title="其他的语言变化"></a>其他的语言变化</h1><p>这里列出大多数的python语言核心和内建函数的变化。</p>
+<p>移除了backticks(使用repr()代替)</p>
+<p>移除了&lt;&gt;(不等号，使用!=代替)</p>
+<p>as和with变成了关键字</p>
+<p>True,False和None变成了关键字</p>
+<p>PEP237:long不存在了，只有int，它和原来的long一样。不再支持以L结尾的数字字面量。移除sys.maxint，因为int现在已经是无限大了</p>
+<p>PEP238:int相除，返回float<br>改变了顺序操作符的行为，例如x&lt;y，当x和y类型不匹配时抛出TypeError而不是返回随即的bool值<br>移除了<strong>getslice</strong>，语法a[i:j]被解释成a.<strong>getitem</strong>(slice(i,j))</p>
+<p>PEP3102:keyword-only arguments.在函数参数列表中，出现在*args之后的命名参数只能使用”关键字参数”的形式调用</p>
+<p>PEP3104:nonlocal声明。使用nonlocal可以声明一个外部变量(不是global变量)</p>
+<p>PEP3111:raw_input()改名为input()，也就是说，新的input()函数从标准输入设备(sys.stdin)读取一行 并返回(不包括行结束符)，如果输入过早终止，该函数抛出EOFError，如果想使用老的input()，可以使用eval(input())代替。<br>xrange()改名为range()，range()现在不是产生一个列表(list)，而是一个迭代器。</p>
+<p>PEP3113:移除了”元组参数拆包(tuple parameter unpacking)”。这种写法已经不行了：</p>
+<p>def foo(a, (b, c)):…</p>
+<p>现在要这样写:</p>
+<p>def foo(a, b_c):<br>      b,c = b_c</p>
+<p>PEP3114:next()重命名为<strong>next</strong>(),新的内建函数next()可以调用一个对象的<strong>next</strong>()方法。</p>
+<p>PEP3127:新的八进制字面量，二进制字面量和bin()函数。你应该写0o666而不是0666，oct()函数也做了响应的改动。同样，0b1010等价于10，bin(10)返回”0b1010″。0666这种写法现在是错误的。</p>
+<p>PEP3132:支持迭代器拆包。现在你可以这样写:</p>
+<p>a, b, *rest = some_seqence</p>
+<p>甚至象这样：<br>*rest, a = stuff</p>
+<p>一般情况下，rest对象是list，而等号右边的对象是可迭代的</p>
+<p>PEP3135:新的super()。你可以不适用任何参数调用super()，正确的参数和实例会被正确选择。如果使用参数，它的行为不变，和以前一样。</p>
+<p>zip(),map(),filter()返回迭代器。</p>
+<p>移除了string.letters和它的朋友们(string.lowcase和string.uppercase)，现在上场的是string.ascii_letters等</p>
+<p>移除了apply(),callable(),exefile(),file(),reduce(),reload()</p>
+<p>移除了dict.has_key()。使用in操作符进行测试</p>
+<p>exec语句没有了，现在是exec()函数</p>
+<p>移除了<strong>oct</strong>()和<strong>hex</strong>()特殊方法。oct()和hex()方法使用<strong>index</strong>()</p>
+<p>移除了对<strong>members</strong>和<strong>methods</strong>的支持</p>
+<p>nb_nonzero重命名为nb_bool,<strong>nonzero</strong>()重命名为<strong>bool</strong>()<br>Optimizations</p>
+<p>一般情况下，python 3.0比python 2.5慢33%左右。不过仍有提升空间。<br>模块变动(新的，改进的和废弃的)</p>
+<p>移除了cPickle模块，可以使用pickle模块代替。最终我们将会有一个透明高效的模块。</p>
+<p>移除了imageop模块</p>
+<p>移除了audiodev, Bastion, bsddb185, exceptions, linuxaudiodev, md5, MimeWriter, mimify, popen2, rexec, sets, sha, stringold, strop, sunaudiodev, timing和xmllib模块</p>
+<p>移除了bsddb模块(单独发布，可以从<a href="http://www.jcea.es/programacion/pybsddb.htm获取" target="_blank" rel="external">http://www.jcea.es/programacion/pybsddb.htm获取</a>)</p>
+<p>移除了new模块<br>os.tmpnam()和os.tmpfile()函数被移动到tmpfile模块下<br>tokenize模块现在使用bytes工作。主要的入口点不再是generate_tokens，而是tokenize.tokenize()</p>
+<h1 id="Build-and-C-API-Changes"><a href="#Build-and-C-API-Changes" class="headerlink" title="Build and C API Changes"></a>Build and C API Changes</h1><p>Python’s build process和C API的改动包括:</p>
+<p>PEP3118:新的Buffer API</p>
+<p>PEP3121:扩展模块的的Initialization &amp; Finalization</p>
+<p>PEP3123:使PyObject_HEAD符合标准C<br>其他的改动和修复</p>
+<p>在源码里分散一系列的改进和bug修复。changes log表明，从2.6到3.0，有XXX个改动和YYY的bug修复。</p>
 
       
     </div>
@@ -355,9 +406,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CRC/" rel="tag">#CRC</a>
-          
-            <a href="/tags/计算机网络/" rel="tag">#计算机网络</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
         </div>
       
@@ -366,17 +415,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/详解re-sub的用法/" rel="next" title="详解re.sub的用法">
-                <i class="fa fa-chevron-left"></i> 详解re.sub的用法
+              <a href="/Argparse-Girls-Tutorial/" rel="next" title="Argparse Girls Tutorial">
+                <i class="fa fa-chevron-left"></i> Argparse Girls Tutorial
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/浏览器的同源策略/" rel="prev" title="浏览器的同源策略">
-                浏览器的同源策略 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,8 +450,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="CRC循环冗余检测-Cyclic-Redundancy-Check/"
-           data-title="CRC循环冗余检测(Cyclic Redundancy Check)" data-url="http://tiierr.xyz/CRC循环冗余检测-Cyclic-Redundancy-Check/">
+      <div class="ds-thread" data-thread-key="What-s-New-in-Python-3-0-中文版/"
+           data-title="What's New in Python 3.0 (中文版)" data-url="http://tiierr.xyz/What-s-New-in-Python-3-0-中文版/">
       </div>
     
   </div>
@@ -490,7 +535,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个基本概念"><span class="nav-number">2.</span> <span class="nav-text">几个基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRC检验码的计算"><span class="nav-number">3.</span> <span class="nav-text">CRC检验码的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误检测"><span class="nav-number">4.</span> <span class="nav-text">错误检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips："><span class="nav-number">5.</span> <span class="nav-text">Tips：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：CRC在优化关系数据库的关联查询的用途。"><span class="nav-number">6.</span> <span class="nav-text">补充：CRC在优化关系数据库的关联查询的用途。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在MySQL数据库中，可以使用CRC32直接对字符串进行编码："><span class="nav-number">6.1.</span> <span class="nav-text">在MySQL数据库中，可以使用CRC32直接对字符串进行编码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Java中，也是使用CRC32类，进行字符串编码："><span class="nav-number">6.2.</span> <span class="nav-text">在Java中，也是使用CRC32类，进行字符串编码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后是Python，使用binascii包的crc32方法："><span class="nav-number">6.3.</span> <span class="nav-text">最后是Python，使用binascii包的crc32方法：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Common-Stumbling-Blocks"><span class="nav-number">1.</span> <span class="nav-text">Common Stumbling Blocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String-and-Bytes"><span class="nav-number">2.</span> <span class="nav-text">String and Bytes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-Stuff"><span class="nav-number">3.</span> <span class="nav-text">Exception Stuff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#New-Class-and-Metaclass-Stuff"><span class="nav-number">4.</span> <span class="nav-text">New Class and Metaclass Stuff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他的语言变化"><span class="nav-number">5.</span> <span class="nav-text">其他的语言变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-and-C-API-Changes"><span class="nav-number">6.</span> <span class="nav-text">Build and C API Changes</span></a></li></ol></div>
             
           </div>
         </section>
