@@ -91,7 +91,7 @@
 <meta property="og:description" content="最近正好遇上阿里云搞活动，9元体验半年云服务，于是就入手了一个阿里云ESC。
 但是阿里云上的系统版本都较老，没有腾讯云那么新，就挑了一个最新版本的Ubuntu系统，Ubuntu 14.04 64位。
 对，你没有看错，就是 14.04！！！！">
-<meta property="og:updated_time" content="2017-01-12T10:55:58.687Z">
+<meta property="og:updated_time" content="2017-04-09T11:54:30.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Ubuntu 14.04上部署Flask">
 <meta name="twitter:description" content="最近正好遇上阿里云搞活动，9元体验半年云服务，于是就入手了一个阿里云ESC。
@@ -313,9 +313,9 @@
 <p>首先从 gayhub 上 clone 该项目：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd /home</span><br><span class="line">$ git clone https://github.com/RayYu03/MovieRental</span><br></pre></td></tr></table></figure>
 <p>安装并激活虚拟环境：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd MovieRental</span><br><span class="line">$ python3 -m virtualenv</span><br><span class="line">$ source venv/bin/activate</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd MovieRental</span><br><span class="line">$ python3 -m virtualenv venv</span><br><span class="line">$ source venv/bin/activate</span><br></pre></td></tr></table></figure>
 <p>安装依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip3 install -r requirements</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
 <p>然后 deploy 该项目：（主要是数据库初始化）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ python3 manage.py deploy</span><br></pre></td></tr></table></figure>
 <p>如果需要体验完整效果，则需要 fetch 数据到数据库：</p>
@@ -330,12 +330,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line"></span><br><span class="line">socket = 127.0.0.1:8001</span><br><span class="line"></span><br><span class="line">chdir = /home/MovieRental</span><br><span class="line"></span><br><span class="line">wsgi-file = manage.py</span><br><span class="line"></span><br><span class="line">callable = app</span><br><span class="line"></span><br><span class="line">processes = 4</span><br><span class="line"></span><br><span class="line">threads = 2</span><br><span class="line"></span><br><span class="line">stats = 127.0.0.1:9191</span><br></pre></td></tr></table></figure>
 <p>启动 uwsgi：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ uwsgi config.ini</span><br></pre></td></tr></table></figure></p>
 <h1 id="配置-supervisor"><a href="#配置-supervisor" class="headerlink" title="配置 supervisor"></a>配置 supervisor</h1><p>安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ apt-get install supervisor</span><br></pre></td></tr></table></figure>
-<p>配置<code>supervisor.conf</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ vim /etc/supervisor/conf.d/supervisor.conf</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ pip install supervisor</span><br></pre></td></tr></table></figure>
+<p>配置<code>supervisor.conf</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ echo_supervisord_conf &gt; /etc/supervisord.conf</span><br><span class="line">(venv) $ vim /etc/supervisord.conf</span><br></pre></td></tr></table></figure></p>
 <p>将以下内容粘贴到里面：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[program:MovieRental]</span><br><span class="line"></span><br><span class="line">command=/home/MovieRental/venv/bin/uwsgi /home/MovieRental/config.ini</span><br><span class="line"></span><br><span class="line">directory=/home/MovieRental</span><br><span class="line"></span><br><span class="line">user=root</span><br><span class="line"></span><br><span class="line">autostart=true</span><br><span class="line"></span><br><span class="line">autorestart=true</span><br><span class="line"></span><br><span class="line">stdout_logfile=/home/MovieRental/logs/uwsgi_supervisor.log</span><br></pre></td></tr></table></figure>
 <p>启动 supervisor：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ service supervisor start</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ supervisord -c /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>查看 supervisord 是否在运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep supervisord</span><br></pre></td></tr></table></figure>
+<h2 id="使用-supervisorctl"><a href="#使用-supervisorctl" class="headerlink" title="使用 supervisorctl"></a>使用 supervisorctl</h2><p>Supervisorctl 是 supervisord 的一个命令行客户端工具，启动时需要指定与 supervisord 使用同一份配置文件，否则与 supervisord 一样按照顺序查找配置文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl -c /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>上面这个命令会进入 supervisorctl 的 shell 界面，然后可以执行不同的命令了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; status    # 查看程序状态</span><br><span class="line">&gt; stop MovieRental   # 关闭 MovieRental 程序</span><br><span class="line">&gt; start MovieRental  # 启动 MovieRental 程序</span><br><span class="line">&gt; restart MovieRental    # 重启 MovieRental 程序</span><br><span class="line">&gt; reread    ＃ 读取有更新（增加）的配置文件，不会启动新添加的程序</span><br><span class="line">&gt; update    ＃ 重启配置文件修改过的程序</span><br></pre></td></tr></table></figure>
 <h1 id="配置-nginx"><a href="#配置-nginx" class="headerlink" title="配置 nginx"></a>配置 nginx</h1><p>安装：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ apt-get install nginx</span><br></pre></td></tr></table></figure>
 <p>配置 default 文件：</p>
@@ -500,7 +506,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask-项目"><span class="nav-number">1.</span> <span class="nav-text">Flask 项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-uwsgi"><span class="nav-number">2.</span> <span class="nav-text">配置 uwsgi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-supervisor"><span class="nav-number">3.</span> <span class="nav-text">配置 supervisor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-nginx"><span class="nav-number">4.</span> <span class="nav-text">配置 nginx</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flask-项目"><span class="nav-number">1.</span> <span class="nav-text">Flask 项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-uwsgi"><span class="nav-number">2.</span> <span class="nav-text">配置 uwsgi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-supervisor"><span class="nav-number">3.</span> <span class="nav-text">配置 supervisor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-supervisorctl"><span class="nav-number">3.1.</span> <span class="nav-text">使用 supervisorctl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-nginx"><span class="nav-number">4.</span> <span class="nav-text">配置 nginx</span></a></li></ol></div>
             
           </div>
         </section>
