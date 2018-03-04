@@ -253,8 +253,8 @@
             
               
                 
-                <a class="post-title-link" href="/linux-reviews/" itemprop="url">
-                  linux reviews
+                <a class="post-title-link" href="/Python中多继承与super-用法/" itemprop="url">
+                  Python中多继承与super()用法
                 </a>
               
             
@@ -267,8 +267,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T22:35:17+08:00" content="2016-10-30">
-              2016-10-30
+            <time itemprop="dateCreated" datetime="2016-09-17T19:01:17+08:00" content="2016-09-17">
+              2016-09-17
             </time>
           </span>
 
@@ -278,8 +278,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/linux-reviews/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="linux-reviews/" itemprop="commentsCount"></span>
+                <a href="/Python中多继承与super-用法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python中多继承与super-用法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -303,10 +303,10 @@
 
       
         
-          <h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile:"></a>Makefile:</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"mytool1.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"mytool2.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">  mytool1_print(<span class="string">"hello tool 1."</span>);</span><br><span class="line">  mytool2_print(<span class="string">"hello tool 2."</span>);</span><br><span class="line">  return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// mytool1.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"mytool1.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mytool1_print</span><span class="params">(<span class="keyword">char</span> *str)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"This is mytool1 print : %s\n"</span>, str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// mytool1.h</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mytool1_print</span><span class="params">(<span class="keyword">char</span> *str)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// mytool2.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"mytool2.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mytool2_print</span><span class="params">(<span class="keyword">char</span> *str)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"This is mytool2 print : %s\n"</span>, str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// mytool2.h</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mytool2_print</span><span class="params">(<span class="keyword">char</span> *str)</span></span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Makefile</span><br><span class="line">CC = gcc</span><br><span class="line">OBJ = main.o mytool1.o mytool2.o</span><br><span class="line">main : $(OBJ)</span><br><span class="line">	<span class="variable">$(CC)</span> -o main <span class="variable">$(OBJ)</span></span><br><span class="line">main.o : main.c mytool1.h mytool2.h</span><br><span class="line">mytool1.o : mytool1.c mytool1.h</span><br><span class="line">mytool2.o : mytool2.c mytool2.h</span><br><span class="line">.PHONY : clean</span><br><span class="line">clean :</span><br><span class="line">	rm -rf <span class="variable">$(OBJ)</span> main</span><br></pre></td></tr></table></figure>
+          <p>Python类分为两种，一种叫<code>经典类</code>，一种叫<code>新式类</code>。两种都支持<code>多继承</code>。</p>
+<p>考虑一种情形，B继承于A，C继承于A和B, 但C需要调用父类的init()函数时，前者会导致父类A的init()函数被调用2次，这是不希望看到的。而且子类要显式地指定父类，不符合<code>DRY</code>原则。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/linux-reviews/#more" rel="contents">
+            <a class="btn" href="/Python中多继承与super-用法/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -357,8 +357,8 @@
             
               
                 
-                <a class="post-title-link" href="/SQLAlchemy-ORM教程之三：Relationship/" itemprop="url">
-                  SQLAlchemy ORM教程之三：Relationship
+                <a class="post-title-link" href="/团队协作软件Worktile、-Teambition与Asana优劣对比/" itemprop="url">
+                  团队协作软件Worktile、 Teambition与Asana优劣对比
                 </a>
               
             
@@ -371,8 +371,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T18:44:07+08:00" content="2016-10-30">
-              2016-10-30
+            <time itemprop="dateCreated" datetime="2016-05-21T13:15:03+08:00" content="2016-05-21">
+              2016-05-21
             </time>
           </span>
 
@@ -382,8 +382,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/SQLAlchemy-ORM教程之三：Relationship/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="SQLAlchemy-ORM教程之三：Relationship/" itemprop="commentsCount"></span>
+                <a href="/团队协作软件Worktile、-Teambition与Asana优劣对比/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="团队协作软件Worktile、-Teambition与Asana优劣对比/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -407,9 +407,9 @@
 
       
         
-          <p>『关系』是关系型数据库的一大特色，也是我们在建模过程中的一个重要的抽象过程。在前面的两个教程中，我们分别回顾了使用<code>SQLAlchemy</code>在数据库中进行创建和简单查询的方法，今天我们来深入到更为复杂和抽象部分。<br>
+          <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.    前言"></a>1.    前言</h3><p>对于很多创业公司来说，要想不被拍在沙滩上，必须要有行之有效且效率高的团队协作与管理的工具。各种团队协作与项目管理的软件也随之而生， 国内的明道、Worktile和 teambition等，国外的Asana、Trello、Basecamp等都是此中翘楚。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/SQLAlchemy-ORM教程之三：Relationship/#more" rel="contents">
+            <a class="btn" href="/团队协作软件Worktile、-Teambition与Asana优劣对比/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -460,8 +460,8 @@
             
               
                 
-                <a class="post-title-link" href="/What-Makes-a-Good-Programmer-Good/" itemprop="url">
-                  What Makes a Good Programmer Good?
+                <a class="post-title-link" href="/Python-Flask-Web开发学习笔记（三）程序的基本结构/" itemprop="url">
+                  Python Flask Web开发学习笔记（三）程序的基本结构
                 </a>
               
             
@@ -474,8 +474,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-29T21:03:24+08:00" content="2016-10-29">
-              2016-10-29
+            <time itemprop="dateCreated" datetime="2016-05-16T11:33:32+08:00" content="2016-05-16">
+              2016-05-16
             </time>
           </span>
 
@@ -485,8 +485,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/What-Makes-a-Good-Programmer-Good/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="What-Makes-a-Good-Programmer-Good/" itemprop="commentsCount"></span>
+                <a href="/Python-Flask-Web开发学习笔记（三）程序的基本结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python-Flask-Web开发学习笔记（三）程序的基本结构/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -510,11 +510,12 @@
 
       
         
-          <p>I’ve worked with a lot of programmers over the years – some of them super amazing, and some distinctly lackluster. As I’ve had the pleasure of working with some very skilled individuals recently, I spent some time thinking about what I admire in them. What makes a good programmer so good, and a bad programmer so bad? Or, to mangle English a little bit, what makes a good programmer good?</p>
-<p>Based on my experiences, being a great programmer has nothing to do with age, education, or how much money you make. It’s all in how you act and, more deeply, how you think. I’ve noticed a consistent set of habits in the programmers I admire. More than knowledge of their chosen language, deep understanding of data structures and algorithms, or even more than years of on-the-job experience – the way they communicate, the way they conduct themselves, and the way they approach programming speak volumes as to their amazing level of skill.</p>
-<p>Certainly there’s more to being a good programmer than anyone can enumerate, and I wouldn’t judge any programmer solely based on the presence (or lack) of these practices. But I do know wisdom when I see it, and when I see a programmer expressing these traits, I think, “This person really knows what they’re doing.”<br>
+          <h2 id="2-5-请求-响应循环"><a href="#2-5-请求-响应循环" class="headerlink" title="2.5　请求-响应循环"></a>2.5　请求-响应循环</h2><p>现在你已经开发了一个简单的 Flask 程序，或许希望进一步了解 Flask 的工作方式。下面将介绍这个框架的一些设计理念。</p>
+<h4 id="2-5-1-程序和请求上下文"><a href="#2-5-1-程序和请求上下文" class="headerlink" title="2.5.1　程序和请求上下文"></a>2.5.1　程序和请求上下文</h4><p>Flask 从客户端收到请求时，要让视图函数能访问一些对象，这样才能处理请求。<code>请求对象</code>就是一个很好的例子，它封装了客户端发送的 HTTP 请求。</p>
+<p>要想让视图函数能够访问请求对象，一个显而易见的方式是将其作为参数传入视图函数，不过这会导致程序中的每个视图函数都增加一个参数。</p>
+<p>除了访问请求对象，如果视图函数在处理请求时还要访问其他对象，情况会变得更糟。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/What-Makes-a-Good-Programmer-Good/#more" rel="contents">
+            <a class="btn" href="/Python-Flask-Web开发学习笔记（三）程序的基本结构/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -565,8 +566,8 @@
             
               
                 
-                <a class="post-title-link" href="/守护进程是个什么玩意儿/" itemprop="url">
-                  守护进程是个什么玩意儿
+                <a class="post-title-link" href="/《Effective-Python》之用Pythonic的方式来思考-一/" itemprop="url">
+                  《Effective Python》之用Pythonic的方式来思考(一)
                 </a>
               
             
@@ -579,8 +580,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-29T20:51:04+08:00" content="2016-10-29">
-              2016-10-29
+            <time itemprop="dateCreated" datetime="2016-05-10T20:41:17+08:00" content="2016-05-10">
+              2016-05-10
             </time>
           </span>
 
@@ -590,8 +591,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/守护进程是个什么玩意儿/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="守护进程是个什么玩意儿/" itemprop="commentsCount"></span>
+                <a href="/《Effective-Python》之用Pythonic的方式来思考-一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="《Effective-Python》之用Pythonic的方式来思考-一/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -615,9 +616,10 @@
 
       
         
-          <p>守护进程也称为精灵进程是一种生存期较长的一种进程。它们独立于控制终端并且周期性的执行某种任务或等待处理某些发生的事件。他们常常在系统引导装入时启动，在系统关闭时终止。unix系统有很多守护进程，大多数服务器都是用守护进程实现的，例如inetd守护进程。<br>
+          <h2 id="Part-1-：-遵循PEP8风格指南"><a href="#Part-1-：-遵循PEP8风格指南" class="headerlink" title="Part 1 ： 遵循PEP8风格指南"></a>Part 1 ： 遵循PEP8风格指南</h2><p>《Python Enhancement Proposal #8》<a href="https://www.python.org/dev/peps/pep-0008/">英文版</a> <a href="https://lizhe2004.gitbooks.io/code-style-guideline-cn/content/python/python-pep8.html">中文版</a>，又叫PEP8，它是针对Python代码格式而修订的风格指南。尽管可以在保证语法正确的前提下随意编写Python代码，但是，采用一致的风格来写代码，可以使项目更利于多人协作。</p>
+<p>PEP8列出了许多编码细节，以描述如何撰写清晰的Python代码。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/守护进程是个什么玩意儿/#more" rel="contents">
+            <a class="btn" href="/《Effective-Python》之用Pythonic的方式来思考-一/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -668,8 +670,8 @@
             
               
                 
-                <a class="post-title-link" href="/八大排序算法的Python实现/" itemprop="url">
-                  八大排序算法的Python实现
+                <a class="post-title-link" href="/Python-Flask-Web开发学习笔记（二）程序的基本结构/" itemprop="url">
+                  Python Flask Web开发学习笔记（二）程序的基本结构
                 </a>
               
             
@@ -682,8 +684,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-25T19:06:24+08:00" content="2016-10-25">
-              2016-10-25
+            <time itemprop="dateCreated" datetime="2016-05-01T11:13:52+08:00" content="2016-05-01">
+              2016-05-01
             </time>
           </span>
 
@@ -693,8 +695,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/八大排序算法的Python实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="八大排序算法的Python实现/" itemprop="commentsCount"></span>
+                <a href="/Python-Flask-Web开发学习笔记（二）程序的基本结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python-Flask-Web开发学习笔记（二）程序的基本结构/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -718,12 +720,566 @@
 
       
         
-          <p>在计算机科学与数学中，一个<a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">排序算法</a>（英语：<code>Sorting algorithm</code>）是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法（例如搜索算法与合并算法）中是重要的，如此这些算法才能得到正确解答。<br>
+          <h2 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1　初始化"></a>2.1　初始化</h2><p>所有 Flask 程序都必须创建一个程序实例。Web 服务器使用一种名为 Web 服务器网关接口（Web Server Gateway Interface，WSGI）的协议，把接收自客户端的所有请求都转交给这个对象处理。程序实例是 Flask 类的对象，经常使用下述代码创建：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br></pre></td></tr></table></figure></p>
+<p>Flask 类的构造函数只有一个必须指定的参数，即程序主模块或包的名字。在大多数程序中，Python 的 <code>__name__</code>变量就是所需的值。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/八大排序算法的Python实现/#more" rel="contents">
+            <a class="btn" href="/Python-Flask-Web开发学习笔记（二）程序的基本结构/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Python-Flask-Web开发学习笔记（一）程序的基本结构/" itemprop="url">
+                  Python Flask Web开发学习笔记（一）程序的基本结构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-01T09:50:28+08:00" content="2016-05-01">
+              2016-05-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Python-Flask-Web开发学习笔记（一）程序的基本结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python-Flask-Web开发学习笔记（一）程序的基本结构/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>首先还是要提一下，需要安装的工具：</strong></p>
+<ul>
+<li><code>Python 2.7</code>or <code>Python 3.5</code>（不保证能用）</li>
+</ul>
+<p><strong>虚拟环境<code>virtualenv</code>：</strong></p>
+<ul>
+<li>大多数 Linux 发行版都提供了 virtualenv 包。例如， Ubuntu 用户可以使用下述命令安装它：</li>
+</ul>
+<p><code>$ sudo apt-get install python-virtualenv</code></p>
+<ul>
+<li>如果你的电脑是 Mac OS X 系统，就可以使用 easy_install 安装 virtualenv ：</li>
+</ul>
+<p><code>$ sudo easy_install virtualenv</code></p>
+<ul>
+<li>如果你使用微软的 Windows 系统，可以使用pip安装。</li>
+</ul>
+<p><code>$ pip install virtualenv</code></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/Python-Flask-Web开发学习笔记（一）程序的基本结构/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Python之神秘的加密模块cryptography（一）/" itemprop="url">
+                  Python之神秘的加密模块cryptography（一）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T22:14:28+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Python之神秘的加密模块cryptography（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python之神秘的加密模块cryptography（一）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>Cryptography的目标是建立一个标准Python加密库。</strong></p>
+<ul>
+<li>如果你曾经在工作中使用过Python加密技术，那么你很可能知道一些库，例如M2Crypto、PyCrypto或者PyOpenSSL。</li>
+</ul>
+<p><strong>Cryptography库想要解决已有库中存在的一些问题：</strong></p>
+<ul>
+<li>缺少PyPy和Python 3支持</li>
+<li>缺少维护</li>
+<li>使用了差评的算法实现（例如旁路攻击side-channel attacks）</li>
+<li>缺少高级（易于使用）的APIs</li>
+<li>缺少AES-GCM和HKDF等算法</li>
+<li>经不住测试错误百出的APIs
+          <div class="post-more-link text-center">
+            <a class="btn" href="/Python之神秘的加密模块cryptography（一）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Python模块之善变的UUID小公举/" itemprop="url">
+                  Python模块之善变的UUID小公举
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T09:44:29+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Python模块之善变的UUID小公举/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python模块之善变的UUID小公举/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>UUID是一种通用唯一识别码，是一种软件建构的标准。</strong></p>
+<ul>
+<li>UUID的目的，是让分布式系统中的所有元素，都能有唯一的辨识信息，而不需要通过中央控制端来做辨识信息的指定。如此一来，每个人都可以创建不与其它人冲突的UUID。在这样的情况下，就不需考虑数据库创建时的名称重复问题。目前最广泛应用的UUID，是微软公司的全局唯一标识符（GUID），而其他重要的应用，则有Linux ext2/ext3文件系统、LUKS加密分区、GNOME、KDE、Mac OS X等等。另外我们也可以在e2fsprogs包中的UUID库找到实现。——<a href="https://zh.wikipedia.org/zh-cn/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81">维基百科</a></li>
+</ul>
+<p>用通俗的话说就是，uuid是一种唯一标识，在许多领域作为标识用途。python的uuid模块就是用来生成它的。</p>
+<p><strong>python提供的生成uuid的方法一共有4种：</strong></p>
+<ul>
+<li><code>uuid1() 从硬件地址和当前时间生成</code></li>
+<li><code>uuid3() 从md5算法生成</code></li>
+<li><code>uuid4() 随机生成</code></li>
+<li><code>uuid5() 从SHA-1算法生成</code></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/Python模块之善变的UUID小公举/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Python每日小程序-Vol-0000/" itemprop="url">
+                  Python每日小程序 Vol.0000
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-24T12:09:36+08:00" content="2016-04-24">
+              2016-04-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Python每日小程序-Vol-0000/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Python每日小程序-Vol-0000/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>题目： 将你的 QQ 头像（或者微博头像）右上角加上红色的数字，类似于微信未读信息数量那种提示效果。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/Python每日小程序-Vol-0000/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Hello-World/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-24T11:10:10+08:00" content="2016-04-24">
+              2016-04-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Hello-World/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Hello-World/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前几天电脑硬盘坏了，导致数据全丢失了。今天早上又重新部署了一下，终于搞定啦！</p>
+
+          
         
       
     </div>
@@ -754,7 +1310,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
   </nav>
 
 
