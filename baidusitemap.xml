@@ -1159,21 +1159,6 @@
 
     
   <url>
-    <loc>http://tiierr.xyz/Hello-World/</loc>
-    <lastmod>2017-01-12T10:55:58.299Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2016-04-24T03:10:10.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://tiierr.xyz/CRC%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A3%80%E6%B5%8B-Cyclic-Redundancy-Check/</loc>
     <lastmod>2017-01-12T10:55:58.299Z</lastmod>
     <data>
@@ -1185,6 +1170,21 @@
          
         <tag>计算机网络</tag>
          
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tiierr.xyz/Hello-World/</loc>
+    <lastmod>2017-01-12T10:55:58.299Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2016-04-24T03:10:10.000Z</pubTime>
+        
          
            
         </display>
